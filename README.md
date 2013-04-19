@@ -3,4 +3,4 @@ office_hours
 
 INFO 2300 Final Project
 
-Hi lydia
+Consider this folder the www folder on their server
