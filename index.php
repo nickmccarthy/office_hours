@@ -1,3 +1,3 @@
 <?
-	print 'home';
+	print 'NOPE.'	
 ?>
