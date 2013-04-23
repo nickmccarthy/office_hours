@@ -1,4 +1,3 @@
 <?
-	print 'YEP.'	
-
+	print 'merge tool?'
 ?>
