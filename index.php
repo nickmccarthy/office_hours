@@ -1,3 +1,3 @@
 <?
-	print 'YEP.'	
+	print 'WEE.'	
 ?>
