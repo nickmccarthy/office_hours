@@ -1,0 +1,4 @@
+<?
+	print('search result');
+
+?>
