@@ -1,0 +1,3 @@
+<?
+print 'add class page';
+?>
