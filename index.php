@@ -1,3 +1,3 @@
 <?
-	print 'WEE.'	
+	print 'merge tool?'
 ?>
