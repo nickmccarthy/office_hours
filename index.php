@@ -1,3 +1,27 @@
-<?
-	print 'merge tool?'
+<?php
+	session_start();
+
+	// Import db config info
+	require 'config/mysql.config.php';
+	require 'config/pageinfo.config.php';
+
 ?>
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="styles/styles.css">
+</head>
+<body>
+
+<form action="search_results.php" method="POST">
+	<label for="Search">Search</label>
+	<input type="text" name="search_terms" id="search_terms"/>
+	<?php
+		if(isset($_GET['results'])){
+			print("No results found");
+		}
+	?>
+</form>
+
+</body>
+</html>
