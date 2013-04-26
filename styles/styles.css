@@ -1,0 +1,102 @@
+body {
+    background: #eee;
+    font-family: Gudea, Helvetica, Arial;
+    color: #bbb;
+}
+
+nav {
+    height: 50px;
+}
+
+#logo {
+    font-family: Acme;
+    font-size: 200%;
+    color: #bbb;
+    float: left;
+}
+
+button {
+    float: right;
+    font-family: Gudea, Helvetica, Arial;
+    font-size: 100%;
+    font-weight: 100;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    width: auto;
+    padding: 5px;
+    color: #ccc;
+    background-color: #eee;
+}
+
+button:hover {
+    background-color: #ddd;
+    border-color: #bbb;
+    color: #bbb;
+}
+
+input[id="search_terms"] {
+    font-size: 100%;
+    font-weight: 100;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    width: 400px !important;
+    padding: 5px;
+    background-color: #fff;
+}
+
+label, .label {
+    font-family: Gudea, Helvetica, Arial;
+    font-size: 100%;
+    font-weight: 400;
+    color: #bbb;
+}
+
+#search_home {
+    width: 500px;
+    margin: 10% auto;
+    clear: both;
+}
+
+h1 {
+    color: #bbb;
+}
+
+#login {
+    width: 500px;
+    margin: 10% auto;
+}
+
+input[type="text"],
+input[type="password"] {
+    float: right;
+    font-size: 100%;
+    font-weight: 100;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    width: 300px;
+    padding: 5px;
+    background-color: #fff;
+}
+
+::-webkit-input-placeholder {
+    font-weight: light !important;
+    color: #6F9FCF;
+}
+
+button[type="submit"] {
+    float: right;
+    font-family: Gudea, Helvetica, Arial;
+    font-size: 100%;
+    font-weight: 100;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    width: 313px;
+    padding: 5px;
+    color: #ccc;
+    background-color: #eee;
+}
+button[type="submit"]:hover {
+    background-color: #ddd;
+    border-color: #bbb;
+    color: #bbb;
+}

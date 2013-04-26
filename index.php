@@ -10,18 +10,24 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="styles/styles.css">
+	<link href='http://fonts.googleapis.com/css?family=Acme' rel='stylesheet' type='text/css' />
+	<link href='http://fonts.googleapis.com/css?family=Gudea' rel='stylesheet' type='text/css' />
 </head>
 <body>
-
-<form action="search_results.php" method="POST">
-	<label for="Search">Search</label>
-	<input type="text" name="search_terms" id="search_terms"/>
-	<?php
-		if(isset($_GET['results'])){
-			print("No results found");
-		}
-	?>
-</form>
+<?php
+	require 'inc/header.html';
+?>
+<div id="search_home">
+	<form action="search_results.php" method="POST">
+		<label for="Search">Search</label>
+		<input type="text" name="search_terms" id="search_terms"/>
+		<?php
+			if(isset($_GET['results'])){
+				print("No results found");
+			}
+		?>
+	</form>
+</div>
 
 </body>
 </html>

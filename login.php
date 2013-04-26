@@ -59,8 +59,13 @@ if (isset($_POST['username']) && isset($_POST["password"]))
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="styles/styles.css">
+	<link href='http://fonts.googleapis.com/css?family=Acme' rel='stylesheet' type='text/css' />
+	<link href='http://fonts.googleapis.com/css?family=Gudea' rel='stylesheet' type='text/css' />
 </head>
 <body>
+<?php
+	require 'inc/header.html';
+?>
 	<div id="login">
 		<form method="post" action="login.php">
 			<table class="form_table">
@@ -71,10 +76,10 @@ if (isset($_POST['username']) && isset($_POST["password"]))
 				</tr>
 				<tr>
 					<td class="label">
-						<label for="username">Username</label>
+						<label for="username">Email</label>
 					</td>
 					<td class="input">
-						<input type="text" name="username" id="username"/>
+						<input type="text" name="username" id="username" placeholder="netID@cornell.edu"/>
 					</td>
 				</tr>
 				<tr>
@@ -82,13 +87,14 @@ if (isset($_POST['username']) && isset($_POST["password"]))
 						<label for="password">Password</label>
 					</td>
 					<td class="input">
-						<input type="password" name="password" id="password"/>
+						<input type="password" name="password" id="password" placeholder="password"/>
 					</td>
 				</tr>
 				<tr>
-					<td>
+					<td class="label">
+						<label for="forgot">Forgot password?</label>
 					</td>
-					<td class="input">			
+					<td colspan="2">
 						<button type="submit">Login</button>
 					</td>
 				</tr>
