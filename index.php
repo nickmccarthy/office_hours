@@ -15,7 +15,11 @@
 </head>
 <body>
 <?php
+if(isset($_SESSION['user'])) {
+	require 'inc/header_in.html';
+} else {
 	require 'inc/header.html';
+}
 ?>
 <div id="search_home">
 	<form action="search_results.php" method="POST">

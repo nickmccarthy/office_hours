@@ -31,16 +31,20 @@ function display_search_results($terms){
 	}elseif($result_class->num_rows == 0 && $result_instructors->num_rows == 0){
 		header("Location: " . $search_page . "?results=0");
 	}else{
+		if(isset($result_class)){
 		print("<div>");
 		while($array = $result_class->fetch_assoc()){
-			print('<a href="' . $_SERVER["SERVER_PORT"] . $_SERVER["REQUEST_URI"] . '?cid=' . $array["cid"] . '" alt="' . $array['name'] . '">' . $array["name"] . '</a>');
+			print('<a href="' . $_SERVER["SERVER_PORT"] . $_SERVER["REQUEST_URI"] . '?cid=' . $array["cid"] . '" alt="' . $array['name'] . '">' . $array["name"] . '</a><br />');
 		}
 		print("</div>");
+		}
+		if(isset($result_instructor)){
 		print("<div>");
 		while($array = $result_instructor->fetch_assoc()){
-			print('<a href="' . $_SERVER[HTTP_HOST] . $_SERVER[REQUEST_URI] . '?uid=' . $array['uid'] . '" alt="' . $array["first_name"] . ' ' . $array["last_name"] . '">' . $array['first_name'] . $array['last_name'] . '</a>');
+			print('<a href="' . $_SERVER[HTTP_HOST] . $_SERVER[REQUEST_URI] . '?uid=' . $array['uid'] . '" alt="' . $array["first_name"] . ' ' . $array["last_name"] . '">' . $array['first_name'] . $array['last_name'] . '</a><br />');
 		}
 		print("</div>");
+		}
 	}
 	$mydb->close();
 }

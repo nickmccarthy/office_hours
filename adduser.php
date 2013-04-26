@@ -4,10 +4,10 @@ require 'config/mysql.config.php';
 
 // CHANGE THESE
 
-$fname = 'Nick';
-$lname = 'McCarthy';
-$pw = 'nick';
-$email = 'npm29@cornell.edu';
+$fname = 'Tingting';
+$lname = 'Wu';
+$pw = 'test';
+$email = 'tw283@cornell.edu';
 
 // END
 
