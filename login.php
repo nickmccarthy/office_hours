@@ -64,41 +64,30 @@ if (isset($_POST['username']) && isset($_POST["password"]))
 </head>
 <body>
 <?php
+if(isset($_SESSION['user'])) {
+	require 'inc/header_in.html';
+} else {
 	require 'inc/header.html';
+}
 ?>
-	<div id="login">
+	<div class="center">
 		<form method="post" action="login.php">
-			<table class="form_table">
-				<tr>
-					<td colspan="2">			
-						<h1>Welcome! Please log in to continue.</h1>
-					</td>
-				</tr>
-				<tr>
-					<td class="label">
-						<label for="username">Email</label>
-					</td>
-					<td class="input">
-						<input type="text" name="username" id="username" placeholder="netID@cornell.edu"/>
-					</td>
-				</tr>
-				<tr>
-					<td class="label">
-						<label for="password">Password</label>
-					</td>
-					<td class="input">
-						<input type="password" name="password" id="password" placeholder="password"/>
-					</td>
-				</tr>
-				<tr>
-					<td class="label">
-						<label for="forgot">Forgot password?</label>
-					</td>
-					<td colspan="2">
-						<button type="submit">Login</button>
-					</td>
-				</tr>
-			</table>
+			<div class="line">
+				<h1>Welcome! Please log in to continue.</h1>
+			</div>
+			<div class="line">
+				<label for="username">Email</label>
+				<input type="text" name="username" id="username" placeholder="netID@cornell.edu"/>
+			</div>
+			<div class="line">
+				<label for="password">Password</label>
+				<input type="password" name="password" id="password" placeholder="password"/>
+			</div>
+			<div class="line">
+				<label for="forgot">Forgot password?</label>
+				<button type="submit">Login</button>
+			</div>
+			
 		</form>
 	</div>
 </body>

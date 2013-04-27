@@ -39,31 +39,30 @@ input[id="search_terms"] {
     font-weight: 100;
     border: 1px solid #ccc;
     border-radius: 15px;
-    width: 400px !important;
+    width: 485px !important;
     padding: 5px;
     background-color: #fff;
+    float: none !important;
 }
 
 label, .label {
+    float: left;
     font-family: Gudea, Helvetica, Arial;
     font-size: 100%;
     font-weight: 400;
     color: #bbb;
-}
-
-#search_home {
-    width: 500px;
-    margin: 10% auto;
-    clear: both;
+    padding: 8px;
 }
 
 h1 {
     color: #bbb;
 }
 
-#login {
-    width: 500px;
+div.center {
+    width: 510px;
     margin: 10% auto;
+    overflow: auto;
+    text-align: center;
 }
 
 input[type="text"],
@@ -76,11 +75,12 @@ input[type="password"] {
     width: 300px;
     padding: 5px;
     background-color: #fff;
+    margin: 5px 0;
 }
 
 ::-webkit-input-placeholder {
     font-weight: light !important;
-    color: #6F9FCF;
+    color: #8CBBE5;
 }
 
 button[type="submit"] {
@@ -94,9 +94,17 @@ button[type="submit"] {
     padding: 5px;
     color: #ccc;
     background-color: #eee;
+    margin: 5px 0;
 }
+
 button[type="submit"]:hover {
     background-color: #ddd;
     border-color: #bbb;
     color: #bbb;
+}
+
+div.line {
+    overflow: auto;
+    width: 500px;
+    margin: 5px auto;
 }

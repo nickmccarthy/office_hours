@@ -21,16 +21,17 @@ if(isset($_SESSION['user'])) {
 	require 'inc/header.html';
 }
 ?>
-<div id="search_home">
-	<form action="search_results.php" method="POST">
-		<label for="Search">Search</label>
-		<input type="text" name="search_terms" id="search_terms"/>
-		<?php
-			if(isset($_GET['results'])){
-				print("No results found");
-			}
-		?>
-	</form>
+<div class="center">
+	<div class="line">
+		<form action="search_results.php" method="POST">
+			<input type="text" name="search_terms" id="search_terms" placeholder="Search courses, people, etc."/>
+		</form>
+			<?php
+				if(isset($_GET['results'])){
+					print("<p>No results found</p>");
+				}
+			?>
+	</div>
 </div>
 
 </body>
