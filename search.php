@@ -16,7 +16,7 @@ function display_search_results($terms){
    		exit();
 	}
 
-	$query_class = "SELECT * FROM Class WHERE name REGEXP '" . $terms ."' OR number REGEXP '" . $terms ."' OR department REGEXP '" . $terms . "'";
+	$query_class = "SELECT * FROM Class WHERE inactive = 0 AND name REGEXP '" . $terms ."' OR number REGEXP '" . $terms ."' OR department REGEXP '" . $terms . "'";
 	$result_class = $mydb->query($query_class);
 
 	$query_instructors = "SELECT * FROM Users WHERE first_name REGEXP '" . $terms ."' OR last_name REGEXP '" . $terms . "'";
@@ -34,9 +34,7 @@ function display_search_results($terms){
 		if(isset($result_class)){
 		print("<div>");
 		while($array = $result_class->fetch_assoc()){
-			if($array['inactive'] == 0){
-				print('<a href="course_info.php?course_number=' . $array["course_number"] . '" alt="' . $array['name'] . '">' . $array["name"] . '</a><br />');
-			}
+			print('<a href="course_info.php?course_number=' . $array["course_number"] . '" alt="' . $array['name'] . '">' . $array["name"] . '</a><br />');
 		}
 		print("</div>");
 		}
