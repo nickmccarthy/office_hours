@@ -73,7 +73,7 @@ if(isset($_SESSION['user'])) {
 	<div class="center">
 		<ul id="tabnav">
 				<li class="tab1"><a href="login.php">Login</a></li>
-				<li class="tab2"><a href="sign_up.php">Sign Up</a></li>
+				<li class="tab2"><a href="signup.php">Sign Up</a></li>
 		</ul>
 		<div class="tabarea">
 			<form method="post" action="login.php">
