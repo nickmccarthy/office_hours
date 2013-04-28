@@ -16,7 +16,7 @@ button {
     font-size: 100%;
     font-weight: 100;
     border: 1px solid #bbb;
-    border-radius: 5px;
+    border-radius: 15px;
     width: auto;
     padding: 5px 10px 5px 10px;
     color: #bbb;
@@ -59,6 +59,7 @@ input[type="password"] {
     padding: 5px;
     background-color: #fff;
     margin: 5px 0;
+    
 }
 
 button[type="submit"] {
@@ -80,13 +81,15 @@ button[type="submit"]:hover {
     border-color: #bbb;
 }
 
-::-webkit-input-placeholder {
+input::-webkit-input-placeholder {
     font-weight: light !important;
     color: #8CBBE5;
 }
 
 div.center {
-    width: 510px;
+    /*border: 1px solid #bbb;*/
+    width: 500px;
+    padding: 10px;
     margin: 10% auto;
     overflow: auto;
     text-align: center;
@@ -112,19 +115,20 @@ input[id="search_terms"] {
 
 /* login and sign up tab */
 .tabarea {
-    border-radius: 10px;
+    border-radius: 15px;
+    width: 459px;
     autoflow: auto;
-    height: 200px;
+    height: auto;
     border: 1px solid #bbb;
     margin: 0 auto;
-    padding: 10px;
+    padding: 20px;
 }
 
 ul#tabnav { /* general settings */
     text-align: right;
-    margin: 5px 10px 0 0;
+    margin: 5px 5px 0 0;
     list-style-type: none;
-    padding: 3px 5px; /* THIRD number must change with respect to padding-top (X) below */
+    padding: 3px 5px;
 }
 
 ul#tabnav li {
@@ -149,7 +153,7 @@ ul#tabnav li a { /* settings for all tab links */
     border: 1px solid #bbb;
     background-color: #ddd; /* set unselected tab background color as desired */
     color: #bbb;
-    margin-right: 0px;
+    margin-right: 0;
     text-decoration: none;
     border-bottom: none;
 }
