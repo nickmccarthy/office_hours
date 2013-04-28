@@ -70,6 +70,7 @@ if(isset($_SESSION['user'])) {
 	require 'inc/header.html';
 }
 ?>
+<div class="content">
 	<div class="center">
 		<ul id="tabnav">
 				<li class="tab1"><a href="login.php">Login</a></li>
@@ -92,5 +93,6 @@ if(isset($_SESSION['user'])) {
 			</form>
 		</div>
 	</div>
+</div>
 </body>
 </html>
