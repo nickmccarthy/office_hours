@@ -34,7 +34,9 @@ function display_search_results($terms){
 		if(isset($result_class)){
 		print("<div>");
 		while($array = $result_class->fetch_assoc()){
-			print('<a href="course_info.php?course_number=' . $array["course_number"] . '" alt="' . $array['name'] . '">' . $array["name"] . '</a><br />');
+			if($array['inactive'] == 0){
+				print('<a href="course_info.php?course_number=' . $array["course_number"] . '" alt="' . $array['name'] . '">' . $array["name"] . '</a><br />');
+			}
 		}
 		print("</div>");
 		}

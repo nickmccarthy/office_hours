@@ -21,3 +21,15 @@ if(isset($_GET['course_number'])){
 ?>
 </body>
 </html>
+
+<?php
+
+//TODO:
+
+//query database and pull the office hours associated with that class
+//list the office hours, sorted by day and then by time
+
+//implement the email subscription option
+
+
+?>
