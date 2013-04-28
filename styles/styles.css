@@ -1,9 +1,4 @@
-body {
-    background: #eee;
-    font-family: Gudea, Helvetica, Arial;
-    color: #bbb;
-}
-
+/* header and navigation buttons */
 nav {
     height: 50px;
 }
@@ -20,29 +15,28 @@ button {
     font-family: Gudea, Helvetica, Arial;
     font-size: 100%;
     font-weight: 100;
-    border: 1px solid #ccc;
-    border-radius: 15px;
+    border: 1px solid #bbb;
+    border-radius: 5px;
     width: auto;
-    padding: 5px;
-    color: #ccc;
+    padding: 5px 10px 5px 10px;
+    color: #bbb;
     background-color: #eee;
 }
 
 button:hover {
-    background-color: #ddd;
+    background-color: #fff;
     border-color: #bbb;
+}
+
+/* general css*/
+body {
+    background: #eee;
+    font-family: Gudea, Helvetica, Arial;
     color: #bbb;
 }
 
-input[id="search_terms"] {
-    font-size: 100%;
-    font-weight: 100;
-    border: 1px solid #ccc;
-    border-radius: 15px;
-    width: 485px !important;
-    padding: 5px;
-    background-color: #fff;
-    float: none !important;
+h1 {
+    color: #bbb;
 }
 
 label, .label {
@@ -51,11 +45,44 @@ label, .label {
     font-size: 100%;
     font-weight: 400;
     color: #bbb;
-    padding: 8px;
+    padding: 10px;
 }
 
-h1 {
+input[type="text"],
+input[type="password"] {
+    float: right;
+    font-size: 100%;
+    font-weight: 100;
+    border: 1px solid #bbb;
+    border-radius: 15px;
+    width: 300px;
+    padding: 5px;
+    background-color: #fff;
+    margin: 5px 0;
+}
+
+button[type="submit"] {
+    float: right;
+    font-family: Gudea, Helvetica, Arial;
+    font-size: 100%;
+    font-weight: 100;
+    border: 1px solid #bbb;
+    border-radius: 15px;
+    width: 313px;
+    padding: 5px;
     color: #bbb;
+    background-color: #eee;
+    margin: 5px 0;
+}
+
+button[type="submit"]:hover {
+    background-color: #fff;
+    border-color: #bbb;
+}
+
+::-webkit-input-placeholder {
+    font-weight: light !important;
+    color: #8CBBE5;
 }
 
 div.center {
@@ -65,46 +92,68 @@ div.center {
     text-align: center;
 }
 
-input[type="text"],
-input[type="password"] {
-    float: right;
-    font-size: 100%;
-    font-weight: 100;
-    border: 1px solid #ccc;
-    border-radius: 15px;
-    width: 300px;
-    padding: 5px;
-    background-color: #fff;
-    margin: 5px 0;
-}
-
-::-webkit-input-placeholder {
-    font-weight: light !important;
-    color: #8CBBE5;
-}
-
-button[type="submit"] {
-    float: right;
-    font-family: Gudea, Helvetica, Arial;
-    font-size: 100%;
-    font-weight: 100;
-    border: 1px solid #ccc;
-    border-radius: 15px;
-    width: 313px;
-    padding: 5px;
-    color: #ccc;
-    background-color: #eee;
-    margin: 5px 0;
-}
-
-button[type="submit"]:hover {
-    background-color: #ddd;
-    border-color: #bbb;
-    color: #bbb;
-}
-
 div.line {
     overflow: auto;
-    width: 500px;
+    width: 450px;
     margin: 5px auto;
+}
+
+/* index page */
+input[id="search_terms"] {
+    font-size: 100%;
+    font-weight: 100;
+    border: 1px solid #bbb;
+    border-radius: 15px;
+    width: 485px !important;
+    padding: 5px;
+    background-color: #fff;
+    float: none !important;
+}
+
+/* login and sign up tab */
+.tabarea {
+    border-radius: 10px;
+    autoflow: auto;
+    height: 200px;
+    border: 1px solid #bbb;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+ul#tabnav { /* general settings */
+    text-align: right;
+    margin: 5px 10px 0 0;
+    list-style-type: none;
+    padding: 3px 5px; /* THIRD number must change with respect to padding-top (X) below */
+}
+
+ul#tabnav li {
+    display: inline;
+}
+
+body#tab1 li.tab1 a, body#tab2 li.tab2 a { /* settings for selected tab link */
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    background-color: #eee;
+    color: #bbb;
+    position: relative;
+    top: 1px;
+    padding: 5px 10px 3px 10px;
+    border-bottom: none;
+}
+
+ul#tabnav li a { /* settings for all tab links */
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    padding: 4px 10px 3px 10px;
+    border: 1px solid #bbb;
+    background-color: #ddd; /* set unselected tab background color as desired */
+    color: #bbb;
+    margin-right: 0px;
+    text-decoration: none;
+    border-bottom: none;
+}
+
+ul#tabnav a:hover { /* settings for hover effect */
+    background: #fff; /* set desired hover color */
 }

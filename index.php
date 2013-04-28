@@ -22,7 +22,6 @@ if(isset($_SESSION['user'])) {
 }
 ?>
 <div class="center">
-	<div class="line">
 		<form action="search_results.php" method="POST">
 			<input type="text" name="search_terms" id="search_terms" placeholder="Search courses, people, etc."/>
 		</form>
@@ -31,7 +30,6 @@ if(isset($_SESSION['user'])) {
 					print("<p>No results found</p>");
 				}
 			?>
-	</div>
 </div>
 
 </body>

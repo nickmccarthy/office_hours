@@ -62,7 +62,7 @@ if (isset($_POST['username']) && isset($_POST["password"]))
 	<link href='http://fonts.googleapis.com/css?family=Acme' rel='stylesheet' type='text/css' />
 	<link href='http://fonts.googleapis.com/css?family=Gudea' rel='stylesheet' type='text/css' />
 </head>
-<body>
+<body id="tab1">
 <?php
 if(isset($_SESSION['user'])) {
 	require 'inc/header_in.html';
@@ -71,24 +71,26 @@ if(isset($_SESSION['user'])) {
 }
 ?>
 	<div class="center">
-		<form method="post" action="login.php">
-			<div class="line">
-				<h1>Welcome! Please log in to continue.</h1>
-			</div>
-			<div class="line">
-				<label for="username">Email</label>
-				<input type="text" name="username" id="username" placeholder="netID@cornell.edu"/>
-			</div>
-			<div class="line">
-				<label for="password">Password</label>
-				<input type="password" name="password" id="password" placeholder="password"/>
-			</div>
-			<div class="line">
-				<label for="forgot">Forgot password?</label>
-				<button type="submit">Login</button>
-			</div>
-			
-		</form>
+		<ul id="tabnav">
+				<li class="tab1"><a href="login.php">Login</a></li>
+				<li class="tab2"><a href="sign_up.php">Sign Up</a></li>
+		</ul>
+		<div class="tabarea">
+			<form method="post" action="login.php">
+				<div class="line">
+					<label for="username">Email</label>
+					<input type="text" name="username" id="username" placeholder="netID@cornell.edu"/>
+				</div>
+				<div class="line">
+					<label for="password">Password</label>
+					<input type="password" name="password" id="password" placeholder="password"/>
+				</div>
+				<div class="line">
+					<label for="forgot">Forgot password?</label>
+					<button type="submit">Login</button>
+				</div>
+			</form>
+		</div>
 	</div>
 </body>
 </html>
