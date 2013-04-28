@@ -1,16 +1,30 @@
-<?
-// query users with uid in session to get name
+<?php
+	session_start();
 
-// query users join teaches join class with their uid
-// for each, print a line with
-// Department . Number . (Position)
+	// Import db config info
+	require 'config/mysql.config.php';
+	require 'config/pageinfo.config.php';
 
-// For each of these, check permissions this user has
-// use level from previous query and see what permissions that level has
-// in class join permissions
-
-// print office hours link for each and also, if have permission to change
-// course permissions, print a link for that too
-
-print 'dashboard';
 ?>
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="styles/styles.css">
+	<link href='http://fonts.googleapis.com/css?family=Acme' rel='stylesheet' type='text/css' />
+	<link href='http://fonts.googleapis.com/css?family=Gudea' rel='stylesheet' type='text/css' />
+</head>
+<?php
+if(isset($_SESSION['user'])) {
+	require 'inc/header_in.html';
+        print '<body id="dash">';
+} else {
+	require 'inc/header.html';
+        print '<body id="tab1">';
+}
+?>
+<div class="content">
+<p>dashboard page</p>
+</div>
+
+</body>
+</html>
