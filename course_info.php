@@ -1,7 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="styles/styles.css">
+	<link href='http://fonts.googleapis.com/css?family=Acme' rel='stylesheet' type='text/css' />
+	<link href='http://fonts.googleapis.com/css?family=Gudea' rel='stylesheet' type='text/css' />
+</head>
+<body>
 <?php
-if(isset($_GET['cid'])){
-	print("This course id is: " . $_GET['cid']);
+if(isset($_SESSION['user'])) {
+	require 'inc/header_in.html';
+} else {
+	require 'inc/header.html';
+}
+
+if(isset($_GET['course_number'])){
+	print("This course number is: " . $_GET['course_number']);
 }else{
-	print("This does not have a class id!");
+	print("This does not have a course number!");
 }
 ?>
+</body>
+</html>

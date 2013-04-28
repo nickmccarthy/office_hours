@@ -22,7 +22,7 @@ if(isset($_SESSION['user'])) {
 }
 ?>
 <div class="center">
-		<form action="search_results.php" method="POST">
+		<form action="search.php" method="POST">
 			<input type="text" name="search_terms" id="search_terms" placeholder="Search courses, people, etc."/>
 		</form>
 			<?php
