@@ -34,14 +34,14 @@ function display_search_results($terms){
 		if(isset($result_class)){
 		print("<div>");
 		while($array = $result_class->fetch_assoc()){
-			print('<a href="' . $_SERVER["SERVER_PORT"] . $_SERVER["REQUEST_URI"] . '?cid=' . $array["cid"] . '" alt="' . $array['name'] . '">' . $array["name"] . '</a><br />');
+			print('<a href="course_info.php?cid=' . $array["cid"] . '" alt="' . $array['name'] . '">' . $array["name"] . '</a><br />');
 		}
 		print("</div>");
 		}
 		if(isset($result_instructor)){
 		print("<div>");
 		while($array = $result_instructor->fetch_assoc()){
-			print('<a href="' . $_SERVER[HTTP_HOST] . $_SERVER[REQUEST_URI] . '?uid=' . $array['uid'] . '" alt="' . $array["first_name"] . ' ' . $array["last_name"] . '">' . $array['first_name'] . $array['last_name'] . '</a><br />');
+			print('<a href="instructor_info.php?uid=' . $array['uid'] . '" alt="' . $array["first_name"] . ' ' . $array["last_name"] . '">' . $array['first_name'] . $array['last_name'] . '</a><br />');
 		}
 		print("</div>");
 		}
