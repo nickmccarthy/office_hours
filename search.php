@@ -65,23 +65,52 @@ function return_clean($tocheck){
 <!DOCTYPE html>
 <head>
 	<link rel="stylesheet" type="text/css" href="styles/styles.css">
+	<link href='http://fonts.googleapis.com/css?family=Acme' rel='stylesheet' type='text/css' />
+	<link href='http://fonts.googleapis.com/css?family=Gudea' rel='stylesheet' type='text/css' />
 </head>
-<body>
+<body id="search">
 <?php
-if(isset($_SESSION['user'])) {
-	require 'inc/header_in.html';
-} else {
-	require 'inc/header.html';
-}
-	display_search_results($_POST['search_terms']);
-?>
-
+		if(isset($_SESSION['user'])) {
+			require 'inc/header_in.html';
+		} else {
+			require 'inc/header.html';
+		}
+			print '<div class="content">';
+			display_search_results($_POST['search_terms']);
+		?>
+<div class="courses">
+        <span class="id"><a href="course_info.php">CourseID (position)</a></span>
+        <?php
+            if(isset($_SESSION['user'])) {
+                print '<span class="edit"><a href="">Join Class</a></span>';
+            } else {
+				print '<span class="edit"><a href="search.php">Subscribe</a></span>';
+			}
+        ?>
+</div>
+<div class="courses">
+        <span class="id"><a href="course_info.php">CourseID (position)</a></span>
+        <?php
+            if(isset($_SESSION['user'])) {
+                print '<span class="edit"><a href="">Join Class</a></span>';
+            } else {
+				print '<span class="edit"><a href="search.php">Subscribe</a></span>';
+			}
+        ?>
+</div>
+<div class="courses">
+        <span class="id"><a href="course_info.php">CourseID (position)</a></span>
+        <?php
+            if(isset($_SESSION['user'])) {
+                print '<span class="edit"><a href="">Join Class</a></span>';
+            } else {
+				print '<span class="edit"><a href="search.php">Subscribe</a></span>';
+			}
+        ?>
+</div>
+</div>
 </body>
 </html>
-
-
-
-
 
 <?php
 

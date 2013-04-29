@@ -18,7 +18,7 @@
 if(isset($_SESSION['user'])) {
 	require 'inc/header_in.html';
 } else {
-	require 'inc/header.html';
+	require 'inc/header_home.html';
 }
 ?>
 <div class="center">

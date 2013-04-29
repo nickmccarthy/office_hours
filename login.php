@@ -87,7 +87,7 @@ if(isset($_SESSION['user'])) {
 					<input type="password" name="password" id="password" placeholder="password"/>
 				</div>
 				<div class="line">
-					<label for="forgot">Forgot password?</label>
+					<label for="forgot"><a href="login.php">Forgot password?</a></label>
 					<button type="submit">Login</button>
 				</div>
 			</form>

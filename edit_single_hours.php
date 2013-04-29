@@ -1,7 +1,42 @@
-<?
-print 'edit single office hours page';
-?>
+<?php
+	session_start();
 
+	// Import db config info
+	require 'config/mysql.config.php';
+	require 'config/pageinfo.config.php';
+
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="styles/styles.css">
+	<link href='http://fonts.googleapis.com/css?family=Acme' rel='stylesheet' type='text/css' />
+	<link href='http://fonts.googleapis.com/css?family=Gudea' rel='stylesheet' type='text/css' />
+</head>
+<?php
+    if(isset($_SESSION['user'])) {
+            require 'inc/header_in.html';
+            print '<body id="dash">';
+    } else {
+            require 'inc/header.html';
+            print '<body id="tab1">';
+    }
+?>
+<div class="content">
+    <h2>Course ID | Edit Office Hours</h2>
+    <div class="center">
+        <ul id="tabnav">
+            <li class="tab1"><a href="edit_single_hours.php">Edit Single Hours</a></li>
+            <li class="tab2"><a href="edit_repeating_hours.php">Edit Repeating Hours</a></li>
+            <li class="tab3"><a href="dashboard.php">Back to Dashboard</a></li>
+        </ul>
+	<div class="tabarea">
+	    <form method="post" action="addclass.php">
+            
+	    </form>
+	</div>
+    </div>
+</div>
 
 <?php
 

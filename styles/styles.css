@@ -69,7 +69,8 @@ label, .label {
 }
 
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type="tel"] {
     float: right;
     font-size: 100%;
     font-weight: 100;
@@ -133,7 +134,7 @@ div.center {
     /*border: 1px solid #bbb;*/
     width: 500px;
     padding: 10px;
-    margin: 10% auto;
+    margin: 50px auto;
     overflow: auto;
     text-align: center;
 }
@@ -177,12 +178,21 @@ div.content {
 }
 
 /* dashboard content arrow */
+body#search .content:after {
+    border: none;
+}
+
+body#search .content:before {
+    border: none;
+}
+
+/* dashboard content arrow */
 body#dash .content:after {
-    right: 238px;
+    right: 248px;
 }
 
 body#dash .content:before {
-    right: 237px;
+    right: 247px;
 }
 
 /* settings content arrow */
@@ -206,12 +216,12 @@ body#help .content:before {
 /* login/signup content arrow */
 body#tab1 .content:after,
 body#tab2 .content:after {
-    right: 30px;
+    right: 26px;
 }
 
 body#tab1 .content:before,
 body#tab2 .content:before {
-    right: 29px;
+    right: 25px;
 }
 
 /* login and sign up tab */
@@ -238,7 +248,9 @@ ul#tabnav li {
     display: inline;
 }
 
-body#tab1 li.tab1 a, body#tab2 li.tab2 a { /* settings for selected tab link */
+body#tab1 li.tab1 a,
+body#tab2 li.tab2 a,
+body#tab3 li.tab3 a { /* settings for selected tab link */
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
     background-color: #eee;
@@ -275,6 +287,7 @@ input[id="search_terms"] {
     padding: 5px;
     background-color: #fff;
     float: none !important;
+    margin: 30% auto;
 }
 
 /* dashboard page */

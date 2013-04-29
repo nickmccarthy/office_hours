@@ -14,13 +14,13 @@
 	<link href='http://fonts.googleapis.com/css?family=Gudea' rel='stylesheet' type='text/css' />
 </head>
 <?php
-if(isset($_SESSION['user'])) {
-	require 'inc/header_in.html';
-        print '<body id="dash">';
-} else {
-	require 'inc/header_in.html';
-        print '<body id="tab1">';
-}
+    if(isset($_SESSION['user'])) {
+            require 'inc/header_in.html';
+            print '<body id="dash">';
+    } else {
+            require 'inc/header.html';
+            print '<body id="tab1">';
+    }
 ?>
 <div class="content">
     <h2>Welcome, First Name</h2>
@@ -50,6 +50,9 @@ if(isset($_SESSION['user'])) {
             }
         ?>
         <span class="edit"><a href="edit_single_hours.php">Edit Office Hours</a></span>
+    </div>
+    <div class="courses">
+        <span class="edit"><a href="addclass.php">Add Class</a></span>
     </div>
 </div>
 
