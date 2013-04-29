@@ -37,7 +37,7 @@
 
 // query users join teaches join class with uid to get permission level
 
-// query class join permissions and for each permission available to that level,
+// query class join permissions and to get all of the permissions
 // print the name of that permission and a pair of checkboxes. Also look up the current
 // permission settings for that class and use to set default values for the checkboxes.
 

@@ -1,3 +1,11 @@
+<?php
+	session_start();
+
+	// Import db config info
+	require 'config/mysql.config.php';
+	require 'config/pageinfo.config.php';
+
+?>
 <!DOCTYPE html>
 <html>
 <head>

@@ -24,7 +24,7 @@ function display_search_results($terms){
 
 	if ($result_class->num_rows == 1 && $result_instructors->num_rows == 0){
 		$row = $result_class->fetch_assoc();
-		header("Location: ".$class_page."?course_number=" . $row['course_number']);
+		header("Location: ".$class_page."?cid=" . $row['cid']);
 	}elseif($result_class->num_rows == 0 && $result_instructors->num_rows == 1){
 		$row = $result_instructors->fetch_assoc();
 		header("Location: ".$instructor_page ."?uid=" . $row['uid']);
@@ -34,7 +34,7 @@ function display_search_results($terms){
 		if(isset($result_class)){
 		print("<div>");
 		while($array = $result_class->fetch_assoc()){
-			print('<a href="course_info.php?course_number=' . $array["course_number"] . '" alt="' . $array['name'] . '">' . $array["name"] . '</a><br />');
+			print('<a href="course_info.php?cid=' . $array["cid"] . '" alt="' . $array['name'] . '">' . $array["name"] . '</a><br />');
 		}
 		print("</div>");
 		}
