@@ -16,7 +16,7 @@ function display_search_results($terms){
    		exit();
 	}
 
-	$query_class = "SELECT * FROM Class WHERE name REGEXP '" . $terms ."' OR number REGEXP '" . $terms ."' OR department REGEXP '" . $terms . "'";
+	$query_class = "SELECT * FROM Class WHERE inactive = 0 AND name REGEXP '" . $terms ."' OR number REGEXP '" . $terms ."' OR department REGEXP '" . $terms . "'";
 	$result_class = $mydb->query($query_class);
 
 	$query_instructors = "SELECT * FROM Users WHERE first_name REGEXP '" . $terms ."' OR last_name REGEXP '" . $terms . "'";
@@ -24,7 +24,7 @@ function display_search_results($terms){
 
 	if ($result_class->num_rows == 1 && $result_instructors->num_rows == 0){
 		$row = $result_class->fetch_assoc();
-		header("Location: ".$class_page."?cid=" . $row['cid']);
+		header("Location: ".$class_page."?course_number=" . $row['course_number']);
 	}elseif($result_class->num_rows == 0 && $result_instructors->num_rows == 1){
 		$row = $result_instructors->fetch_assoc();
 		header("Location: ".$instructor_page ."?uid=" . $row['uid']);
@@ -34,7 +34,7 @@ function display_search_results($terms){
 		if(isset($result_class)){
 		print("<div>");
 		while($array = $result_class->fetch_assoc()){
-			print('<a href="course_info.php?cid=' . $array["cid"] . '" alt="' . $array['name'] . '">' . $array["name"] . '</a><br />');
+			print('<a href="course_info.php?course_number=' . $array["course_number"] . '" alt="' . $array['name'] . '">' . $array["name"] . '</a><br />');
 		}
 		print("</div>");
 		}
@@ -67,8 +67,12 @@ function return_clean($tocheck){
 	<link rel="stylesheet" type="text/css" href="styles/styles.css">
 </head>
 <body>
-
 <?php
+if(isset($_SESSION['user'])) {
+	require 'inc/header_in.html';
+} else {
+	require 'inc/header.html';
+}
 	display_search_results($_POST['search_terms']);
 ?>
 
