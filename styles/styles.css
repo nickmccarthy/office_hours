@@ -1,7 +1,7 @@
 /* header and navigation buttons */
 #header {
     height: auto;
-    width: 98%;
+    width: auto;
     overflow: auto;
     padding: 10px;
 }
@@ -48,6 +48,16 @@ body {
 h1 {
     color: #bbb;
 }
+
+a {
+    color: #bbb;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #8CBBE5;
+    border-bottom: 1px solid #8CBBE5;
+    }
 
 label, .label {
     float: left;
@@ -134,10 +144,11 @@ div.line {
     margin: 5px auto;
 }
 
+/* main content div*/
 div.content {
     border-radius: 5px;
-    margin: 1% auto;
-    width: 98%;
+    margin: 15px 0px;
+    width: auto;
     position: relative;
     background: #ddd;
     border: 1px solid #bbb;
@@ -165,7 +176,7 @@ div.content {
     margin-left: -16px;
 }
 
-/* dashboard arrow */
+/* dashboard content arrow */
 body#dash .content:after {
     right: 238px;
 }
@@ -174,7 +185,7 @@ body#dash .content:before {
     right: 237px;
 }
 
-/* settings arrow */
+/* settings content arrow */
 body#settings .content:after {
     right: 156px;
 }
@@ -183,7 +194,7 @@ body#settings .content:before {
     right: 155px;
 }
 
-/* help arrow */
+/* help content arrow */
 body#help .content:after {
     right: 91px;
 }
@@ -192,27 +203,15 @@ body#help .content:before {
     right: 90px;
 }
 
-/* login/signup arrow */
+/* login/signup content arrow */
 body#tab1 .content:after,
 body#tab2 .content:after {
-    right: 26px;
+    right: 30px;
 }
 
 body#tab1 .content:before,
 body#tab2 .content:before {
-    right: 25px;
-}
-
-/* index page */
-input[id="search_terms"] {
-    font-size: 100%;
-    font-weight: 100;
-    border: 1px solid #bbb;
-    border-radius: 15px;
-    width: 485px !important;
-    padding: 5px;
-    background-color: #fff;
-    float: none !important;
+    right: 29px;
 }
 
 /* login and sign up tab */
@@ -223,7 +222,7 @@ input[id="search_terms"] {
     autoflow: auto;
     height: auto;
     border: 1px solid #bbb;
-    margin: 0 auto;
+    margin: 0px auto;
     padding: 20px;
     background-color: #eee;
 }
@@ -264,4 +263,51 @@ ul#tabnav li a { /* settings for all tab links */
 
 ul#tabnav a:hover { /* settings for hover effect */
     background: #fff; /* set desired hover color */
+}
+
+/* index (search) page */
+input[id="search_terms"] {
+    font-size: 100%;
+    font-weight: 100;
+    border: 1px solid #bbb;
+    border-radius: 15px;
+    width: 485px !important;
+    padding: 5px;
+    background-color: #fff;
+    float: none !important;
+}
+
+/* dashboard page */
+.courses {
+    width: auto;
+    height: 60px;
+    padding: 10px;
+}
+
+.courses:nth-child(odd) {
+    background-color: #fff;
+    border: 0px;
+}
+
+.courses:nth-child(even) {
+    background-color: #eee;
+    border: 0px;
+}
+
+.courses:hover {
+    background-color: #EEF3F7;
+}
+
+.id {
+    padding: 5px 10px;
+    display: inline;
+    float: left;
+    height: auto;
+}
+
+.edit {
+    padding: 5px 10px;
+    display: inline;
+    float: right;
+    height: auto;
 }
