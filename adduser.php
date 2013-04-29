@@ -28,3 +28,15 @@ $result = $db->query($query);
 print $db->errno;
 
 ?>
+
+
+
+
+<?php
+
+// TODO:
+
+// This is not part of the site, just a way of adding us to the users db
+// before signup is complete
+
+?>

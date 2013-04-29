@@ -55,3 +55,20 @@ if(isset($_SESSION['user'])) {
 </div>
 </body>
 </html>
+
+
+
+
+
+<?php
+
+// TODO: 
+
+//Check that the supplied email is a cornell email, and has
+// not been used by a different user. (query users db and check EXISTS)
+
+// If unique, add this person's supplied info (first and last name, email,
+// password to the users db and redirect them to their dashboard)
+
+
+?>
