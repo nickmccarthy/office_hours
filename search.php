@@ -74,3 +74,28 @@ function return_clean($tocheck){
 
 </body>
 </html>
+
+
+
+
+
+<?php
+
+// TODO:
+
+// Other than above, print out a couple instructors associated with a course
+// for each course result (users join teaches join class)
+
+// or classes taught by an instructor/ ta for each person result
+// (also users join teaches join class)
+
+
+// if logged in, add a join class button for classes if permissions allow
+// joining of that class (permissions table and check self enrollment)
+
+// if not logged in, print a notification button
+// on submission of the dialog associated with this notification button, 
+// check and see if the supplied email is in class join emails and if not, 
+// add it
+
+?>

@@ -28,3 +28,17 @@ if(isset($_SESSION['user'])) {
 
 </body>
 </html>
+
+
+
+
+<?php
+
+// TODO:
+
+// check that old password matches the one currently in the db for this user
+// if so, and if the new pass word and confirmation are the same, add
+// a new salt and the hash of this password in the db, replacing the old ones
+
+// redirect the user to the dashboard
+?>
