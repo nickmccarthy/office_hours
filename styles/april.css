@@ -8,6 +8,10 @@
 button {
     border: 1px solid #E96368;
     color: #E96368;
+    background-color: #f4ddcd;
+}
+
+button:hover {
     background-color: #f2eae3;
 }
 
@@ -70,12 +74,12 @@ input::-webkit-input-placeholder { /* WebKit browsers */
 
 /* main content div*/
 div.content {
-    background: #eee;
+    background: #f4ddcd;
     border: 1px solid #E96368;
 }
 
 .content:after { /* arrow inside */
-    border-bottom-color: #eee;
+    border-bottom-color: #f4ddcd;
 
 }
 .content:before { /* arrow outline */
