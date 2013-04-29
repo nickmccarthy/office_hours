@@ -26,10 +26,13 @@ if(isset($_GET['cid'])){
 
 //TODO:
 
-//query database and pull the office hours associated with that class
-//list the office hours, sorted by day and then by time
+// query class table and print associated data (course id, course name, meeting
+// time, instructor(s))
 
-//implement the email subscription option
+// query for the office hours associated with that class (users join teaches join
+// class join officeHours), select those that occur in the next week
+
+// list the office hours, sorted by day and then by time
 
 
 ?>

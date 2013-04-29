@@ -18,18 +18,43 @@ if(isset($_SESSION['user'])) {
 	require 'inc/header_in.html';
         print '<body id="dash">';
 } else {
-	require 'inc/header.html';
+	require 'inc/header_in.html';
         print '<body id="tab1">';
 }
 ?>
 <div class="content">
-<p>dashboard page</p>
+    <h2>Welcome, First Name</h2>
+    <div class="courses">
+        <span class="id"><a href="course_info.php">CourseID (position)</a></span>
+        <?php
+            if(isset($_SESSION['user'])) {
+                print '<span class="edit"><a href="edit_permissions.php">Course Permissions</a></span>';
+            }
+        ?>
+        <span class="edit"><a href="edit_single_hours.php">Edit Office Hours</a></span>
+        
+    </div>
+    <div class="courses">
+        <span class="id"><a href="course_info.php">CourseID (position)</a></span>
+        <?php
+            if(isset($_SESSION['user'])) {
+                print '<span class="edit"><a href="edit_permissions.php">Course Permissions</a></span>';
+            }
+        ?>        <span class="edit"><a href="edit_single_hours.php">Edit Office Hours</a></span>
+    </div>
+    <div class="courses">
+        <span class="id"><a href="course_info.php">CourseID (position)</a></span>
+        <?php
+            if(isset($_SESSION['user'])) {
+                print '<span class="edit"><a href="edit_permissions.php">Course Permissions</a></span>';
+            }
+        ?>
+        <span class="edit"><a href="edit_single_hours.php">Edit Office Hours</a></span>
+    </div>
 </div>
 
 </body>
 </html>
-
-
 
 <?php
 
