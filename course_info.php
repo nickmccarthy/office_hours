@@ -10,6 +10,8 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="styles/styles.css">
+    <!-- style sheets will change depending on the month -->
+	<link rel="stylesheet" type="text/css" href="styles/april.css">
 	<link href='http://fonts.googleapis.com/css?family=Acme' rel='stylesheet' type='text/css' />
 	<link href='http://fonts.googleapis.com/css?family=Gudea' rel='stylesheet' type='text/css' />
 </head>
@@ -38,16 +40,3 @@ if(isset($_GET['cid'])){
 </body>
 </html>
 
-<?php
-
-//TODO:
-
-// query class table and print associated data (course id, course name, meeting
-// time, instructor(s))
-
-// query for the office hours associated with that class (users join teaches join
-// class join officeHours), select those that occur in the next week
-
-// list the office hours, sorted by day and then by time
-
-?>
