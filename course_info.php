@@ -26,9 +26,6 @@ if(isset($_SESSION['user'])) {
 
 <div class="content">
 <?php
-if(isset($_GET['course_number'])){
-	print("This course number is: " . $_GET['course_number']);
-
 if(isset($_GET['cid'])){
 	print("This cid is: " . $_GET['cid']);
 }else{

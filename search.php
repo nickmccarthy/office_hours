@@ -16,6 +16,8 @@ function display_search_results($terms){
    		exit();
 	}
 
+
+
 	$query_class = "SELECT * FROM Class WHERE inactive = 0 AND name REGEXP '" . $terms ."' OR number REGEXP '" . $terms ."' OR department REGEXP '" . $terms . "'";
 	$result_class = $mydb->query($query_class);
 
@@ -32,18 +34,23 @@ function display_search_results($terms){
 		header("Location: " . $search_page . "?results=0");
 	}else{
 		if(isset($result_class)){
-		print("<div>");
-		while($array = $result_class->fetch_assoc()){
-			print('<a href="course_info.php?cid=' . $array["cid"] . '" alt="' . $array['name'] . '">' . $array["name"] . '</a><br />');
-		}
-		print("</div>");
+			while($array = $result_class->fetch_assoc()){
+				print('<div class="courses">');
+				print('<span class="id"><a href="course_info.php?cid=' . $array["cid"] . '" alt = "' . $array["name"] . '">' . $array["name"] . '</a></span>');
+				if(isset($_SESSION['user'])){
+					print('<span class="edit"><a href="" alt="Join">Join Class</a></span>');
+				}else{
+					print('<span class="edit"><a href="search.php">Subscribe</a></span>');
+				}
+				print('</div>');
+			}
 		}
 		if(isset($result_instructor)){
-		print("<div>");
-		while($array = $result_instructor->fetch_assoc()){
-			print('<a href="instructor_info.php?uid=' . $array['uid'] . '" alt="' . $array["first_name"] . ' ' . $array["last_name"] . '">' . $array['first_name'] . $array['last_name'] . '</a><br />');
-		}
-		print("</div>");
+			print("<div>");
+			while($array = $result_instructor->fetch_assoc()){
+				print('<a href="instructor_info.php?uid=' . $array['uid'] . '" alt="' . $array["first_name"] . ' ' . $array["last_name"] . '">' . $array['first_name'] . $array['last_name'] . '</a><br />');
+			}
+			print("</div>");
 		}
 	}
 	$mydb->close();
@@ -80,36 +87,6 @@ function return_clean($tocheck){
 			print '<div class="content">';
 			display_search_results($_POST['search_terms']);
 		?>
-<div class="courses">
-        <span class="id"><a href="course_info.php">CourseID (position)</a></span>
-        <?php
-            if(isset($_SESSION['user'])) {
-                print '<span class="edit"><a href="">Join Class</a></span>';
-            } else {
-				print '<span class="edit"><a href="search.php">Subscribe</a></span>';
-			}
-        ?>
-</div>
-<div class="courses">
-        <span class="id"><a href="course_info.php">CourseID (position)</a></span>
-        <?php
-            if(isset($_SESSION['user'])) {
-                print '<span class="edit"><a href="">Join Class</a></span>';
-            } else {
-				print '<span class="edit"><a href="search.php">Subscribe</a></span>';
-			}
-        ?>
-</div>
-<div class="courses">
-        <span class="id"><a href="course_info.php">CourseID (position)</a></span>
-        <?php
-            if(isset($_SESSION['user'])) {
-                print '<span class="edit"><a href="">Join Class</a></span>';
-            } else {
-				print '<span class="edit"><a href="search.php">Subscribe</a></span>';
-			}
-        ?>
-</div>
 </div>
 </body>
 </html>
