@@ -17,8 +17,8 @@ function display_search_results($terms){
 	}
 
 
-
-	$query_class = "SELECT * FROM Class WHERE inactive = 0 AND name REGEXP '" . $terms ."' OR number REGEXP '" . $terms ."' OR department REGEXP '" . $terms . "'";
+	//initial queries for page information
+	$query_class = "SELECT * FROM Class WHERE inactive = 0 AND (name REGEXP '" . $terms ."' OR number REGEXP '" . $terms ."' OR department REGEXP '" . $terms . "')";
 	$result_class = $mydb->query($query_class);
 
 	$query_instructors = "SELECT * FROM Users WHERE first_name REGEXP '" . $terms ."' OR last_name REGEXP '" . $terms . "'";
@@ -26,31 +26,64 @@ function display_search_results($terms){
 
 	if ($result_class->num_rows == 1 && $result_instructors->num_rows == 0){
 		$row = $result_class->fetch_assoc();
-		header("Location: ".$class_page."?cid=" . $row['cid']);
+		header("Location: ". $class_page."?cid=" . $row['cid']);
 	}elseif($result_class->num_rows == 0 && $result_instructors->num_rows == 1){
 		$row = $result_instructors->fetch_assoc();
-		header("Location: ".$instructor_page ."?uid=" . $row['uid']);
+		header("Location: ". $instructor_page ."?uid=" . $row['uid']);
 	}elseif($result_class->num_rows == 0 && $result_instructors->num_rows == 0){
 		header("Location: " . $search_page . "?results=0");
 	}else{
 		if(isset($result_class)){
 			while($array = $result_class->fetch_assoc()){
-				print('<div class="courses">');
+
+				//query the database for the instructors of the current course
+				$query = "SELECT first_name, last_name FROM Users NATURAL JOIN Teaches NATURAL JOIN Class WHERE cid=" . $array['cid'];
+				$result = $mydb->query($query);
+				$I1 = $result->fetch_assoc();
+				$I1name = '';
+				$I2name = '';
+				if(isset($I1)){
+					$I1name = 'Instructors: ' . $I1['first_name'] . ' ' . $I1['last_name'];
+					$I2 = $result->fetch_assoc();
+					if(isset($I2)){
+						$I2name = ', ' . $I2['first_name'] . ' ' . $I2['last_name'];
+					}
+				}
+
+				//print the courses
+				print("<div class='courses'> \n");
 				print('<span class="id"><a href="course_info.php?cid=' . $array["cid"] . '" alt = "' . $array["name"] . '">' . $array["name"] . '</a></span>');
 				if(isset($_SESSION['user'])){
 					print('<span class="edit"><a href="" alt="Join">Join Class</a></span>');
 				}else{
 					print('<span class="edit"><a href="search.php">Subscribe</a></span>');
 				}
-				print('</div>');
+				print($I1name . ' ' . $I2name);
+				print("</div> \n");
 			}
 		}
-		if(isset($result_instructor)){
-			print("<div>");
-			while($array = $result_instructor->fetch_assoc()){
-				print('<a href="instructor_info.php?uid=' . $array['uid'] . '" alt="' . $array["first_name"] . ' ' . $array["last_name"] . '">' . $array['first_name'] . $array['last_name'] . '</a><br />');
+		if(isset($result_instructors)){
+			while($array = $result_instructors->fetch_assoc()){
+
+				//query the database for the courses this instructor teaches
+				$query = 'SELECT department, name, number FROM Users NATURAL JOIN Teaches NATURAL JOIN Class WHERE inactive = 0 ORDER BY cid DESC';
+				$result = $mydb->query($query);
+				$C1 = $result->fetch_assoc();
+				$C1name = '';
+				$C2name = '';
+				if(isset($C1)){
+					$C1name = "Classes: " . $C1['department'] . " " . $C1['number'] . ": " . $C1['name'];
+					$C2 = $result->fetch_assoc();
+					if(isset($C2)){
+						$C2name = " " . $C2['department'] . " " . $C2['number'] . ": " . $C2['name'];
+					}
+				}
+
+				//print instructors
+				print('<div class="courses">');
+				print('<span class="edit"><a href="instructor_info.php?uid=' . $array["uid"] . '" alt="' . $array["first_name"] . ' ' . $array["last_name"] . '">' . $array["first_name"] . ', ' . $array["last_name"] . '</a></span>');
+				print('</div>');
 			}
-			print("</div>");
 		}
 	}
 	$mydb->close();
