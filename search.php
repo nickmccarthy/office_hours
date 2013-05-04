@@ -55,9 +55,8 @@ function display_search_results($terms){
 				print('<span class="id"><a href="course_info.php?cid=' . $array["cid"] . '" alt = "' . $array["name"] . '">' . $array["name"] . '</a></span>');
 				if(isset($_SESSION['user'])){
 					print('<span class="edit"><a href="" alt="Join">Join Class</a></span>');
-				}else{
-					print('<span class="edit"><a href="search.php">Subscribe</a></span>');
 				}
+				print('<span class="edit"><a href="search.php">Subscribe</a></span>');
 				print($I1name . ' ' . $I2name);
 				print("</div> \n");
 			}
@@ -81,7 +80,7 @@ function display_search_results($terms){
 
 				//print instructors
 				print('<div class="courses">');
-				print('<span class="edit"><a href="instructor_info.php?uid=' . $array["uid"] . '" alt="' . $array["first_name"] . ' ' . $array["last_name"] . '">' . $array["first_name"] . ', ' . $array["last_name"] . '</a></span>');
+				print('<span class="edit"><a href="instructor_info.php?uid=' . $array["uid"] . '" alt="' . $array["first_name"] . ' ' . $array["last_name"] . '">' . $array["first_name"] . ' ' . $array["last_name"] . '</a></span>');
 				print('</div>');
 			}
 		}
