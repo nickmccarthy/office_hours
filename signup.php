@@ -24,7 +24,9 @@ if (isset($_POST['fname'])
 	{
 		$db = new mysqli($dbserver, $dbusername, $dbpassword, $dbname);
 
-		$user = new user($fname, $lname, $email, $password);
+		$user = new user($email);
+		$user->set_data($fname, $lname, $password);
+
 		if (!$user->exists($db))
 		{
 			$user->add($db);
