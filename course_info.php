@@ -27,12 +27,28 @@ if(isset($_SESSION['user'])) {
 <div class="content">
 <?php
 if(isset($_GET['cid'])){
-	print("This cid is: " . $_GET['cid']);
+
+	$mydb = new mysqli($dbserver, $dbusername, $dbpassword, $dbname);
+	if (mysqli_connect_errno()) {
+    	printf("Connect failed: %s\n", mysqli_connect_error());
+   		exit();
+	}
+	$query = "SELECT * FROM Class WHERE cid=" . $_GET['cid'];
+	$result = $mydb->query($query);
+	$row = $result->fetch_assoc();
+
+	print("<h2>" . $row['department'] . " " . $row['number'] . "|" . $row['name'] . "</h2>");
+
+	$year = date("Y");
+	$week = date("W");
+	$firstDayOfWeek = strtotime($year."W".str_pad($week,2,"0",STR_PAD_LEFT));
+	print("<div>Office Hours Week of " . date("F jS",$firstDayOfWeek));
+
+	$ohQuery = "SELECT * FROM "
 }else{
-	print("This does not have a cid!");
+	print("<h2>No Course Found</h2>");
 }
 ?>
-<H2>Course ID | Course Name</H2>
 </div>
 </body>
 </html>
