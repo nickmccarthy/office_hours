@@ -4,8 +4,45 @@ session_start();
 	// Import db config info
 require 'config/mysql.config.php';
 require 'config/pageinfo.config.php';
+require 'queries/user.php';
+
+if (isset($_POST['fname']) 
+	&& isset($_POST['lname'])
+	&& isset($_POST['username'])
+	&& isset($_POST['password']))
+{
+	$fname = trim(htmlentities($_POST['fname']));
+	$lname = trim(htmlentities($_POST['lname']));
+	$email = trim(htmlentities($_POST['username']));
+	$password = trim(htmlentities($_POST['password']));
+
+
+	// CHECK user input here
+	$valid = true;
+
+	if ($valid)
+	{
+		$db = new mysqli($dbserver, $dbusername, $dbpassword, $dbname);
+
+		$user = new user($fname, $lname, $email, $password);
+		if (!$user->exists($db))
+		{
+			$user->add($db);
+
+			$_SESSION['user'] = $email;
+			header("Location: $dashboard");
+		}
+		else 
+		{
+			// Handle more gracefully
+			print "User already exists";
+		}
+	}
+}
 
 ?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +69,7 @@ require 'config/pageinfo.config.php';
 				<li class="tab2"><a href="signup.php">Sign Up</a></li>
 			</ul>
 			<div class="tabarea">
-				<form method="post" action="login.php">
+				<form method="post" action="signup.php">
 					<div class="line">
 						<label for="fname">First Name</label>
 						<input type="text" name="fname" id="fname" placeholder="First Name"/>
