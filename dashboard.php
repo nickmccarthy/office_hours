@@ -21,53 +21,59 @@ if (!isset($_SESSION['user']))
     <link href='http://fonts.googleapis.com/css?family=Acme' rel='stylesheet' type='text/css' />
     <link href='http://fonts.googleapis.com/css?family=Gudea' rel='stylesheet' type='text/css' />
 </head>
-<?php
-require 'inc/header_in.html';
-print '<body id="dash">';
+<body id="dash">
+    <?php
+    require 'inc/header_in.html';
 
-$db = new mysqli($dbserver, $dbusername, $dbpassword, $dbname);
-$user = new user($_SESSION['user']);
-$user->lookup_data($db);
+    $db = new mysqli($dbserver, $dbusername, $dbpassword, $dbname);
+    $user = new user($_SESSION['user']);
+    $user->lookup_data($db);
 
-?>
-<div class="content">
-    <h2>Welcome, <?print $user->fn; ?></h2>
-    <div class="courses">
-        <span class="id"><a href="course_info.php">CourseID (position)</a></span>
+    ?>
+    <div class="content">
+        <h2>Welcome, <?print $user->first_name(); ?></h2>
+
         <?php
-        if(isset($_SESSION['user'])) {
-            print '<span class="edit"><a href="edit_permissions.php">Course Permissions</a></span>';
+        foreach ($user->get_classes($db) as $class)
+        {
+            format_course($class);
         }
+
         ?>
-        <span class="edit"><a href="edit_single_hours.php">Edit Office Hours</a></span>
 
+        <div class="courses">
+            <span class="edit"><a href="addclass.php">Add Class</a></span>
+        </div>
     </div>
-    <div class="courses">
-        <span class="id"><a href="course_info.php">CourseID (position)</a></span>
-        <?php
-        if(isset($_SESSION['user'])) {
-            print '<span class="edit"><a href="edit_permissions.php">Course Permissions</a></span>';
-        }
-        ?>        <span class="edit"><a href="edit_single_hours.php">Edit Office Hours</a></span>
-    </div>
-    <div class="courses">
-        <span class="id"><a href="course_info.php">CourseID (position)</a></span>
-        <?php
-        if(isset($_SESSION['user'])) {
-            print '<span class="edit"><a href="edit_permissions.php">Course Permissions</a></span>';
-        }
-        ?>
-        <span class="edit"><a href="edit_single_hours.php">Edit Office Hours</a></span>
-    </div>
-    <div class="courses">
-        <span class="edit"><a href="addclass.php">Add Class</a></span>
-    </div>
-</div>
 
 </body>
 </html>
 
 <?php
+
+function format_course($teaches)
+{
+    $class = $teaches->class;
+
+    print '<div class="courses">';
+
+    print '<span class="id">';
+    print "<a href=\"course_info.php?cid=$class->cid\">$class->department $class->number | $teaches->level</a>";
+    print '</span>';
+
+    if ($teaches->level == 'Professor')
+    {
+        print '<span class="edit">';
+        print '<a href="edit_permissions.php">Course Permissions</a>';
+        print '</span>';
+    }
+
+    print '<span class="edit">';
+    print '<a href="edit_single_hours.php">Edit Office Hours</a>';
+    print '</span>';
+
+    print '</div>';
+}
 
 // TODO:
 
