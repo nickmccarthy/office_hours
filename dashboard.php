@@ -1,16 +1,16 @@
 <?php
 session_start();
 
+// Import db config info
+require 'config/mysql.config.php';
+require 'config/pageinfo.config.php';
+require 'queries/queries.php';
 
 if (!isset($_SESSION['user']))
 {
     header("Location: $login_page");
 }
 
-// Import db config info
-require 'config/mysql.config.php';
-require 'config/pageinfo.config.php';
-require 'queries/queries.php';
 
 ?>
 <!DOCTYPE html>
@@ -65,12 +65,12 @@ function format_course($teaches)
     if ($teaches->level == 'Professor')
     {
         print '<span class="edit">';
-        print '<a href="edit_permissions.php">Course Permissions</a>';
+        print "<a href=\"edit_permissions.php?cid=$class->cid\">Course Permissions</a>";
         print '</span>';
     }
 
     print '<span class="edit">';
-    print '<a href="edit_single_hours.php">Edit Office Hours</a>';
+    print "<a href=\"edit_single_hours.php?cid=$class->cid\">Edit Office Hours</a>";
     print '</span>';
 
     print '</div>';

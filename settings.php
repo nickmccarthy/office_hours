@@ -1,15 +1,15 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['user']))
-{
-    header("Location: $login_page");
-}
-
 // Import db config info
 require 'config/mysql.config.php';
 require 'config/pageinfo.config.php';
 require 'queries/queries.php';
+
+if (!isset($_SESSION['user']))
+{
+    header("Location: $login_page");
+}
 
 if (isset($_POST['npassword'])
     &&isset($_POST['cpassword']) 
