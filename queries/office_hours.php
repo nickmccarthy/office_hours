@@ -43,14 +43,14 @@ class office_hours
 
 	static function find_hours_on_date($db, $uid, $cid, $date)
 	{
-		return find_hours_in_range($db, $uid, $cid, $date, $date);
+		return office_hours::find_hours_in_range($db, $uid, $cid, $date, $date);
 	}
 
 	static function find_hours_in_week($db, $uid, $cid, $start_date)
 	{
 		$ed = new DateTime($start_date);
 		$ed->add(new DateInterval('P7D'));
-		return find_hours_in_range($db, $uid, $cid, $start_date, $ed->format('Y-m-d'));
+		return office_hours::find_hours_in_range($db, $uid, $cid, $start_date, $ed->format('Y-m-d'));
 	}
 
 	static function find_hours_in_range($db, $uid, $cid, $start_date, $end_date)
