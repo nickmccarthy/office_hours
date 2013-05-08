@@ -44,7 +44,8 @@ class course
 	{
 		$query = "
 		SELECT *
-		FROM Teaches NATUIRAL JOIN Class
+		FROM Teaches INNER JOIN Class
+		ON Teaches.cid = Class.cid
 		WHERE uid = \"$uid\"";
 
 		$result = $db->query($query);
@@ -52,7 +53,7 @@ class course
 		$arr = array();
 		while ($row = $result->fetch_assoc())
 		{
-			$cl = new course($row["uid"]);
+			$cl = new course($row["cid"]);
 			$cl->set_data(
 				$row["name"],
 				$row["number"],
