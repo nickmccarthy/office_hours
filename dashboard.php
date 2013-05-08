@@ -1,15 +1,16 @@
 <?php
 session_start();
 
-	// Import db config info
-require 'config/mysql.config.php';
-require 'config/pageinfo.config.php';
-require 'queries/user.php';
 
 if (!isset($_SESSION['user']))
 {
     header("Location: $login_page");
 }
+
+// Import db config info
+require 'config/mysql.config.php';
+require 'config/pageinfo.config.php';
+require 'queries/user.php';
 
 ?>
 <!DOCTYPE html>

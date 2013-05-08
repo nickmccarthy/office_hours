@@ -45,6 +45,30 @@ class user
 		}
 	}
 
+	function check_password($pw)
+	{
+		return hash('sha256', $this->salt.$pw) == $this->hash;
+	}
+
+	function check_and_set_password($db, $oldpw, $newpw)
+	{
+		if ($this->check_password($oldpw))
+		{
+			$this->create_hash($newpw);
+
+			$query = "
+			UPDATE $this->table_name
+			SET hash=\"$this->hash\", salt=\"$this->salt\"
+			WHERE uid=\"$this->uid\""; 
+
+			$db->query($query);
+
+			return $db->errno == 0;
+		}
+
+		return false;
+	}
+
 	function exists($db)
 	{
 		$query = "
