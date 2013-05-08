@@ -4,6 +4,7 @@ session_start();
 // Import db config info
 require 'config/mysql.config.php';
 require 'config/pageinfo.config.php';
+require 'queries/user.php';
 
 // Logout request was sent
 if (isset($_GET['logout']))
@@ -24,23 +25,11 @@ if (isset($_POST['username']) && isset($_POST["password"]))
 		$dbpassword,
 		$dbname);
 
-	$query = "
-	SELECT hash, salt
-	FROM Users
-	WHERE email=\"$un\"";
-
-	$result = $db->query($query);
-
-	if ($result->num_rows == 1)
+	$user = new user($un);
+	$user->lookup_data($db);
+	if ($user->check_password($pw))
 	{
-		$info = $result->fetch_assoc();
-		$salt = $info['salt'];
-		$hash = $info['hash'];
-
-		if (hash('sha256', $salt.$pw) == $hash)
-		{
-			$_SESSION['user'] = $un;
-		}	
+		$_SESSION['user'] = $un;
 	}
 
 	$db->close();
@@ -59,42 +48,42 @@ if (isset($_POST['username']) && isset($_POST["password"]))
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="styles/styles.css">
-    <!-- style sheets will change depending on the month -->
+	<!-- style sheets will change depending on the month -->
 	<link rel="stylesheet" type="text/css" href="styles/april.css">
 	<link href='http://fonts.googleapis.com/css?family=Acme' rel='stylesheet' type='text/css' />
 	<link href='http://fonts.googleapis.com/css?family=Gudea' rel='stylesheet' type='text/css' />
 </head>
 <body id="tab1">
-<?php
-if(isset($_SESSION['user'])) {
-	require 'inc/header_in.html';
-} else {
-	require 'inc/header.html';
-}
-?>
-<div class="content">
-	<div class="center">
-		<ul id="tabnav">
+	<?php
+	if(isset($_SESSION['user'])) {
+		require 'inc/header_in.html';
+	} else {
+		require 'inc/header.html';
+	}
+	?>
+	<div class="content">
+		<div class="center">
+			<ul id="tabnav">
 				<li class="tab1"><a href="login.php">Login</a></li>
 				<li class="tab2"><a href="signup.php">Sign Up</a></li>
-		</ul>
-		<div class="tabarea">
-			<form method="post" action="login.php">
-				<div class="line">
-					<label for="username">Email</label>
-					<input type="text" name="username" id="username" placeholder="netID@cornell.edu"/>
-				</div>
-				<div class="line">
-					<label for="password">Password</label>
-					<input type="password" name="password" id="password" placeholder="password"/>
-				</div>
-				<div class="line">
-					<label for="forgot"><a href="login.php">Forgot password?</a></label>
-					<button type="submit">Login</button>
-				</div>
-			</form>
+			</ul>
+			<div class="tabarea">
+				<form method="post" action="login.php">
+					<div class="line">
+						<label for="username">Email</label>
+						<input type="text" name="username" id="username" placeholder="netID@cornell.edu"/>
+					</div>
+					<div class="line">
+						<label for="password">Password</label>
+						<input type="password" name="password" id="password" placeholder="password"/>
+					</div>
+					<div class="line">
+						<label for="forgot"><a href="login.php">Forgot password?</a></label>
+						<button type="submit">Login</button>
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
-</div>
 </body>
 </html>
