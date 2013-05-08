@@ -198,7 +198,7 @@ class course
 	{
 		$query = "
 		SELECT *
-		FROM Teaches NATUIRAL JOIN $this->table_name
+		FROM Teaches NATUIRAL JOIN Class
 		WHERE uid = \"$uid\"";
 
 		$result = $db->query($query);
