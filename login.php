@@ -25,11 +25,12 @@ if (isset($_POST['username']) && isset($_POST["password"]))
 		$dbpassword,
 		$dbname);
 
-	$user = new user($un);
-	$user->lookup_data($db);
-	if ($user->check_password($pw))
+	if ($user = user::exists($db, $un))
 	{
-		$_SESSION['user'] = $un;
+		if ($user->check_password($pw))
+		{
+			$_SESSION['user'] = $user->uid;
+		}
 	}
 
 	$db->close();

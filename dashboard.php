@@ -32,7 +32,7 @@ if (!isset($_SESSION['user']))
 
     ?>
     <div class="content">
-        <h2>Welcome, <?print $user->first_name(); ?></h2>
+        <h2>Welcome, <?print $user->first_name; ?></h2>
 
         <?php
         foreach ($user->get_classes($db) as $class)

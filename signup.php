@@ -24,20 +24,20 @@ if (isset($_POST['fname'])
 	{
 		$db = new mysqli($dbserver, $dbusername, $dbpassword, $dbname);
 
-		$user = new user($email);
-		$user->set_data($fname, $lname, $password);
-
-		if (!$user->exists($db))
-		{
-			$user->add($db);
-
-			$_SESSION['user'] = $email;
-			header("Location: $dashboard");
-		}
-		else 
+		if (user::exists($db, $email))
 		{
 			// Handle more gracefully
 			print "User already exists";
+		}
+		else
+		{
+			$user = new user();
+			$user->set_data($fname, $lname, $email, $password);
+			$user->add($db);
+
+			$_SESSION['user'] = $user->uid;
+			header("Location: $dashboard");
+
 		}
 	}
 }

@@ -3,16 +3,17 @@ class user
 {
 	private $table_name = "Users";
 
-	function __construct($email)
+	function __construct($uid = -1)
 	{
-		$this->email = $email;
+		$this->uid = $uid;
 	}
 
 	// Manually set user data
-	function set_data($fn, $ln, $pw)
+	function set_data($fn, $ln, $email, $pw)
 	{
-		$this->fn = $fn;
-		$this->ln = $ln;
+		$this->first_name = $fn;
+		$this->last_name = $ln;
+		$this->email = $email;
 		$this->create_hash($pw);
 	}
 
@@ -28,7 +29,7 @@ class user
 		$query = "
 		SELECT *
 		FROM $this->table_name
-		WHERE email = \"$this->email\"
+		WHERE uid = \"$this->uid\"
 		LIMIT 1";
 
 		$result = $db->query($query);
@@ -37,9 +38,9 @@ class user
 		{
 			$user = $result->fetch_assoc();
 
-			$this->uid = $user["uid"];
-			$this->fn = $user["first_name"];
-			$this->ln = $user["last_name"];
+			$this->email = $user["email"];
+			$this->first_name = $user["first_name"];
+			$this->last_name = $user["last_name"];
 			$this->salt = $user["salt"];
 			$this->hash = $user["hash"];
 		}
@@ -69,25 +70,15 @@ class user
 		return false;
 	}
 
-	function exists($db)
-	{
-		$query = "
-		SELECT 1
-		FROM $this->table_name
-		WHERE email = \"$this->email\"";
-
-		$result = $db->query($query);
-		return $result->num_rows == 1;
-	}
-
 	// requires a call of set data before
 	function add($db)
 	{
 		$query = "
 		INSERT INTO $this->table_name (first_name, last_name, email, hash, salt)
-		VALUES (\"$this->fn\",\"$this->ln\",\"$this->email\",\"$this->hash\",\"$this->salt\")";
+		VALUES (\"$this->first_name\",\"$this->last_name\",\"$this->email\",\"$this->hash\",\"$this->salt\")";
 		
 		$db->query($query);
+		$this->uid = $db->insert_id;
 	}
 
 	function get_classes($db)
@@ -95,15 +86,26 @@ class user
 		return teaches::get_classes_by_uid($db, $this->uid);
 	}
 
-	function uid() {
-		return $this->uid;
+	static function exists($db, $email)
+	{
+		$query = "
+		SELECT uid
+		FROM Users
+		WHERE email = \"$email\"
+		LIMIT 1";
+
+		$result = $db->query($query);
+		if ($result->num_rows == 1)
+		{
+			$row = $result->fetch_assoc();
+			$user = new user($row["uid"]);
+			$user->lookup_data($db);
+			return $user;
+		}
+
+		return false;
 	}
-	function first_name() {
-		return $this->fn;
-	}
-	function last_name() {
-		return $this->ln;
-	}
+
 }
 
 ?>
