@@ -53,20 +53,20 @@ if (isset($_GET['date']))
 
 
     <div class="content">
-        <h2><?php print $course->department." ".$course->number; ?> | Edit Office Hours</h2>
+        <h2><?php print $course->department_number(); ?> | Edit Office Hours</h2>
         <div class="center">
             <ul id="tabnav">
-                <li class="tab1"><a href="edit_single_hours.php">Edit Single Hours</a></li>
+                <li class="tab1"><a href="#">Edit Single Hours</a></li>
                 <li class="tab2"><a href="edit_repeating_hours.php?cid=<?print $cid;?>">Edit Repeating Hours</a></li>
                 <li class="tab3"><a href="dashboard.php">Back to Dashboard</a></li>
             </ul>
             <div class="tabarea">
                 <form method="get" action="edit_single_hours.php">
-                    <input type="date" name="date" value="<?print $date?>">
                     <input type="hidden" name="cid" value="<?print $cid?>">
+                    <input type="date" name="date" value="<?print $date?>">
                     <input type="submit">
                 </form>
-                <form method="post" action="edit_single_hours.php?cid=<?print $cid;?>">
+                <form method="post" action="edit_single_hours.php?<?print "cid=$cid&date=$date"; ?>">
                     <?
                     if (count($hours) > 0)
                     {

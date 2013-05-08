@@ -67,20 +67,9 @@ class course
 	}
 
 
-	function name() {
-		return $this->name;
-	}
-	function number() {
-		return $this->number;
-	}
-	function department() {
-		return $this->department;
-	}
-	function semester() {
-		return $this->semester;
-	}
-	function inactive() {
-		return $this->inactive;
+	function department_number()
+	{
+		return $this->department." ".$this->number;
 	}
 }
 
