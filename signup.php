@@ -4,7 +4,7 @@ session_start();
 	// Import db config info
 require 'config/mysql.config.php';
 require 'config/pageinfo.config.php';
-require 'queries/user.php';
+require 'queries/queries.php';
 
 if (isset($_POST['fname']) 
 	&& isset($_POST['lname'])
