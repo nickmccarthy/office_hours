@@ -63,7 +63,7 @@ if (isset($_GET['date']))
             <div class="tabarea">
                 <form method="get" action="edit_single_hours.php">
                     <input type="hidden" name="cid" value="<?print $cid?>">
-                    <input type="date" name="date" value="<?print $date?>">
+                    Choose Date: <input type="date" name="date" value="<?print $date?>">
                     <input type="submit">
                 </form>
                 <form method="post" action="edit_single_hours.php?<?print "cid=$cid&date=$date"; ?>">
@@ -74,12 +74,9 @@ if (isset($_GET['date']))
                         {
                             format_oh($oh);
                         }
-                        print '<input type="submit">';
                     }
-                    else
-                    {
-                        print "No office hours on this date!";
-                    }
+                    format_oh(false);
+                    print '<input type="submit">';
                     ?>
                 </form>
             </div>
@@ -92,11 +89,19 @@ if (isset($_GET['date']))
 
 function format_oh($oh)
 {
-    print "<input type=\"time\" name=\"start_time[]\" value=\"$oh->start_time\">";
+    $st = $et = $loc = "";
+    if ($oh)
+    {
+        $st = $oh->start_time;
+        $et = $oh->end_time;
+        $loc = $oh->location;
+    }
+    print "<input type=\"time\" name=\"start_time[]\" value=\"$st\">";
     print " to ";
-    print "<input type=\"time\" name=\"end_time[]\" value=\"$oh->end_time\">";
+    print "<input type=\"time\" name=\"end_time[]\" value=\"$et\">";
     print " in ";
-    print "<input type=\"text\" name=\"location[]\" value=\"$oh->location\">";
+    // temporarily a textarea to not have text styling
+    print "<input type=\"textarea\" rows=\"1\" cols=\"30\" name=\"location[]\" value=\"$loc\">";
 }
 
 // TODO:

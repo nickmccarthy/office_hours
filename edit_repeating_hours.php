@@ -106,7 +106,8 @@ function format_oh($oh)
     print " to ";
     print "<input type=\"time\" name=\"end_time[]\" value=\"$oh->end_time\">";
     print " in ";
-    print "<input type=\"text\" name=\"location[]\" value=\"$oh->location\">";
+    // temporarily a textarea to not have text styling
+    print "<input type=\"textarea\" rows=\"1\" cols=\"30\" name=\"location[]\" value=\"$oh->location\">";
 }
 
 // TODO:
