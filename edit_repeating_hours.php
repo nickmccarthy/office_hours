@@ -53,7 +53,7 @@ if (!preg_match('/^[0-9]+$/', $cid))
                 <li class="tab3"><a href="dashboard.php">Back to Dashboard</a></li>
             </ul>
             <div class="tabarea">
-             <form method="post" action="addclass.php">
+               <form method="post" action="addclass.php">
                 <?
                 if (count($hours) > 0)
                 {
@@ -61,10 +61,8 @@ if (!preg_match('/^[0-9]+$/', $cid))
                         format_oh($oh);
                     }
                 }
-                else 
-                {
-                    print "No repeating office hours!";
-                }
+                format_oh(false);
+                print '<input type="submit">';
                 ?>
             </form>
         </div>
@@ -88,27 +86,40 @@ function format_oh($oh)
         "Friday",
         "Saturday");
 
+    $dow = $sd = $ed = $st = $et = $loc = "";
+    if ($oh)
+    {
+        $dow = $oh->day_of_week;
+        $sd = $oh->start_date;
+        $ed = $oh->end_date;
+        $st = $oh->start_time;
+        $et = $oh->end_time;
+        $loc = $oh->location;
+    }
+
     print "Every ";
 
     print '<select name="day[]">';
     foreach ($days as $day) {
-        $sel = ($day == $oh->day_of_week) ? 'selected="selected"' : '';
+        $sel = ($day == $dow) ? 'selected="selected"' : '';
         print "<option value=\"$day\" $sel>$day</option>";
     }
     print '</select>';
 
     print " from ";
-    print "<input type=\"date\" name=\"start_date[]\" value=\"$oh->start_date\">";
+    print "<input type=\"date\" name=\"start_date[]\" value=\"$sd\">";
     print " to ";
-    print "<input type=\"date\" name=\"end_date[]\" value=\"$oh->end_date\">";
+    print "<input type=\"date\" name=\"end_date[]\" value=\"$ed\">";
     print " - ";
-    print "<input type=\"time\" name=\"start_time[]\" value=\"$oh->start_time\">";
+    print "<input type=\"time\" name=\"start_time[]\" value=\"$st\">";
     print " to ";
-    print "<input type=\"time\" name=\"end_time[]\" value=\"$oh->end_time\">";
+    print "<input type=\"time\" name=\"end_time[]\" value=\"$et\">";
     print " in ";
     // temporarily a textarea to not have text styling
-    print "<input type=\"textarea\" rows=\"1\" cols=\"30\" name=\"location[]\" value=\"$oh->location\">";
-}
+    print "<input type=\"textarea\" rows=\"1\" cols=\"30\" name=\"location[]\" value=\"$loc\">";
+    print '<br>'; // remove when formatting exists
+
+ }
 
 // TODO:
 
@@ -124,4 +135,4 @@ function format_oh($oh)
 
 // send the user back to the dashboard
 
-?>
+ ?>
