@@ -41,6 +41,8 @@ if (!preg_match('/^[0-9]+$/', $cid))
     $course = new course($cid);
     $course->lookup_data($db);
 
+    $hours = repeating_office_hours::find_repeating_hours($db, $uid, $cid);
+
     ?>
     <div class="content">
         <h2><? print $course->department_number(); ?> | Edit Office Hours</h2>
@@ -51,19 +53,61 @@ if (!preg_match('/^[0-9]+$/', $cid))
                 <li class="tab3"><a href="dashboard.php">Back to Dashboard</a></li>
             </ul>
             <div class="tabarea">
-               <form method="post" action="addclass.php"></form>
-           </div>
-       </div>
-   </div>
+             <form method="post" action="addclass.php">
+                <?
+                if (count($hours) > 0)
+                {
+                    foreach ($hours as $oh) {
+                        format_oh($oh);
+                    }
+                }
+                else 
+                {
+                    print "No repeating office hours!";
+                }
+                ?>
+            </form>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
 
 
-
-
-
 <?php
+
+function format_oh($oh)
+{
+    $days = array(
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday");
+
+    print "Every ";
+
+    print '<select name="day[]">';
+    foreach ($days as $day) {
+        $sel = ($day == $oh->day_of_week) ? 'selected="selected"' : '';
+        print "<option value=\"$day\" $sel>$day</option>";
+    }
+    print '</select>';
+
+    print " from ";
+    print "<input type=\"date\" name=\"start_date[]\" value=\"$oh->start_date\">";
+    print " to ";
+    print "<input type=\"date\" name=\"end_date[]\" value=\"$oh->end_date\">";
+    print " - ";
+    print "<input type=\"time\" name=\"start_time[]\" value=\"$oh->start_time\">";
+    print " to ";
+    print "<input type=\"time\" name=\"end_time[]\" value=\"$oh->end_time\">";
+    print " in ";
+    print "<input type=\"text\" name=\"location[]\" value=\"$oh->location\">";
+}
 
 // TODO:
 

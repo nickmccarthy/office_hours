@@ -83,6 +83,73 @@ class office_hours
 
 		return $arr;
 	}
+
+	static function find_info_repeating($db, $repeat_tag)
+	{
+		$query = "
+		SELECT *
+		FROM OfficeHours
+		WHERE repeat_tag = \"$repeat_tag\"
+		LIMIT 1";
+
+		$result = $db->query($query);
+		$row = $result->fetch_assoc();
+
+		return $row;
+	}
+}
+
+class repeating_office_hours
+{
+	function __construct($repeat_tag)
+	{
+		$this->repeat_tag = $repeat_tag;
+	}
+
+	function set_data($start_date, $end_date, $start_time, $end_time, $day_of_week, $location)
+	{
+		$this->start_date = $start_date;
+		$this->end_date = $end_date;
+		$this->start_time = $start_time;
+		$this->end_time = $end_time;
+		$this->day_of_week = $day_of_week;
+		$this->location = $location;
+	}
+
+	static function find_repeating_hours($db, $uid, $cid)
+	{
+		$query = "
+		SELECT *
+		FROM Repeating
+		WHERE repeat_tag
+		IN (
+			SELECT DISTINCT repeat_tag
+			FROM OfficeHours
+			WHERE uid = \"$uid\"
+			AND cid = \"$cid\"
+			AND repeat_tag >= 0
+			) 
+ORDER BY start_date";
+
+$result = $db->query($query);
+
+$arr = array();
+while ($row = $result->fetch_assoc())
+{
+	$roh = new repeating_office_hours($row["repeat_tag"]);
+	$info = office_hours::find_info_repeating($db, $row["repeat_tag"]);
+	$roh->set_data(
+		$row["start_date"],
+		$row["end_date"],
+		$info["start_time"],
+		$info["end_time"],
+		date('l', strtotime($info["date"])),
+		$info["location"]);
+	$arr[] = $roh;
+}
+
+return $arr;
+}
 }
 
 
