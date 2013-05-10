@@ -9,9 +9,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="styles/styles.css">
+	<link rel="stylesheet" type="text/css" href="styles/styles.css" />
     <!-- style sheets will change depending on the month -->
-	<link rel="stylesheet" type="text/css" href="styles/april.css">
+	<link rel="stylesheet" type="text/css" href="styles/april.css" />
 	<link href='http://fonts.googleapis.com/css?family=Acme' rel='stylesheet' type='text/css' />
 	<link href='http://fonts.googleapis.com/css?family=Gudea' rel='stylesheet' type='text/css' />
 </head>
@@ -26,17 +26,13 @@ if(isset($_SESSION['user'])) {
 
 <div class="content">
 <?php
-if(isset($_GET['course_number'])){
-	print("This course number is: " . $_GET['course_number']);
-
 if(isset($_GET['cid'])){
 	print("This cid is: " . $_GET['cid']);
 }else{
 	print("This does not have a cid!");
 }
 ?>
-<H2>Course ID | Course Name</H2>
+<h2>Course ID | Course Name</h2>
 </div>
 </body>
 </html>
-
