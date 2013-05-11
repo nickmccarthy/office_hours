@@ -13,7 +13,7 @@
             </div>
             <div class="line">
                 <label for="csemester">Semester</label>
-                <input type="text" name="csemester" id="csemester" placeholder="Semester (S/F, Year)"/>
+                <input type="text" name="csemester" id="csemester" placeholder="Semester (SP/FA##)"/>
             </div>
             <div class="line">
                 <label for="terms"></label>
