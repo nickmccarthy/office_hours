@@ -14,6 +14,8 @@
 	<!--<link rel="stylesheet" type="text/css" href="styles/april1.css">-->
 	<link href='http://fonts.googleapis.com/css?family=Acme' rel='stylesheet' type='text/css' />
 	<link href='http://fonts.googleapis.com/css?family=Gudea' rel='stylesheet' type='text/css' />
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="scripts/subscribe.js"></script>
 </head>
 <?php
     if(isset($_SESSION['user'])) {
@@ -39,6 +41,15 @@ if(isset($_GET['cid'])){
 	$row = $result->fetch_assoc();
 
 	print("<h2>" . $row['department'] . " " . $row['number'] . "|" . $row['name'] . "</h2>");
+
+	print('<span class="edit"><button class="sub_btn" id="' . $_GET["cid"] .'">Subscribe</button></span>');
+	print('<div class="cid" style="visibility: hidden">' . $_GET['cid'] . '</div>');
+	print("<div class='subscribe' id='" . $_GET['cid'] ."'>
+					<div class='courses'>
+						<input type='text' name='email' id='email' placeholder='netID@cornell.edu'>
+						<button type='submit' class='sub_submit'>Subscribe</button>
+					</div>
+				</div>");
 
 	$firstDayOfWeek = date("Y-m-d");
 	$firstDayOfNextWeek = date("Y-m-d", strtotime("+1 week"));

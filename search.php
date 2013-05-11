@@ -54,11 +54,18 @@ function display_search_results($terms){
 				print("<div class='courses'> \n");
 				print('<span class="id"><a href="course_info.php?cid=' . $array["cid"] . '" alt = "' . $array["name"] . '">' . $array["name"] . '</a></span>');
 				if(isset($_SESSION['user'])){
-					print('<span class="edit"><a href="" alt="Join">Join Class</a></span>');
+					print('<span class="edit"><a href="" alt="Join" class="join_btn">Join Class</a></span>');
 				}
-				print('<span class="edit"><a href="search.php">Subscribe</a></span>');
+				print('<span class="edit"><a class="sub_btn" id="' . $array["cid"] .'">Subscribe</a></span>');
+				print('<div class="cid" style="visibility: hidden">' . $array['cid'] . '</div>');
 				print($I1name . ' ' . $I2name);
 				print("</div> \n");
+				print("<div class='subscribe' id='" . $array['cid'] ."'>
+					<div class='courses'>
+						<input type='text' name='email' id='email' placeholder='netID@cornell.edu'>
+						<button type='submit' class='sub_submit'>Subscribe</button>
+					</div>
+				</div>");
 			}
 		}
 		if(isset($result_instructors)){
@@ -108,6 +115,8 @@ function return_clean($tocheck){
 	<link rel="stylesheet" type="text/css" href="styles/<?php echo strtolower(date('F'))?>.css">
 	<link href='http://fonts.googleapis.com/css?family=Acme' rel='stylesheet' type='text/css' />
 	<link href='http://fonts.googleapis.com/css?family=Gudea' rel='stylesheet' type='text/css' />
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="scripts/subscribe.js"></script>
 </head>
 <?php
 if(isset($_SESSION['user'])) {

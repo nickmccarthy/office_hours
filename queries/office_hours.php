@@ -123,16 +123,54 @@ class office_hours
 
 		return $row;
 	}
+
+	static function delete_repeating($db, $repeat_tag)
+	{
+		$query = "
+		DELETE FROM OfficeHours
+		WHERE repeat_tag = \"$repeat_tag\"";
+
+		$db->query($query);
+	}
+
+	static function add_repeating($db, $roh)
+	{
+		if (strtotime($roh->end_date) < strtotime($roh->start_date))
+		{
+			// Print an error to user of some type?
+			return;
+		}
+
+		$date = $roh->start_date;
+		if (date('l', strtotime($roh->start_date)) != $roh->day_of_week)
+		{
+			$date = date('Y-m-d', strtotime("next $roh->day_of_week", strtotime($date)));
+		}
+		
+		while ($date <= $roh->end_date)
+		{			
+			$oh = new office_hours($roh->cid, $roh->uid, $date, $roh->start_time);
+			$oh->set_data($roh->location, $roh->end_time, $roh->repeat_tag);
+			$oh->add($db);
+
+			$date = date('Y-m-d', strtotime("next $roh->day_of_week", strtotime($date)));
+
+		}
+		
+
+
+	}
+
 }
 
 class repeating_office_hours
 {
-	function __construct($repeat_tag)
+	function __construct($repeat_tag = -1)
 	{
 		$this->repeat_tag = $repeat_tag;
 	}
 
-	function set_data($start_date, $end_date, $start_time, $end_time, $day_of_week, $location)
+	function set_data($start_date, $end_date, $start_time, $end_time, $day_of_week, $location, $uid, $cid)
 	{
 		$this->start_date = $start_date;
 		$this->end_date = $end_date;
@@ -140,7 +178,62 @@ class repeating_office_hours
 		$this->end_time = $end_time;
 		$this->day_of_week = $day_of_week;
 		$this->location = $location;
+		$this->uid = $uid;
+		$this->cid = $cid;
 	}
+
+	function lookup_data($db)
+	{
+		$query = "
+		SELECT *
+		FROM Repeating
+		WHERE repeat_tag = \"$this->repeat_tag\"";
+
+		$result = $db->query($query);
+		$row = $result->fetch_assoc();
+
+		$info = office_hours::find_info_repeating($db, $row["repeat_tag"]);
+		$this->set_data(
+			$row["start_date"],
+			$row["end_date"],
+			$info["start_time"],
+			$info["end_time"],
+			date('l', strtotime($info["date"])),
+			$info["location"],
+			$info["uid"],
+			$info["cid"]);
+	}
+
+	function add_or_update($db)
+	{
+		if ($this->repeat_tag == -1){
+			$this->add($db);
+		} else {
+			$this->update($db);
+		}
+	}
+
+	function add($db)
+	{
+		$query = "
+		INSERT INTO Repeating (start_date, end_date)
+		VALUES (\"$this->start_date\",\"$this->end_date\")";
+
+		$db->query($query);
+		$this->repeat_tag = $db->insert_id;
+	}
+
+	function update($db)
+	{
+		$query = "
+		UPDATE Repeating
+		SET start_date = \"$this->start_date\", end_date = \"$this->end_date\"
+		WHERE repeat_tag = \"$this->repeat_tag\"";
+		$db->query($query);
+	}
+
+
+
 
 	static function find_repeating_hours($db, $uid, $cid)
 	{
@@ -155,27 +248,29 @@ class repeating_office_hours
 			AND cid = \"$cid\"
 			AND repeat_tag >= 0
 			) 
-			ORDER BY start_date";
+ORDER BY start_date";
 
-		$result = $db->query($query);
+$result = $db->query($query);
 
-		$arr = array();
-		while ($row = $result->fetch_assoc())
-		{
-			$roh = new repeating_office_hours($row["repeat_tag"]);
-			$info = office_hours::find_info_repeating($db, $row["repeat_tag"]);
-			$roh->set_data(
-				$row["start_date"],
-				$row["end_date"],
-				$info["start_time"],
-				$info["end_time"],
-				date('l', strtotime($info["date"])),
-				$info["location"]);
-			$arr[] = $roh;
-		}
+$arr = array();
+while ($row = $result->fetch_assoc())
+{
+	$roh = new repeating_office_hours($row["repeat_tag"]);
+	$info = office_hours::find_info_repeating($db, $row["repeat_tag"]);
+	$roh->set_data(
+		$row["start_date"],
+		$row["end_date"],
+		$info["start_time"],
+		$info["end_time"],
+		date('l', strtotime($info["date"])),
+		$info["location"],
+		$uid,
+		$cid);
+	$arr[] = $roh;
+}
 
-	return $arr;
-	}
+return $arr;
+}
 }
 
 
