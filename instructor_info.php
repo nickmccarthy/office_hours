@@ -39,11 +39,19 @@ if(isset($_GET['uid'])){
 	if(isset($first_row)){
 		print("<h2>" . $first_row['first_name'] . " " . $first_row['last_name'] . "</h2>");
 		print("<div><a href='course_info.php?cid=" . $first_row['cid'] . "' alt = '" . $first_row['name'] . "'>" . $first_row['department'] . " " . $first_row['number'] . ": " . $first_row['name'] . "</a>");
-		printOfficeHours($mydb, $first_row, $_GET['uid']);
+		$teachesquery = "SELECT * FROM Teaches WHERE cid=" . $first_row['cid'] . " AND uid=" . $_GET['uid'];
+		$teaches = $mydb->query($teachesquery);
+		if($teaches->num_rows > 0){
+			printOfficeHours($mydb, $first_row, $_GET['uid']);
+		}
 		print("</div>");
 		while($next_row = $result->fetch_assoc()){
 			print("<div><a href='course_info.php?cid=" . $next_row['cid'] . "' alt = '" . $next_row['name'] . "'>" . $next_row['department'] . " " . $next_row['number'] . ": " . $next_row['name'] . "</a>");
-			printOfficeHours($mydb, $next_row, $_GET['uid']);
+			$teachesquery = "SELECT * FROM Teaches WHERE cid=" . $first_row['cid'] . " AND uid=" . $_GET['uid'];
+			$teaches = $mydb->query($teachesquery);
+			if($teaches->num_rows > 0){
+				printOfficeHours($mydb, $next_row, $_GET['uid']);
+			}
 			print("</div>");
 		}
 	}else{
@@ -60,7 +68,7 @@ if(isset($_GET['uid'])){
 function printOfficeHours($mydb, $row, $uid){
 	$firstDayOfWeek = date("Y-m-d");
 	$firstDayOfNextWeek = date("Y-m-d", strtotime("+1 week"));
-	$ohquery = "SELECT * FROM (OfficeHours LEFT JOIN Repeating ON OfficeHours.repeat_tag=Repeating.repeat_tag) NATURAL JOIN Users WHERE cid=" . $row['cid'] . " AND((date <='" . $firstDayOfNextWeek . "' AND date >='" . $firstDayOfWeek . "') OR (Repeating.repeat_tag IS NOT NULL AND start_date <= '" . $firstDayOfWeek . "' AND end_date >= '" . $firstDayOfWeek . "'))";
+	$ohquery = "SELECT * FROM (OfficeHours LEFT JOIN Repeating ON OfficeHours.repeat_tag=Repeating.repeat_tag) NATURAL JOIN Users WHERE uid =" . $uid . " AND cid=" . $row['cid'] . " AND((date <='" . $firstDayOfNextWeek . "' AND date >='" . $firstDayOfWeek . "') OR (Repeating.repeat_tag IS NOT NULL AND start_date <= '" . $firstDayOfWeek . "' AND end_date >= '" . $firstDayOfWeek . "'))";
 	$ohs = $mydb->query($ohquery);
 	while($array = $ohs->fetch_assoc()){
 		if(isset($array['start_date'])){
