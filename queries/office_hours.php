@@ -67,6 +67,19 @@ class office_hours
 		$this->start_time = $new_start_time;
 	}
 
+	function delete($db)
+	{
+		$query = "
+		DELETE FROM OfficeHours
+		WHERE cid = \"$this->cid\"
+		AND uid = \"$this->uid\"
+		AND date = \"$this->date\"
+		AND start_time = \"$this->start_time\"";
+
+		$db->query($query);
+	}
+
+
 	static function find_hours_on_date($db, $uid, $cid, $date)
 	{
 		return office_hours::find_hours_in_range($db, $uid, $cid, $date, $date);
@@ -221,6 +234,16 @@ class repeating_office_hours
 
 		$db->query($query);
 		$this->repeat_tag = $db->insert_id;
+	}
+
+	function delete($db)
+	{
+		$query = "
+		DELETE FROM Repeating
+		WHERE repeat_tag = \"$this->repeat_tag\"";
+		$db->query($query);
+
+		office_hours::delete_repeating($db, $this->repeat_tag);
 	}
 
 	function update($db)
