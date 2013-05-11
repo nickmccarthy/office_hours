@@ -34,7 +34,7 @@ $(document).ready(function(){
 			$('#email').val('Already Signed Up!');
 		}
 		if(response == 'not there'){
-			$('#email').hide();
+			$('#email').hide("slow");
 			$('.sub_submit').html('Signed Up!');
 		}
 	}
