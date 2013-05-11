@@ -15,13 +15,14 @@
 	<link href='http://fonts.googleapis.com/css?family=Acme' rel='stylesheet' type='text/css' />
 	<link href='http://fonts.googleapis.com/css?family=Gudea' rel='stylesheet' type='text/css' />
 </head>
-<body id="search">
 <?php
-if(isset($_SESSION['user'])) {
-	require 'inc/header_in.html';
-} else {
-	require 'inc/header.html';
-}
+    if(isset($_SESSION['user'])) {
+            require 'inc/header_in.html';
+            print '<body id="search_in">';
+    } else {
+            require 'inc/header.html';
+            print '<body id="search_out">';
+    }
 ?>
 <div class="content">
 <?php

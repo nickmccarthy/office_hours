@@ -185,83 +185,28 @@ div.content {
     margin-left: -26px;
 }
 
-/* search content arrow */
-body#search .content:after {
+body#search_in .content:after { /* search_in content arrow */
     right: 330px;
 }
 
-/* dashboard content arrow */
-body#dash .content:after {
+body#dash .content:after { /* dashboard content arrow */
     right: 246px;
 }
 
-/* settings content arrow */
-body#settings .content:after {
+body#settings .content:after { /* settings content arrow */
     right: 155px;
 }
 
-/* help content arrow */
-body#help .content:after {
+body#help .content:after { /* help content arrow */
     right: 86px;
 }
 
-/* login/signup content arrow */
-body#tab1 .content:after,
-body#tab2 .content:after {
+body#search_out .content:after { /* search_out content arrow */
+    right: 84px;
+}
+
+body#log .content:after { /* login/signup content arrow */
     right: 16px;
-}
-
-/* login and sign up tab */
-.tabarea {
-    border-radius: 5px;
-    border-top-right-radius: 0;
-    width: 448px;
-    autoflow: auto;
-    height: auto;
-    border: 1px solid #bbb;
-    margin: 0px auto;
-    padding: 20px;
-    background-color: #eee;
-}
-
-ul#tabnav { /* general settings */
-    text-align: right;
-    margin: 5px 0px 0 0;
-    list-style-type: none;
-    padding: 3px 5px;
-}
-
-ul#tabnav li {
-    display: inline;
-}
-
-body#tab1 li.tab1 a,
-body#tab2 li.tab2 a,
-body#tab3 li.tab3 a { /* settings for selected tab link */
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
-    background-color: #eee;
-    color: #bbb;
-    position: relative;
-    top: 1px;
-    padding: 5px 10px 3px 10px;
-    border-bottom: none;
-}
-
-ul#tabnav li a { /* settings for all tab links */
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
-    padding: 4px 10px 3px 10px;
-    border: 1px solid #bbb;
-    background-color: #ddd; /* set unselected tab background color as desired */
-    color: #bbb;
-    margin-right: 0;
-    text-decoration: none;
-    border-bottom: none;
-}
-
-ul#tabnav a:hover { /* settings for hover effect */
-    background: #fff; /* set desired hover color */
 }
 
 /* index (search) page */

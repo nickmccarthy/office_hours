@@ -21,7 +21,7 @@ if(isset($_SESSION['user'])) {
         print '<body id="help">';
 } else {
 	require 'inc/header.html';
-        print '<body id="tab1">';
+        print '<body id="log">';
 }
 ?>
 <div class="content">

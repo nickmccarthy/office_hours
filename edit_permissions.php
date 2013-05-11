@@ -21,7 +21,7 @@
             print '<body id="dash">';
     } else {
             require 'inc/header.html';
-            print '<body id="tab1">';
+            print '<body id="search_out">';
     }
 ?>
 <div class="content">

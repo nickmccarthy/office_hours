@@ -47,12 +47,6 @@ if (!preg_match('/^[0-9]+$/', $cid))
     <div class="content">
         <h2><? print $course->department_number(); ?> | Edit Office Hours</h2>
         <div class="center">
-            <ul id="tabnav">
-                <li class="tab2"><a href="edit_single_hours.php?cid=<?print $cid;?>">Edit Single Hours</a></li>
-                <li class="tab1"><a href="#">Edit Repeating Hours</a></li>
-                <li class="tab3"><a href="dashboard.php">Back to Dashboard</a></li>
-            </ul>
-            <div class="tabarea">
                <form method="post" action="addclass.php">
                 <?
                 if (count($hours) > 0)
@@ -67,7 +61,6 @@ if (!preg_match('/^[0-9]+$/', $cid))
             </form>
         </div>
     </div>
-</div>
 
 </body>
 </html>

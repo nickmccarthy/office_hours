@@ -52,11 +52,10 @@ if (isset($_POST['fname'])
 	<!-- style sheets will change depending on the month 
 	<link rel="stylesheet" type="text/css" href="styles/<?php echo strtolower(date('F'))?>.css"> -->
 	<!-- <link rel="stylesheet" type="text/css" href="styles/april.css">-->
-
 	<link href='http://fonts.googleapis.com/css?family=Acme' rel='stylesheet' type='text/css' />
 	<link href='http://fonts.googleapis.com/css?family=Gudea' rel='stylesheet' type='text/css' />
 </head>
-<body id="tab2">
+<body id="log">
 	<?php
 	if(isset($_SESSION['user'])) {
 		require 'inc/header_in.html';
@@ -68,14 +67,7 @@ if (isset($_POST['fname'])
 		<div class="center">
 			<?php
 				include 'inc/signup_form.php';
-				?>
-			<!--<ul id="tabnav">
-				<li class="tab1"><a href="login.php">Login</a></li>
-				<li class="tab2"><a href="signup.php">Sign Up</a></li>
-			</ul>
-			<div class="tabarea">
-				
-			</div>-->
+			?>
 		</div>
 	</div>
 </body>

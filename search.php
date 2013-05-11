@@ -109,7 +109,7 @@ function return_clean($tocheck){
 	<link href='http://fonts.googleapis.com/css?family=Acme' rel='stylesheet' type='text/css' />
 	<link href='http://fonts.googleapis.com/css?family=Gudea' rel='stylesheet' type='text/css' />
 </head>
-<body id="search">
+<body id="search_in">
 <?php
 		if(isset($_SESSION['user'])) {
 			require 'inc/header_in.html';

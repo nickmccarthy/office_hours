@@ -54,7 +54,7 @@ if (isset($_POST['username']) && isset($_POST["password"]))
 	<link href='http://fonts.googleapis.com/css?family=Acme' rel='stylesheet' type='text/css' />
 	<link href='http://fonts.googleapis.com/css?family=Gudea' rel='stylesheet' type='text/css' />
 </head>
-<body id="tab1">
+<body id="log">
 	<?php
 	if(isset($_SESSION['user'])) {
 		require 'inc/header_in.html';
@@ -66,14 +66,7 @@ if (isset($_POST['username']) && isset($_POST["password"]))
 		<div class="center">
 			<?php
 				include 'inc/login_form.php';
-				?>
-			<!--<ul id="tabnav">
-				<li class="tab1"><a href="login.php">Login</a></li>
-				<li class="tab2"><a href="signup.php">Sign Up</a></li>
-			</ul>
-			<div class="tabarea">
-				
-			</div>-->
+			?>
 		</div>
 	</div>
 </body>
