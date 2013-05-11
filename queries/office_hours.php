@@ -223,6 +223,16 @@ class repeating_office_hours
 		$this->repeat_tag = $db->insert_id;
 	}
 
+	function delete($db)
+	{
+		$query = "
+		DELETE FROM Repeating
+		WHERE repeat_tag = \"$this->repeat_tag\"";
+		$db->query($query);
+
+		office_hours::delete_repeating($db, $this->repeat_tag);
+	}
+
 	function update($db)
 	{
 		$query = "
