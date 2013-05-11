@@ -38,7 +38,14 @@ if(isset($_GET['uid'])){
 	$first_row = $result->fetch_assoc();
 	if(isset($first_row)){
 		print("<h2>" . $first_row['first_name'] . " " . $first_row['last_name'] . "</h2>");
-		print("<a href='course_info.php?cid=" . $first_row['cid'] . "' alt = '" . $first_row['name'] . "'>" . $first_row['department'] . " " . $first_row['number'] . ": " . $first_row['name'] . "</a>");
+		print("<div><a href='course_info.php?cid=" . $first_row['cid'] . "' alt = '" . $first_row['name'] . "'>" . $first_row['department'] . " " . $first_row['number'] . ": " . $first_row['name'] . "</a>");
+		printOfficeHours($mydb, $first_row, $_GET['uid']);
+		print("</div>");
+		while($next_row = $result->fetch_assoc()){
+			print("<div><a href='course_info.php?cid=" . $next_row['cid'] . "' alt = '" . $next_row['name'] . "'>" . $next_row['department'] . " " . $next_row['number'] . ": " . $next_row['name'] . "</a>");
+			printOfficeHours($mydb, $next_row, $_GET['uid']);
+			print("</div>");
+		}
 	}else{
 		$queryname = "SELECT first_name, last_name FROM Users WHERE uid=" . $_GET['uid'];
 		$r = $mydb->query($queryname);
@@ -48,6 +55,26 @@ if(isset($_GET['uid'])){
 	$mydb->close();
 }else{
 	print("This does not have an instructor id!");
+}
+
+function printOfficeHours($mydb, $row, $uid){
+	$firstDayOfWeek = date("Y-m-d");
+	$firstDayOfNextWeek = date("Y-m-d", strtotime("+1 week"));
+	$ohquery = "SELECT * FROM (OfficeHours LEFT JOIN Repeating ON OfficeHours.repeat_tag=Repeating.repeat_tag) NATURAL JOIN Users WHERE cid=" . $row['cid'] . " AND((date <='" . $firstDayOfNextWeek . "' AND date >='" . $firstDayOfWeek . "') OR (Repeating.repeat_tag IS NOT NULL AND start_date <= '" . $firstDayOfWeek . "' AND end_date >= '" . $firstDayOfWeek . "'))";
+	$ohs = $mydb->query($ohquery);
+	while($array = $ohs->fetch_assoc()){
+		if(isset($array['start_date'])){
+				$myDateTime = DateTime::createFromFormat('Y-m-d', $array['date']);
+				$dayOfWeek = $myDateTime->format('N');
+				$currentDayOfWeek = date("N");
+				$difference = abs($dayOfWeek-$currentDayOfWeek);
+				$day = date("F jS", strtotime("+".$difference." day"));
+			}else{
+				$myDateTime = DateTime::createFromFormat('Y-m-d', $array['date']);
+				$day = $myDateTime->format('F jS');
+			}
+		print("<div> Day: " . $day . " Time:" . $array['start_time'] . " Location:" . $array['location'] . "</div>");
+	}
 }
 ?>
 
