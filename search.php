@@ -117,7 +117,7 @@ function return_clean($tocheck){
 			require 'inc/header.html';
 		}
 			print '<div class="content">';
-			display_search_results($_POST['search_terms']);
+			display_search_results($_GET['search_terms']);
 		?>
 </div>
 </body>
