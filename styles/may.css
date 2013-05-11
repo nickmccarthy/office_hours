@@ -1,7 +1,7 @@
 /* MONTH OF MAY COLORS*/
 
 /* general css*/
-h1, h2 {
+h1, h2, p {
     color: #9c7f54;
 }
 
@@ -94,7 +94,7 @@ input:focus {
 
 /* dashboard page */
 .courses:nth-child(2n+1) {
-    background-color: #f2eae3;
+    background-color: #fff;
     border-color: #9c7f54;
 }
 

@@ -6,7 +6,7 @@ body {
     color: #bbb;
 }
 
-h1, h2 {
+h1, h2, h3, p {
     color: #8CBBE5;
 }
 
@@ -239,16 +239,6 @@ background-color: #eee;
 
 .courses:nth-child(2n+1) {
     background-color: #fff;
-    border-top: 1px solid #ddd;
-}
-
-.courses:first-child {
-    border-bottom: 1px solid #ddd;
-
-}
-.courses:last-child {
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
 }
 
 .courses:hover {
@@ -258,6 +248,7 @@ background-color: #eee;
 .id {
     padding: 5px 10px;
     display: inline;
+    clear: both;
     float: left;
     height: auto;
 }
@@ -267,4 +258,33 @@ background-color: #eee;
     display: inline;
     float: right;
     height: auto;
+}
+
+/* Subscribe */
+.sub_courses {
+    background: none;
+    width: auto;
+    height: 60px;
+    padding: 10px;
+    overflow: auto;
+}
+
+.sub_btn, .join_btn {
+    float: right;
+    width: auto;
+}
+
+.cid {
+    visibility: hidden;
+}
+
+.subscribe, .join_class{
+    float: left;
+    overflow: auto;
+    width: auto;
+}
+
+.sub_submit, .join_submit {
+    width: 60px !important;
+    margin-left: 10px !important;
 }
