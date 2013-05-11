@@ -43,8 +43,18 @@ if(isset($_GET['cid'])){
 	$week = date("W");
 	$firstDayOfWeek = strtotime($year."W".str_pad($week,2,"0",STR_PAD_LEFT));
 	print("<div>Office Hours Week of " . date("F jS",$firstDayOfWeek));
-
-	$ohQuery = "SELECT * FROM "
+	print("<br />" . $firstDayOfWeek);
+	print("<br />". $week);
+	print("<br />". $year);
+	$firstDayOfNextWeek = strtotime($year."W".str_pad($week+1,2,"0",STR_PAD_LEFT));
+//SELECT * FROM 'OfficeHours' NATURAL JOIN Repeating WHERE cid = 1 AND (() OR ())
+	$ohQuery = "SELECT * FROM OfficeHours WHERE cid=" . $_GET['cid'] . " AND (date > ". $firstDayOfNextWeek . " AND date < " . $firstDayOfWeek . ") ";
+	$ohResult = $mydb->query($ohQuery);
+	if(isset($ohResult)){
+		while($array = $ohResult->fetch_assoc()){
+			print("<div>" . $array['date'] . " " . $array['location'] . " " . "</div>");
+		}
+	}
 }else{
 	print("<h2>No Course Found</h2>");
 }
