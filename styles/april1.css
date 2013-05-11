@@ -1,0 +1,137 @@
+/* MONTH OF APRIL COLORS*/
+
+/* header and navigation buttons */
+#logo {
+    color: #E96368;
+}
+
+button {
+    border: 1px solid #E96368;
+    color: #E96368;
+    background-color: #f4ddcd;
+}
+
+button:hover {
+    background-color: #f2eae3;
+}
+
+/* general css*/
+body {
+    background: #f2eae3;
+    color: #E96368;
+}
+
+h1 {
+    color: #E96368;
+}
+
+a {
+    color: #E96368;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #ff998c;
+    border-bottom: 1px solid #ff998c;
+    }
+
+label, .label {
+    color: #E96368;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="tel"] {
+    border: 1px solid #E96368;
+}
+
+button[type="submit"] {
+    border: 1px solid #E96368;
+    color: #E96368;
+    background-color: #f4ddcd;
+}
+
+button[type="submit"]:hover {
+    background-color: #f2eae3;
+    border-color: #E96368;
+}
+
+input::-webkit-input-placeholder { /* WebKit browsers */
+    color: #ff998c;
+}
+
+:-moz-placeholder { /* Firefox 4 to 18 */
+    color: #ff998c;
+}
+
+::-moz-placeholder { /* Firefox 19+ */
+    color: #ff998c;
+}
+
+:-ms-input-placeholder { /* IE 10+ */
+    color: #ff998c;
+}
+
+/* main content div*/
+div.content {
+    background: #f4ddcd;
+    border: 1px solid #E96368;
+}
+
+.content:after { /* arrow inside */
+    border-bottom-color: #f4ddcd;
+
+}
+.content:before { /* arrow outline */
+    border-bottom-color: #E96368;
+}
+
+/* login and sign up tab */
+.tabarea {
+    border: 1px solid #E96368;
+    background-color: #f2eae3;
+}
+
+body#tab1 li.tab1 a,
+body#tab2 li.tab2 a,
+body#tab3 li.tab3 a { /* settings for selected tab link */
+    background-color: #f2eae3;
+    color: #E96368;
+}
+
+ul#tabnav li a { /* settings for all tab links */
+    border: 1px solid #E96368;
+    background-color: #f4ddcd; /* set unselected tab background color as desired */
+    color: #E96368;
+}
+
+ul#tabnav a:hover { /* settings for hover effect */
+    background: #f2eae3; /* set desired hover color */
+}
+
+/* index (search) page */
+input[id="search_terms"] {
+    border: 1px solid #E96368;
+    border-radius: 15px;
+    width: 485px !important;
+    padding: 5px;
+    background-color: #fff;
+    float: none !important;
+    margin: 30% auto;
+}
+
+/* dashboard page */
+
+.courses:nth-child(odd) {
+    background-color: #f2eae3;
+    border: 0px;
+}
+
+.courses:nth-child(even) {
+    background-color: #eee;
+    border: 0px;
+}
+
+.courses:hover {
+    background-color: #f4ddcd;
+}
