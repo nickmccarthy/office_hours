@@ -22,6 +22,55 @@ if (!preg_match('/^[0-9]+$/', $cid))
     header("Location: $dashboard");
 }
 
+$db = new mysqli($dbserver, $dbusername, $dbpassword, $dbname);
+
+if (isset($_POST['start_date'])
+    && isset($_POST['end_date'])
+    && isset($_POST['start_time'])
+    && isset($_POST['end_time'])
+    && isset($_POST['location']))
+{
+    for ($i = 0; $i < count($_POST['start_time']); $i++)
+    {
+        $day = $_POST['day'][$i];
+        $sd = trim(htmlentities($_POST['start_date'][$i]));
+        $ed = trim(htmlentities($_POST['end_date'][$i]));
+        $st = trim(htmlentities($_POST['start_time'][$i]));
+        $et = trim(htmlentities($_POST['end_time'][$i]));
+        $loc = trim(htmlentities($_POST['location'][$i]));
+
+        if ($day != '' && $sd != '' && $ed != '' && $st != '' && $et != '' && $loc != '') // make sure all set
+        {
+            $rt = $_POST['repeat_tag'][$i];
+            $roh = new repeating_office_hours($rt);
+
+            if ($rt == -1)
+            {
+                $roh->set_data($sd, $ed, $st, $et, $day, $loc, $uid, $cid);
+                $roh->add($db);
+                office_hours::add_repeating($db, $roh);
+            }
+            else
+            {
+
+                $roh->lookup_data($db);
+                if ($day != $roh->day_of_week
+                    || $sd != $roh->start_date
+                    || $ed != $roh->end_date
+                    || $st != $roh->start_time
+                    || $et != $roh->end_time
+                    || $loc != $roh->location)
+                {
+                    $roh->set_data($sd, $ed, $st, $et, $day, $loc, $uid, $cid);
+                    $roh->update($db);
+                    office_hours::delete_repeating($db, $rt);
+                    office_hours::add_repeating($db, $roh);
+                }
+            }
+        }
+    }
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -29,7 +78,7 @@ if (!preg_match('/^[0-9]+$/', $cid))
 <head>
 	<link rel="stylesheet" type="text/css" href="styles/styles.css">
     <!-- style sheets will change depending on the month -->
-	<!--<link rel="stylesheet" type="text/css" href="styles/april1.css">-->
+    <!--<link rel="stylesheet" type="text/css" href="styles/april1.css">-->
     <link href='http://fonts.googleapis.com/css?family=Acme' rel='stylesheet' type='text/css' />
     <link href='http://fonts.googleapis.com/css?family=Gudea' rel='stylesheet' type='text/css' />
 </head>
@@ -37,7 +86,6 @@ if (!preg_match('/^[0-9]+$/', $cid))
     <?php
     require 'inc/header_in.html';
 
-    $db = new mysqli($dbserver, $dbusername, $dbpassword, $dbname);
     $course = new course($cid);
     $course->lookup_data($db);
 
@@ -47,20 +95,20 @@ if (!preg_match('/^[0-9]+$/', $cid))
     <div class="content">
         <h2><? print $course->department_number(); ?> | Edit Office Hours</h2>
         <div class="center">
-               <form method="post" action="addclass.php">
-                <?
-                if (count($hours) > 0)
-                {
-                    foreach ($hours as $oh) {
-                        format_oh($oh);
-                    }
+         <form method="post" action="edit_repeating_hours.php?cid=<?print $cid?>">
+            <?
+            if (count($hours) > 0)
+            {
+                foreach ($hours as $oh) {
+                    format_oh($oh);
                 }
-                format_oh(false);
-                print '<input type="submit">';
-                ?>
-            </form>
-        </div>
+            }
+            format_oh(false);
+            print '<input type="submit">';
+            ?>
+        </form>
     </div>
+</div>
 
 </body>
 </html>
@@ -80,6 +128,7 @@ function format_oh($oh)
         "Saturday");
 
     $dow = $sd = $ed = $st = $et = $loc = "";
+    $rt = -1;
     if ($oh)
     {
         $dow = $oh->day_of_week;
@@ -88,6 +137,7 @@ function format_oh($oh)
         $st = $oh->start_time;
         $et = $oh->end_time;
         $loc = $oh->location;
+        $rt = $oh->repeat_tag;
     }
 
     print "Every ";
@@ -112,7 +162,8 @@ function format_oh($oh)
     print "<input type=\"textarea\" rows=\"1\" cols=\"30\" name=\"location[]\" value=\"$loc\">";
     print '<br>'; // remove when formatting exists
 
- }
+    print "<input type=\"hidden\" name=\"repeat_tag[]\" value=\"$rt\">"; // keep track or original to change
+}
 
 // TODO:
 
@@ -128,4 +179,4 @@ function format_oh($oh)
 
 // send the user back to the dashboard
 
- ?>
+?>
