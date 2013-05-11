@@ -11,7 +11,7 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="styles/styles.css" />
     <!-- style sheets will change depending on the month -->
-	<!--<link rel="stylesheet" type="text/css" href="styles/april1.css">-->
+	<link rel="stylesheet" type="text/css" href="styles/<?php echo strtolower(date('F'))?>.css">
 	<link href='http://fonts.googleapis.com/css?family=Acme' rel='stylesheet' type='text/css' />
 	<link href='http://fonts.googleapis.com/css?family=Gudea' rel='stylesheet' type='text/css' />
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
@@ -40,21 +40,20 @@ if(isset($_GET['cid'])){
 	$result = $mydb->query($query);
 	$row = $result->fetch_assoc();
 
-	print("<h2>" . $row['department'] . " " . $row['number'] . "|" . $row['name'] . "</h2>");
-
-	print('<span class="edit"><button class="sub_btn" id="' . $_GET["cid"] .'">Subscribe</button></span>');
-	print('<div class="cid" style="visibility: hidden">' . $_GET['cid'] . '</div>');
+	print("<h2>" . $row['department'] . " " . $row['number'] . " | " . $row['name'] . "</h2>");
+	print ("<div class='sub_courses'>");
+	print('<span class="sub_btn"><button id="' . $_GET["cid"] .'">Subscribe</button></span>');
+	print('<span class="cid">' . $_GET['cid'] . '</span>');
 	print("<div class='subscribe' id='" . $_GET['cid'] ."'>
-					<div class='courses'>
-						<input type='text' name='email' id='email' placeholder='netID@cornell.edu'>
-						<button type='submit' class='sub_submit'>Subscribe</button>
-					</div>
-				</div>");
+				<button type='submit' class='sub_submit'>Go!</button>
+				<input type='text' name='email' id='email' placeholder='netID@cornell.edu'>
+			</div>
+			</div>");
 
 	$firstDayOfWeek = date("Y-m-d");
 	$firstDayOfNextWeek = date("Y-m-d", strtotime("+1 week"));
 	$firstForDisplay = date("F jS");
-	print("<div>Office Hours Week following " . $firstForDisplay . "</div>");
+	print("<div><h3>Office Hours Week following " . $firstForDisplay . "</h3></div>");
 
 	$query = "SELECT * FROM (OfficeHours LEFT JOIN Repeating ON OfficeHours.repeat_tag=Repeating.repeat_tag) NATURAL JOIN Users WHERE cid=" . $_GET['cid'] . " AND((date <='" . $firstDayOfNextWeek . "' AND date >='" . $firstDayOfWeek . "') OR (Repeating.repeat_tag IS NOT NULL AND start_date <= '" . $firstDayOfWeek . "' AND end_date >= '" . $firstDayOfWeek . "'))";
 	$ohResult = $mydb->query($query);
