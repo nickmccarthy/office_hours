@@ -92,12 +92,6 @@ if (isset($_POST['start_time'])
     <div class="content">
         <h2><?php print $course->department_number(); ?> | Edit Office Hours</h2>
         <div class="center">
-            <ul id="tabnav">
-                <li class="tab1"><a href="#">Edit Single Hours</a></li>
-                <li class="tab2"><a href="edit_repeating_hours.php?cid=<?print $cid;?>">Edit Repeating Hours</a></li>
-                <li class="tab3"><a href="dashboard.php">Back to Dashboard</a></li>
-            </ul>
-            <div class="tabarea">
                 <form method="get" action="edit_single_hours.php">
                     <input type="hidden" name="cid" value="<?print $cid?>">
                     Choose Date: <input type="date" name="date" value="<?print $date?>">
@@ -116,7 +110,6 @@ if (isset($_POST['start_time'])
                     print '<input type="submit">';
                     ?>
                 </form>
-            </div>
         </div>
     </div>
 </body>
