@@ -1,4 +1,4 @@
-/* MONTH OF APRIL COLORS*/
+/* MONTH OF MAY COLORS*/
 
 /* general css*/
 h1, h2 {
@@ -60,19 +60,19 @@ input::-webkit-input-placeholder { /* WebKit browsers */
 
 /* header and navigation buttons */
 #header {
-    background: #80C199;
-    border-bottom: 10px solid #E98D8D;
+    background: #88c552;
+    border-bottom: 10px solid #886cbb;
 }
 
 button {
-    border: 2px solid #80C199;
-    background-color: #80C199;
+    border: 2px solid #88c552;
+    background-color: #88c552;
 }
 
 button:hover {
     color: #fff;
-    background-color: #E98D8D;
-    border-color: #E98D8D;
+    background-color: #886cbb;
+    border-color: #886cbb;
 }
 
 /* main content div*/

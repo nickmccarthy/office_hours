@@ -11,6 +11,29 @@ if (!isset($_SESSION['user']))
     header("Location: $login_page");
 }
 
+function format_course($teaches)
+{
+    $class = $teaches->class;
+
+    print '<div class="courses">';
+
+    print '<span class="id">';
+    print "<a href=\"course_info.php?cid=$class->cid\">$class->department $class->number | $teaches->level</a>";
+    print '</span>';
+
+    if ($teaches->level == 'Professor')
+    {
+        print '<span class="edit">';
+        print "<a href=\"edit_permissions.php?cid=$class->cid\">Course Permissions</a>";
+        print '</span>';
+    }
+
+    print '<span class="edit">';
+    print "<a href=\"edit_single_hours.php?cid=$class->cid\">Edit Office Hours</a>";
+    print '</span>';
+
+    print '</div>';
+}
 
 ?>
 <!DOCTYPE html>
@@ -18,7 +41,7 @@ if (!isset($_SESSION['user']))
 <head>
 	<link rel="stylesheet" type="text/css" href="styles/styles.css">
     <!-- style sheets will change depending on the month -->
-	<!--<link rel="stylesheet" type="text/css" href="styles/april1.css">-->
+	<link rel="stylesheet" type="text/css" href="styles/<?php echo strtolower(date('F'))?>.css"> 
     <link href='http://fonts.googleapis.com/css?family=Acme' rel='stylesheet' type='text/css' />
     <link href='http://fonts.googleapis.com/css?family=Gudea' rel='stylesheet' type='text/css' />
 </head>
@@ -52,29 +75,7 @@ if (!isset($_SESSION['user']))
 
 <?php
 
-function format_course($teaches)
-{
-    $class = $teaches->class;
 
-    print '<div class="courses">';
-
-    print '<span class="id">';
-    print "<a href=\"course_info.php?cid=$class->cid\">$class->department $class->number | $teaches->level</a>";
-    print '</span>';
-
-    if ($teaches->level == 'Professor')
-    {
-        print '<span class="edit">';
-        print "<a href=\"edit_permissions.php?cid=$class->cid\">Course Permissions</a>";
-        print '</span>';
-    }
-
-    print '<span class="edit">';
-    print "<a href=\"edit_single_hours.php?cid=$class->cid\">Edit Office Hours</a>";
-    print '</span>';
-
-    print '</div>';
-}
 
 // TODO:
 
