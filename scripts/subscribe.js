@@ -7,12 +7,20 @@ $(document).ready(function(){
 	$('.sub_btn').click(function(){
 		var id = event.target.id;
 		var lookup = '#' + id + '.subscribe';
+		if($(lookup).is(':hidden')){
+			$('.subscribe').hide();
+			$('.join_class').hide();
+		}
 		$(lookup).toggle("slow");
 	})
 
 	$('.join_btn').click(function(){
 		var id = event.target.id;
 		var lookup = '#' + id + '.join_class';
+		if($(lookup).is(':hidden')){
+			$('.join_class').hide();
+			$('.subscribe').hide();
+		}
 		$(lookup).toggle("slow");
 	})
 
@@ -21,7 +29,7 @@ $(document).ready(function(){
 	
 	function subscribeEmail(){
 		var emailval = $('#email').val();
-		var cidval = $(this).parent().parent().attr("id");
+		var cidval = $(this).parent().attr("id");
 		var mydata = {sub_email : emailval,
 						cid: cidval};
 		request = $.ajax({
@@ -36,7 +44,7 @@ $(document).ready(function(){
 
 	function joinClass(){
 		var pos = $('#position').val();
-		var cidval = $(this).parent().parent().attr("id");
+		var cidval = $(this).parent().attr("id");
 		var mydata = {position: pos,
 						cid: cidval};
 		request = $.ajax({
@@ -57,7 +65,7 @@ $(document).ready(function(){
 		}
 		if(response == 'not there'){
 			$('#email').hide("slow");
-			$('.join_submit').html('Joined Class!');
+			$('.sub_submit').html('Done!');
 		}
 	}
 
@@ -70,7 +78,7 @@ $(document).ready(function(){
 		}
 		if(response == 'not there'){
 			$('#position').hide("slow");
-			$('.join_submit').html('Signed Up!');
+			$('.join_submit').html('Done!');
 		}
 	}
 })
