@@ -39,18 +39,15 @@ if (isset($_POST['start_date'])
         $et = trim(htmlentities($_POST['end_time'][$i]));
         $loc = trim(htmlentities($_POST['location'][$i]));
         
-
-        $del = false;
-        if (isset($_POST['delete'])){
-            if (count($_POST['delete']) > $i)
-            {
-                $del = $_POST['delete'][$i];
-            }
-        }
-
         $rt = $_POST['repeat_tag'][$i];
         $roh = new repeating_office_hours($rt);
 
+        $del = false;
+        if (isset($_POST['delete'])){
+            foreach ($_POST['delete'] as $del_rt) {
+                $del = $del || ($rt == $del_rt);
+            }
+        }
         if ($del)
         {
             $roh->delete($db);
@@ -142,6 +139,7 @@ function format_oh($oh)
         "Saturday");
 
     $dow = $sd = $ed = $st = $et = $loc = "";
+    $del = "disabled";
     $rt = -1;
     if ($oh)
     {
@@ -152,6 +150,7 @@ function format_oh($oh)
         $et = $oh->end_time;
         $loc = $oh->location;
         $rt = $oh->repeat_tag;
+        $del = "";
     }
 
     print "Every ";
@@ -174,10 +173,7 @@ function format_oh($oh)
     print " in ";
     // temporarily a textarea to not have text styling
     print "<input type=\"textarea\" rows=\"1\" cols=\"30\" name=\"location[]\" value=\"$loc\">";
-    if ($oh)
-    {
-        print " Del: <input type=\"checkbox\" name=\"delete[]\">";
-    }
+    print " Del: <input type=\"checkbox\" name=\"delete[]\" $del value=\"$rt\">";
     print '<br>'; // remove when formatting exists
 
     print "<input type=\"hidden\" name=\"repeat_tag[]\" value=\"$rt\">"; // keep track or original to change

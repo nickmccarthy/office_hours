@@ -67,6 +67,19 @@ class office_hours
 		$this->start_time = $new_start_time;
 	}
 
+	function delete($db)
+	{
+		$query = "
+		DELETE FROM OfficeHours
+		WHERE cid = \"$this->cid\"
+		AND uid = \"$this->uid\"
+		AND date = \"$this->date\"
+		AND start_time = \"$this->start_time\"";
+
+		$db->query($query);
+	}
+
+
 	static function find_hours_on_date($db, $uid, $cid, $date)
 	{
 		return office_hours::find_hours_in_range($db, $uid, $cid, $date, $date);

@@ -42,10 +42,22 @@ if (isset($_POST['start_time'])
         $et = trim(htmlentities($_POST['end_time'][$i]));
         $loc = trim(htmlentities($_POST['location'][$i]));
 
-        if ($st != '' && $et != '' && $loc != '') // make sure all set
+        $ost = $_POST['orig_start_time'][$i];
+
+        $del = false;
+        if (isset($_POST['delete'])){
+            foreach ($_POST['delete'] as $del_st) {
+                $del = $del || ($ost == $del_st);
+            }
+        }
+        if ($del)
+        {
+            $oh = new office_hours($cid, $uid, $date, $ost);
+            $oh->delete($db);
+        }
+        elseif ($st != '' && $et != '' && $loc != '') // make sure all set
         {
             $oh;
-            $ost = $_POST['orig_start_time'][$i];
             if ($ost == '')
             {
                 $oh = new office_hours($cid, $uid, $date, $st);
@@ -63,7 +75,6 @@ if (isset($_POST['start_time'])
 
             }
         }
-
     }
 }
 
@@ -120,11 +131,13 @@ if (isset($_POST['start_time'])
 function format_oh($oh)
 {
     $st = $et = $loc = "";
+    $del = "disabled";
     if ($oh)
     {
         $st = $oh->start_time;
         $et = $oh->end_time;
         $loc = $oh->location;
+        $del = "";
     }
     print "<input type=\"time\" name=\"start_time[]\" value=\"$st\">";
     print " to ";
@@ -132,10 +145,7 @@ function format_oh($oh)
     print " in ";
     // temporarily a textarea to not have text styling
     print "<input type=\"textarea\" rows=\"1\" cols=\"30\" name=\"location[]\" value=\"$loc\">";
-    if ($oh)
-    {
-        print " Del: <input type=\"checkbox\" name=\"delete[]\">";
-    }
+    print " Del: <input type=\"checkbox\" name=\"delete[]\" $del value=\"$st\">";
     print '<br>'; // remove when formatting exists
     print "<input type=\"hidden\" name=\"orig_start_time[]\" value=\"$st\">"; // keep track or original to change
 }
