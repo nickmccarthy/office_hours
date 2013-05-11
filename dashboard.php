@@ -21,16 +21,19 @@ function format_course($teaches)
     print "<a href=\"course_info.php?cid=$class->cid\">$class->department $class->number | $teaches->level</a>";
     print '</span>';
 
+
+    print '<span class="edit">';
+    print "<a href=\"edit_single_hours.php?cid=$class->cid\">Single Edit</a>";
+    print ' | ';
+    print "<a href=\"edit_repeating_hours.php?cid=$class->cid\">Repeating Edit</a>";
+    print '</span>';
+
     if (strtoupper($teaches->level) == 'PROFESSOR' || strtoupper($teaches->level) == 'INSTRUCTOR')
     {
         print '<span class="edit">';
         print "<a href=\"edit_permissions.php?cid=$class->cid\">Course Permissions</a>";
         print '</span>';
     }
-
-    print '<span class="edit">';
-    print "<a href=\"edit_single_hours.php?cid=$class->cid\">Edit Office Hours</a>";
-    print '</span>';
 
     print '</div>';
 }

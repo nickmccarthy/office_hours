@@ -14,6 +14,9 @@ $uid = $_SESSION['user'];
 
 $db = new mysqli($dbserver, $dbusername, $dbpassword, $dbname);
 
+$vcnum = $vcname = $vsem = $vyear = true;
+$cid = $cname = $csemester = $cyear = '';
+
 if (isset($_POST['cid'])
     && isset($_POST['cname'])
     && isset($_POST['csemester'])
@@ -24,7 +27,7 @@ if (isset($_POST['cid'])
     $csemester = trim(htmlentities($_POST['csemester']));
     $cyear = trim(htmlentities($_POST['cyear']));
 
-    $vcnum = preg_match('/^(?<dept>[a-zA-Z]+) (?<number>[0-9]{4})$/', $cid, $matches);
+    $vcnum = preg_match('/^(?<dept>[a-zA-Z]+)[ ]*(?<number>[0-9]{4})$/', $cid, $matches);
     $vcname = preg_match('/^[a-zA-Z0-9 ]+$/', $cname);
     $vsem = preg_match('/^(SP|FA)$/', $csemester);
     $vyear = preg_match('/^20(?<year>[0-9]{2})+$/', $cyear, $matches2);
@@ -46,13 +49,13 @@ if (isset($_POST['cid'])
 <!DOCTYPE html>
 <html>
 <head>
- <link rel="stylesheet" type="text/css" href="styles/styles.css">
- <link rel="stylesheet" type="text/css" href="styles/<?php echo strtolower(date('F'))?>.css" />
+   <link rel="stylesheet" type="text/css" href="styles/styles.css">
+   <link rel="stylesheet" type="text/css" href="styles/<?php echo strtolower(date('F'))?>.css" />
 
- <!-- style sheets will change depending on the month -->
- <!--<link rel="stylesheet" type="text/css" href="styles/april1.css">-->
- <link href='http://fonts.googleapis.com/css?family=Acme' rel='stylesheet' type='text/css' />
- <link href='http://fonts.googleapis.com/css?family=Gudea' rel='stylesheet' type='text/css' />
+   <!-- style sheets will change depending on the month -->
+   <!--<link rel="stylesheet" type="text/css" href="styles/april1.css">-->
+   <link href='http://fonts.googleapis.com/css?family=Acme' rel='stylesheet' type='text/css' />
+   <link href='http://fonts.googleapis.com/css?family=Gudea' rel='stylesheet' type='text/css' />
 </head>
 <?php
 if(isset($_SESSION['user'])) {
@@ -65,9 +68,32 @@ if(isset($_SESSION['user'])) {
 ?>
 <div class="content">
     <div class="center">
-        <?php
-        include 'inc/addclass_form.php';
-        ?>
+        <form method="post" action="addclass.php">
+            <div class="line">
+                <label for="cid">Course ID</label>
+                <input type="text" name="cid" id="cid" placeholder="Department ####" value="<?print $cid?>"/>
+                <label class="error"><?if(!$vcnum) print "Invalid course number. Department can only have letters, number must be 4 digits.";?></label>
+            </div>
+            <div class="line">
+                <label for="cname">Course Name</label>
+                <input type="text" name="cname" id="cname" placeholder="Course Name" value="<?print $cname?>"/>
+                <label class="error"><?if(!$vcname) print "Invalid course name. Must contain only letters, numbers, or spaces.";?></label>
+            </div>
+            <div class="line">
+                <label for="csemester">Semester</label>
+                <input type="text" name="csemester" id="csemester" placeholder="Semester (SP/FA)" value="<?print $csemester?>"/>
+                <label class="error"><?if(!$vsem) print "Invalid semester. Must be SP or FA.";?></label>
+            </div>
+            <div class="line">
+                <label for="csemester">Year</label>
+                <input type="text" name="cyear" id="cyear" placeholder="Year (####)" value="<?print $cyear?>"/>
+                <label class="error"><?if(!$vyear) print "Invalid year. Must be a 4 digit number of form 20##.";?></label>
+            </div>
+            <div class="line">
+                <label for="terms"></label>
+                <button type="submit">Add Class</button>
+            </div>
+        </form>
     </div>
 </div>
 
