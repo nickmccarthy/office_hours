@@ -129,27 +129,27 @@ class repeating_office_hours
 			AND cid = \"$cid\"
 			AND repeat_tag >= 0
 			) 
-ORDER BY start_date";
+			ORDER BY start_date";
 
-$result = $db->query($query);
+		$result = $db->query($query);
 
-$arr = array();
-while ($row = $result->fetch_assoc())
-{
-	$roh = new repeating_office_hours($row["repeat_tag"]);
-	$info = office_hours::find_info_repeating($db, $row["repeat_tag"]);
-	$roh->set_data(
-		$row["start_date"],
-		$row["end_date"],
-		$info["start_time"],
-		$info["end_time"],
-		date('l', strtotime($info["date"])),
-		$info["location"]);
-	$arr[] = $roh;
-}
+		$arr = array();
+		while ($row = $result->fetch_assoc())
+		{
+			$roh = new repeating_office_hours($row["repeat_tag"]);
+			$info = office_hours::find_info_repeating($db, $row["repeat_tag"]);
+			$roh->set_data(
+				$row["start_date"],
+				$row["end_date"],
+				$info["start_time"],
+				$info["end_time"],
+				date('l', strtotime($info["date"])),
+				$info["location"]);
+			$arr[] = $roh;
+		}
 
-return $arr;
-}
+	return $arr;
+	}
 }
 
 

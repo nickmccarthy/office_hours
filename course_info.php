@@ -39,20 +39,27 @@ if(isset($_GET['cid'])){
 
 	print("<h2>" . $row['department'] . " " . $row['number'] . "|" . $row['name'] . "</h2>");
 
-	$year = date("Y");
-	$week = date("W");
-	$firstDayOfWeek = strtotime($year."W".str_pad($week,2,"0",STR_PAD_LEFT));
-	print("<div>Office Hours Week of " . date("F jS",$firstDayOfWeek));
-	print("<br />" . $firstDayOfWeek);
-	print("<br />". $week);
-	print("<br />". $year);
-	$firstDayOfNextWeek = strtotime($year."W".str_pad($week+1,2,"0",STR_PAD_LEFT));
-//SELECT * FROM 'OfficeHours' NATURAL JOIN Repeating WHERE cid = 1 AND (() OR ())
-	$ohQuery = "SELECT * FROM OfficeHours WHERE cid=" . $_GET['cid'] . " AND (date > ". $firstDayOfNextWeek . " AND date < " . $firstDayOfWeek . ") ";
-	$ohResult = $mydb->query($ohQuery);
+	$firstDayOfWeek = date("Y-m-d");
+	$firstDayOfNextWeek = date("Y-m-d", strtotime("+1 week"));
+	$firstForDisplay = date("F jS");
+	print("<div>Office Hours Week following " . $firstForDisplay . "</div>");
+
+	$query = "SELECT * FROM (OfficeHours LEFT JOIN Repeating ON OfficeHours.repeat_tag=Repeating.repeat_tag) NATURAL JOIN Users WHERE cid=" . $_GET['cid'] . " AND((date <='" . $firstDayOfNextWeek . "' AND date >='" . $firstDayOfWeek . "') OR (Repeating.repeat_tag IS NOT NULL AND start_date <= '" . $firstDayOfWeek . "' AND end_date >= '" . $firstDayOfWeek . "'))";
+	$ohResult = $mydb->query($query);
+
 	if(isset($ohResult)){
 		while($array = $ohResult->fetch_assoc()){
-			print("<div>" . $array['date'] . " " . $array['location'] . " " . "</div>");
+			if(isset($array['start_date'])){
+				$myDateTime = DateTime::createFromFormat('Y-m-d', $array['date']);
+				$dayOfWeek = $myDateTime->format('N');
+				$currentDayOfWeek = date("N");
+				$difference = abs($dayOfWeek-$currentDayOfWeek);
+				$day = date("F jS", strtotime("+".$difference." day"));
+			}else{
+				$myDateTime = DateTime::createFromFormat('Y-m-d', $array['date']);
+				$day = $myDateTime->format('F jS');
+			}
+			print("<span><a href='instructor_info.php?uid=" . $array['uid'] . "''>" . $array['first_name'] . " " . $array['last_name'] . " " . $day ." starts:" . $array['start_time'] . " ends:" . $array['end_time'] . " location:" . $array['location'] . " </a></span>");
 		}
 	}
 }else{
