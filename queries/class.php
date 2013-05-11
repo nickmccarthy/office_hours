@@ -3,7 +3,7 @@ class course
 {
 	private $table_name = "Class";
 
-	function __construct($cid)
+	function __construct($cid = -1)
 	{
 		$this->cid = $cid;
 	}
@@ -15,6 +15,17 @@ class course
 		$this->department = $department;
 		$this->semester = $semester;
 		$this->inactive = $inactive;
+	}
+
+	function add($db)
+	{
+		$query = "
+		INSERT INTO $this->table_name (name, number, department, semester, inactive)
+		VALUES (\"$this->name\",\"$this->number\",\"$this->department\",\"$this->semester\",\"$this->inactive\")";
+		
+		$db->query($query);
+		$this->cid = $db->insert_id;
+
 	}
 
 	function lookup_data($db)

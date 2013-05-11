@@ -5,7 +5,7 @@ class teaches
 	public $user = false;
 	public $class = false;
 
-	function __construct($uid, $cid, $level='')
+	function __construct($uid, $cid, $level='Instructor')
 	{
 		$this->uid = $uid;
 		$this->cid = $cid;
@@ -29,6 +29,15 @@ class teaches
 
 			$this->level = $teach["teach"];
 		}
+	}
+
+	function add($db)
+	{
+		$query = "
+		INSERT INTO $this->table_name (uid, cid, level)
+		VALUES (\"$this->uid\",\"$this->cid\",\"$this->level\")";
+
+		$db->query($query);
 	}
 
 	static function get_classes_by_uid($db, $uid)
