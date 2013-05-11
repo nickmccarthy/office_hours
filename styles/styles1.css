@@ -136,7 +136,7 @@ div.content {
 /* header and navigation buttons */
 #header {
     margin: 0px;
-    background-color: #ddd;
+    background-color: #000;
     height: auto;
     min-width: 1050px;
     overflow: auto;
@@ -145,10 +145,11 @@ div.content {
 }
 
 nav {
-    height: 50px;
+    height: 100px;
     width: auto;
     overflow: hidden;
     padding: 0px;
+    border: 1px solid #000;
 }
 
 #logo {
