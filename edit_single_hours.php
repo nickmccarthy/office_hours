@@ -74,7 +74,7 @@ if (isset($_POST['start_time'])
 <head>
 	<link rel="stylesheet" type="text/css" href="styles/styles.css">
     <!-- style sheets will change depending on the month -->
-	<!--<link rel="stylesheet" type="text/css" href="styles/april1.css">-->
+    <!--<link rel="stylesheet" type="text/css" href="styles/april1.css">-->
     <link href='http://fonts.googleapis.com/css?family=Acme' rel='stylesheet' type='text/css' />
     <link href='http://fonts.googleapis.com/css?family=Gudea' rel='stylesheet' type='text/css' />
 </head>
@@ -92,24 +92,24 @@ if (isset($_POST['start_time'])
     <div class="content">
         <h2><?php print $course->department_number(); ?> | Edit Office Hours</h2>
         <div class="center">
-                <form method="get" action="edit_single_hours.php">
-                    <input type="hidden" name="cid" value="<?print $cid?>">
-                    Choose Date: <input type="date" name="date" value="<?print $date?>">
-                    <input type="submit">
-                </form>
-                <form method="post" action="edit_single_hours.php?<?print "cid=$cid&date=$date"; ?>">
-                    <?
-                    if (count($hours) > 0)
+            <form method="get" action="edit_single_hours.php">
+                <input type="hidden" name="cid" value="<?print $cid?>">
+                Choose Date: <input type="date" name="date" value="<?print $date?>">
+                <input type="submit">
+            </form>
+            <form method="post" action="edit_single_hours.php?<?print "cid=$cid&date=$date"; ?>">
+                <?
+                if (count($hours) > 0)
+                {
+                    foreach ($hours as $oh)
                     {
-                        foreach ($hours as $oh)
-                        {
-                            format_oh($oh);
-                        }
+                        format_oh($oh);
                     }
-                    format_oh(false);
-                    print '<input type="submit">';
-                    ?>
-                </form>
+                }
+                format_oh(false);
+                print '<input type="submit">';
+                ?>
+            </form>
         </div>
     </div>
 </body>
@@ -132,6 +132,10 @@ function format_oh($oh)
     print " in ";
     // temporarily a textarea to not have text styling
     print "<input type=\"textarea\" rows=\"1\" cols=\"30\" name=\"location[]\" value=\"$loc\">";
+    if ($oh)
+    {
+        print " Del: <input type=\"checkbox\" name=\"delete[]\">";
+    }
     print '<br>'; // remove when formatting exists
     print "<input type=\"hidden\" name=\"orig_start_time[]\" value=\"$st\">"; // keep track or original to change
 }

@@ -41,9 +41,11 @@ if (isset($_POST['start_date'])
         
 
         $del = false;
-        if (isset($_POST['delete']))
-        {
-            $del = $_POST['location'][$i];
+        if (isset($_POST['delete'])){
+            if (count($_POST['delete']) > $i)
+            {
+                $del = $_POST['delete'][$i];
+            }
         }
 
         $rt = $_POST['repeat_tag'][$i];
@@ -107,7 +109,7 @@ if (isset($_POST['start_date'])
     <div class="content">
         <h2><? print $course->department_number(); ?> | Edit Office Hours</h2>
         <div class="center">
-         <form method="post" action="edit_repeating_hours.php?cid=<?print $cid?>">
+           <form method="post" action="edit_repeating_hours.php?cid=<?print $cid?>">
             <?
             if (count($hours) > 0)
             {
