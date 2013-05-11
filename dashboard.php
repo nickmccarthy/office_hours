@@ -21,7 +21,7 @@ function format_course($teaches)
     print "<a href=\"course_info.php?cid=$class->cid\">$class->department $class->number | $teaches->level</a>";
     print '</span>';
 
-    if ($teaches->level == 'Professor')
+    if (strtoupper($teaches->level) == 'PROFESSOR' || strtoupper($teaches->level) == 'INSTRUCTOR')
     {
         print '<span class="edit">';
         print "<a href=\"edit_permissions.php?cid=$class->cid\">Course Permissions</a>";

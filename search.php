@@ -54,7 +54,16 @@ function display_search_results($terms){
 				print("<div class='courses'> \n");
 				print('<span class="id"><a href="course_info.php?cid=' . $array["cid"] . '" alt = "' . $array["name"] . '">' . $array["name"] . '</a></span>');
 				if(isset($_SESSION['user'])){
-					print('<span class="edit"><a href="" alt="Join" class="join_btn">Join Class</a></span>');
+					print('<span class="edit"><a alt="Join" class="join_btn" id ="' . $array["cid"] . '">Join Class</a></span>');
+					print('<div class="cid" style="visibility: hidden">' . $array['cid'] . '</div>');
+					print($I1name . ' ' . $I2name);
+					print("</div> \n");
+					print("<div class='join_class' id='" . $array['cid'] ."'>
+						<div class='courses'>
+						<input type='text' name='position' id='position' placeholder='your position'>
+						<button type='submit' class='join_submit'>Join</button>
+						</div>
+						</div>");
 				}
 				print('<span class="edit"><a class="sub_btn" id="' . $array["cid"] .'">Subscribe</a></span>');
 				print('<div class="cid" style="visibility: hidden">' . $array['cid'] . '</div>');
