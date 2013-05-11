@@ -10,7 +10,7 @@ class office_hours
 		$this->start_time = $start_time;
 	}
 
-	function set_data($location, $end_time, $repeat_tag)
+	function set_data($location, $end_time, $repeat_tag = -1)
 	{		
 		$this->location = $location;
 		$this->end_time = $end_time;
@@ -39,6 +39,32 @@ class office_hours
 				$row["end_time"],
 				$row["repeat_tag"]);
 		}
+	}
+
+	function add($db)
+	{
+		$query = "
+		INSERT INTO OfficeHours (cid, uid, date, location, start_time, end_time, repeat_tag)
+		VALUES (\"$this->cid\",\"$this->uid\",\"$this->date\",\"$this->location\",\"$this->start_time\",\"$this->end_time\",\"$this->repeat_tag\")";
+		
+		$db->query($query);
+	}
+
+	function update($db, $new_start_time)
+	{
+		$query = "
+		UPDATE OfficeHours
+		SET location = \"$this->location\",
+		start_time = \"$new_start_time\",
+		end_time = \"$this->end_time\",
+		repeat_tag = \"$this->repeat_tag\"
+		WHERE cid = \"$this->cid\"
+		AND uid = \"$this->uid\"
+		AND date = \"$this->date\"
+		AND start_time = \"$this->start_time\"";
+
+		$db->query($query);
+		$this->start_time = $new_start_time;
 	}
 
 	static function find_hours_on_date($db, $uid, $cid, $date)

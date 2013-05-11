@@ -6,6 +6,7 @@ require 'config/mysql.config.php';
 require 'config/pageinfo.config.php';
 require 'queries/queries.php';
 
+
 if (!isset($_SESSION['user']))
 {
     header("Location: $login_page");
@@ -29,6 +30,43 @@ if (isset($_GET['date']))
     $date = $_GET['date'];
 }
 
+$db = new mysqli($dbserver, $dbusername, $dbpassword, $dbname);
+
+if (isset($_POST['start_time'])
+    && isset($_POST['end_time'])
+    && isset($_POST['location']))
+{
+    for ($i = 0; $i < count($_POST['start_time']); $i++)
+    {
+        $st = trim(htmlentities($_POST['start_time'][$i]));
+        $et = trim(htmlentities($_POST['end_time'][$i]));
+        $loc = trim(htmlentities($_POST['location'][$i]));
+
+        if ($st != '' && $et != '' && $loc != '') // make sure all set
+        {
+            $oh;
+            $ost = $_POST['orig_start_time'][$i];
+            if ($ost == '')
+            {
+                $oh = new office_hours($cid, $uid, $date, $st);
+                $oh->set_data($loc, $et);
+                $oh->add($db);
+            } else {
+                $oh = new office_hours($cid, $uid, $date, $ost);
+                $oh->lookup_data($db);
+
+                if ($st != $ost || $et != $oh->end_time || $loc != $oh->location)
+                {
+                    $oh->set_data($loc, $et);
+                    $oh->update($db, $st);
+                }
+
+            }
+        }
+
+    }
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -44,7 +82,6 @@ if (isset($_GET['date']))
     <?php
     require 'inc/header_in.html';
 
-    $db = new mysqli($dbserver, $dbusername, $dbpassword, $dbname);
     $course = new course($cid);
     $course->lookup_data($db);
 
@@ -103,6 +140,7 @@ function format_oh($oh)
     // temporarily a textarea to not have text styling
     print "<input type=\"textarea\" rows=\"1\" cols=\"30\" name=\"location[]\" value=\"$loc\">";
     print '<br>'; // remove when formatting exists
+    print "<input type=\"hidden\" name=\"orig_start_time[]\" value=\"$st\">"; // keep track or original to change
 }
 
 // TODO:
