@@ -196,7 +196,7 @@ body#dash .content:after { /* dashboard content arrow */
 }
 
 body#settings .content:after { /* settings content arrow */
-    right: 155px;
+    right: 158px;
 }
 
 body#help .content:after { /* help content arrow */
@@ -236,7 +236,6 @@ background-color: #eee;
     height: 60px;
     padding: 10px;
 }
-
 
 .courses:nth-child(2n+1) {
     background-color: #fff;

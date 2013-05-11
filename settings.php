@@ -42,7 +42,16 @@ if (isset($_POST['npassword'])
 <head>
 	<link rel="stylesheet" type="text/css" href="styles/styles.css">
     <!-- style sheets will change depending on the month -->
-	<link rel="stylesheet" type="text/css" href="styles/<?php echo strtolower(date('F'))?>.css"> 
+	<link rel="stylesheet" type="text/css" href="styles/<?php echo strtolower(date('F'))?>.css">
+        <link rel="stylesheet" type="text/css" href="styles/march.css" />
+    <link rel="stylesheet" type="text/css" href="styles/february.css" />
+    <link rel="stylesheet" type="text/css" href="styles/january.css" />
+    <link rel="stylesheet" type="text/css" href="styles/december.css" /> 
+    <link rel="stylesheet" type="text/css" href="styles/november.css" /> 
+    <link rel="stylesheet" type="text/css" href="styles/october.css" /> 
+    <link rel="stylesheet" type="text/css" href="styles/september.css" /> 
+    <link rel="stylesheet" type="text/css" href="styles/august.css" /> 
+    <link rel="stylesheet" type="text/css" href="styles/july.css" /> 
     <link href='http://fonts.googleapis.com/css?family=Acme' rel='stylesheet' type='text/css' />
     <link href='http://fonts.googleapis.com/css?family=Gudea' rel='stylesheet' type='text/css' />
 </head>

@@ -1,112 +1,108 @@
-/* MONTH OF MAY COLORS*/
+/* MONTH OF JULY COLORS*/
 
 /* general css*/
 h1, h2 {
-    color: #B09274;
+    color: #824831;
 }
 
 a {
-    color: #80C199;
-    text-decoration: none;
+    color: #7d51bb;
 }
 
 a:hover {
-    color: #80C199;
-    border-bottom: 1px solid #80C199;
+    color: #C74a4a;
+    border-color: #C74a4a;
 }
 
 label, .label {
-    color: #E98D8D;
+    color: #C74a4a;
 }
 
 label.error {
-    color: #80C199;
+    color: #7d51bb;
 }
-
 
 input[type="text"],
 input[type="password"],
 input[type="tel"] {
-    border-color: #E98D8D;
+    border-color: #C74a4a;
 }
 
 button[type="submit"] {
-    border-color: #E98D8D;
-    background-color: #E98D8D;
+    border-color: #C74a4a;
+    background-color: #C74a4a;
     color: #fff;
 }
 
 button[type="submit"]:hover {
     background-color: #fff;
-    border-color: #E98D8D;
-    color: #E98D8D;
+    border-color: #C74a4a;
+    color: #C74a4a;
 }
 
 input::-webkit-input-placeholder { /* WebKit browsers */
-    color: #B09274;
+    color: #824831;
 }
 
 :-moz-placeholder { /* Firefox 4 to 18 */
-    color: #B09274;
+    color: #824831;
 }
 
 ::-moz-placeholder { /* Firefox 19+ */
-    color: #B09274;
+    color: #824831;
 }
 
 :-ms-input-placeholder { /* IE 10+ */
-    color: #B09274;
+    color: #824831;
 }
 
 /* header and navigation buttons */
 #header {
-    background: #80C199;
-    border-bottom: 10px solid #E98D8D;
+    background: #7d51bb;
+    border-color: #C74a4a;
 }
 
 button {
-    border: 2px solid #80C199;
-    background-color: #80C199;
+    border-color: #7d51bb;
+    background-color: #7d51bb;
 }
 
 button:hover {
     color: #fff;
-    background-color: #E98D8D;
-    border-color: #E98D8D;
+    background-color: #C74a4a;
+    border-color: #C74a4a;
 }
 
 /* main content div*/
 div.content {
-    border-top: 1px solid #E98D8D;
+    border-color: #C74a4a;
 }
 
 .content:after {
-    border-bottom-color: #E98D8D;
+    border-bottom-color: #C74a4a;
 }
 
 /* index (search) page */
 input[id="search_terms"] {
-    border-color: #E98D8D;
+    border-color: #C74a4a;
 }
 
 input:focus {
-    background-color: #f5efef;
+    background-color: #feeae6;
 }
 
 /* dashboard page */
 .courses:nth-child(2n+1) {
-    background-color: #f2eae3;
+    background-color: #fff;
     border-color: #B09274;
 }
 
-.courses:first-child {
-    border-color: #B09274;
-
-}
+.courses:first-child,
 .courses:last-child {
-    border-color: #B09274;
+    border-color: #824831;
+
 }
 
 .courses:hover {
-    background-color: #f5efef;
+    background-color: #feeae6;
 }

@@ -105,19 +105,20 @@ function return_clean($tocheck){
 <head>
 	<link rel="stylesheet" type="text/css" href="styles/styles.css">
     <!-- style sheets will change depending on the month -->
-	<link rel="stylesheet" type="text/css" href="styles/<?php echo strtolower(date('F'))?>.css"> 
+	<link rel="stylesheet" type="text/css" href="styles/<?php echo strtolower(date('F'))?>.css">
 	<link href='http://fonts.googleapis.com/css?family=Acme' rel='stylesheet' type='text/css' />
 	<link href='http://fonts.googleapis.com/css?family=Gudea' rel='stylesheet' type='text/css' />
 </head>
-<body id="search_in">
 <?php
-		if(isset($_SESSION['user'])) {
-			require 'inc/header_in.html';
-		} else {
-			require 'inc/header.html';
-		}
-			print '<div class="content">';
-			display_search_results($_GET['search_terms']);
+if(isset($_SESSION['user'])) {
+        require 'inc/header_in.html';
+        print '<body id="search_in">';
+    } else {
+        require 'inc/header.html';
+        print '<body id="search_out">';
+    }
+		print '<div class="content">';
+		display_search_results($_GET['search_terms']);
 		?>
 </div>
 </body>
