@@ -24,7 +24,7 @@ if (isset($_POST['cid'])
 {
     $cid = trim(htmlentities($_POST['cid']));
     $cname = trim(htmlentities($_POST['cname']));
-    $csemester = trim(htmlentities($_POST['csemester']));
+    $csemester = strtoupper(trim(htmlentities($_POST['csemester'])));
     $cyear = trim(htmlentities($_POST['cyear']));
 
     $vcnum = preg_match('/^(?<dept>[a-zA-Z]+)[ ]*(?<number>[0-9]{4})$/', $cid, $matches);
