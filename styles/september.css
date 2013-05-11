@@ -1,108 +1,108 @@
-/* MONTH OF APRIL COLORS*/
+/* MONTH OF SEPTEMBER COLORS*/
 
 /* general css*/
 h1, h2 {
-    color: #705c52;
+    color: #713e31;
 }
 
 a {
-    color: #80C199;
+    color: #5b406e;
 }
 
 a:hover {
-    color: #E98D8D;
-    border-color: #E98D8D;
+    color: #f26f00;
+    border-color: #f26f00;
 }
 
 label, .label {
-    color: #E98D8D;
+    color: #f26f00;
 }
 
 label.error {
-    color: #80C199;
+    color: #5b406e;
 }
-
 
 input[type="text"],
 input[type="password"],
 input[type="tel"] {
-    border-color: #E98D8D;
+    border-color: #f26f00;
 }
 
 button[type="submit"] {
-    border-color: #E98D8D;
-    background-color: #E98D8D;
+    border-color: #f26f00;
+    background-color: #f26f00;
     color: #fff;
 }
 
 button[type="submit"]:hover {
     background-color: #fff;
-    border-color: #E98D8D;
-    color: #E98D8D;
+    border-color: #5e5991;
+    color: #5e5991;
 }
 
 input::-webkit-input-placeholder { /* WebKit browsers */
-    color: #705c52;
+    color: #713e31;
 }
 
 :-moz-placeholder { /* Firefox 4 to 18 */
-    color: #705c52;
+    color: #713e31;
 }
 
 ::-moz-placeholder { /* Firefox 19+ */
-    color: #705c52;
+    color: #713e31;
 }
 
 :-ms-input-placeholder { /* IE 10+ */
-    color: #705c52;
+    color: #713e31;
 }
 
 /* header and navigation buttons */
 #header {
-    background: #80C199;
-    border-color: #E98D8D;
+    background: #5b406e;
+    border-color: #f26f00;
 }
 
 button {
-    border-color: #80C199;
-    background-color: #80C199;
+    border-color: #5b406e;
+    background-color: #5b406e;
 }
 
 button:hover {
     color: #fff;
-    background-color: #E98D8D;
-    border-color: #E98D8D;
+    background-color: #f26f00;
+    border-color: #f26f00;
 }
 
 /* main content div*/
 div.content {
-    border-color: #E98D8D;
+    border-color: #f26f00;
 }
 
 .content:after {
-    border-bottom-color: #E98D8D;
+    border-bottom-color: #f26f00;
 }
 
 /* index (search) page */
 input[id="search_terms"] {
-    border-color: #E98D8D;
+    border-color: #f26f00;
 }
 
 input:focus {
-    background-color: #f5efef;
+    background-color: #fdece6;
 }
 
 /* dashboard page */
 .courses:nth-child(2n+1) {
-    background-color: #f2eae3;
-    border-color: #705c52;
+    background-color: #fff;
+    border-color: #713e31;
 }
 
 .courses:first-child,
 .courses:last-child {
-    border-color: #705c52;
+    border-color: #713e31;
+
 }
 
 .courses:hover {
-    background-color: #f5efef;
+    background-color: #fdece6;
 }

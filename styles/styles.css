@@ -6,8 +6,8 @@ body {
     color: #bbb;
 }
 
-h1 {
-    color: #bbb;
+h1, h2 {
+    color: #8CBBE5;
 }
 
 a {
@@ -70,6 +70,7 @@ button[type="submit"] {
 button[type="submit"]:hover {
     background-color: #fff;
     border-color: #8CBBE5;
+    color: #8CBBE5;
 }
 
 input::-webkit-input-placeholder { /* ebKit browsers */
@@ -119,7 +120,7 @@ div.line {
 /* header and navigation buttons */
 #header {
     margin: 0px;
-    background: #ddd;
+    background: #ccc;
     height: auto;
     min-width: 1050px;
     overflow: auto;
@@ -146,18 +147,19 @@ button {
     font-family: Gudea, Helvetica, Arial;
     font-size: 100%;
     font-weight: 400;
-    border: 2px solid #8CBBE5;
+    border: 2px solid #ccc;
     border-radius: 15px;
     width: auto;
     padding: 3px 10px;
     color: #fff;
-    background-color: #8CBBE5;
+    background-color: #ccc;
     margin-right: 5px;
 }
 
 button:hover {
-    color: #8CBBE5;
-    background-color: #eee;
+    color: #fff;
+    background-color: #8CBBE5;
+    border-color: #8CBBE5;
 }
 
 /* main content div*/
@@ -194,7 +196,7 @@ body#dash .content:after { /* dashboard content arrow */
 }
 
 body#settings .content:after { /* settings content arrow */
-    right: 155px;
+    right: 158px;
 }
 
 body#help .content:after { /* help content arrow */
@@ -222,8 +224,9 @@ input[id="search_terms"] {
     margin: 30% auto;
 }
 
-:focus {outline:none;
-border:1px solid red;
+input:focus {
+outline: none;
+background-color: #eee;
 }
 
 
@@ -234,14 +237,18 @@ border:1px solid red;
     padding: 10px;
 }
 
-.courses:nth-child(odd) {
+.courses:nth-child(2n+1) {
     background-color: #fff;
-    border: 0px;
+    border-top: 1px solid #ddd;
 }
 
-.courses:nth-child(even) {
-    background-color: #eee;
-    border: 0px;
+.courses:first-child {
+    border-bottom: 1px solid #ddd;
+
+}
+.courses:last-child {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
 }
 
 .courses:hover {

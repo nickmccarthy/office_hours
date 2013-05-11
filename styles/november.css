@@ -1,108 +1,108 @@
-/* MONTH OF APRIL COLORS*/
+/* MONTH OF NOVEMBER COLORS*/
 
 /* general css*/
 h1, h2 {
-    color: #705c52;
+    color: #83332d;
 }
 
 a {
-    color: #80C199;
+    color: #584c4b;
 }
 
 a:hover {
-    color: #E98D8D;
-    border-color: #E98D8D;
+    color: #cc9a3d;
+    border-color: #cc9a3d;
 }
 
 label, .label {
-    color: #E98D8D;
+    color: #cc9a3d;
 }
 
 label.error {
-    color: #80C199;
+    color: #584c4b;
 }
-
 
 input[type="text"],
 input[type="password"],
 input[type="tel"] {
-    border-color: #E98D8D;
+    border-color: #cc9a3d;
 }
 
 button[type="submit"] {
-    border-color: #E98D8D;
-    background-color: #E98D8D;
+    border-color: #cc9a3d;
+    background-color: #cc9a3d;
     color: #fff;
 }
 
 button[type="submit"]:hover {
     background-color: #fff;
-    border-color: #E98D8D;
-    color: #E98D8D;
+    border-color: #cc9a3d;
+    color: #cc9a3d;
 }
 
 input::-webkit-input-placeholder { /* WebKit browsers */
-    color: #705c52;
+    color: #83332d;
 }
 
 :-moz-placeholder { /* Firefox 4 to 18 */
-    color: #705c52;
+    color: #83332d;
 }
 
 ::-moz-placeholder { /* Firefox 19+ */
-    color: #705c52;
+    color: #83332d;
 }
 
 :-ms-input-placeholder { /* IE 10+ */
-    color: #705c52;
+    color: #83332d;
 }
 
 /* header and navigation buttons */
 #header {
-    background: #80C199;
-    border-color: #E98D8D;
+    background: #584c4b;
+    border-color: #cc9a3d;
 }
 
 button {
-    border-color: #80C199;
-    background-color: #80C199;
+    border-color: #584c4b;
+    background-color: #584c4b;
 }
 
 button:hover {
     color: #fff;
-    background-color: #E98D8D;
-    border-color: #E98D8D;
+    background-color: #cc9a3d;
+    border-color: #cc9a3d;
 }
 
 /* main content div*/
 div.content {
-    border-color: #E98D8D;
+    border-color: #cc9a3d;
 }
 
 .content:after {
-    border-bottom-color: #E98D8D;
+    border-bottom-color: #cc9a3d;
 }
 
 /* index (search) page */
 input[id="search_terms"] {
-    border-color: #E98D8D;
+    border-color: #cc9a3d;
 }
 
 input:focus {
-    background-color: #f5efef;
+    background-color: #fdf3dd;
 }
 
 /* dashboard page */
 .courses:nth-child(2n+1) {
-    background-color: #f2eae3;
-    border-color: #705c52;
+    background-color: #fff;
+    border-color: #83332d;
 }
 
 .courses:first-child,
 .courses:last-child {
-    border-color: #705c52;
+    border-color: #83332d;
+
 }
 
 .courses:hover {
-    background-color: #f5efef;
+    background-color: #fdf3dd;
 }

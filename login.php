@@ -50,7 +50,7 @@ if (isset($_POST['username']) && isset($_POST["password"]))
 <head>
 	<link rel="stylesheet" type="text/css" href="styles/styles.css">
 	<!-- style sheets will change depending on the month -->
-	<!--<link rel="stylesheet" type="text/css" href="styles/april1.css">-->
+	<link rel="stylesheet" type="text/css" href="styles/<?php echo strtolower(date('F'))?>.css">
 	<link href='http://fonts.googleapis.com/css?family=Acme' rel='stylesheet' type='text/css' />
 	<link href='http://fonts.googleapis.com/css?family=Gudea' rel='stylesheet' type='text/css' />
 </head>
