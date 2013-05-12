@@ -27,7 +27,7 @@ class teaches
 		{
 			$teach = $result->fetch_assoc();
 
-			$this->level = $teach["teach"];
+			$this->level = $teach["level"];
 		}
 	}
 

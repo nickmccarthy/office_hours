@@ -169,9 +169,6 @@ class office_hours
 			$date = date('Y-m-d', strtotime("next $roh->day_of_week", strtotime($date)));
 
 		}
-		
-
-
 	}
 
 }
@@ -228,6 +225,8 @@ class repeating_office_hours
 
 	function add($db)
 	{
+		$this->email($db, "ADD");
+
 		$query = "
 		INSERT INTO Repeating (start_date, end_date)
 		VALUES (\"$this->start_date\",\"$this->end_date\")";
@@ -238,6 +237,8 @@ class repeating_office_hours
 
 	function delete($db)
 	{
+		$this->email($db, "DELETE");
+
 		$query = "
 		DELETE FROM Repeating
 		WHERE repeat_tag = \"$this->repeat_tag\"";
@@ -246,8 +247,10 @@ class repeating_office_hours
 		office_hours::delete_repeating($db, $this->repeat_tag);
 	}
 
-	function update($db)
+	function update($db, $old)
 	{
+		$this->email_update($db, $old);
+
 		$query = "
 		UPDATE Repeating
 		SET start_date = \"$this->start_date\", end_date = \"$this->end_date\"
@@ -255,7 +258,97 @@ class repeating_office_hours
 		$db->query($query);
 	}
 
+	function email($db, $update_type)
+	{
+		$query = "
+		SELECT email
+		FROM Emails
+		WHERE cid = \"$this->cid\"";
 
+		$result = $db->query($query);
+
+		$class = new course($this->cid);
+		$class->lookup_data($db);
+
+		$user = new user($this->uid);
+		$user->lookup_data($db);
+
+		$teaches = new teaches($this->uid, $this->cid);
+		$teaches->lookup_data($db);
+
+		$mod = "cancelled";
+		if ($update_type == "ADD")
+			$mod = "added";
+
+		$headers = "From: CUOnTime _do not reply_\n";
+		$headers .= "MIME-Version: 1.0\n";
+		$headers .= "Content-Type: text/html; charset=ISO-8859-1 \n";
+
+		$subject = "[$class->department $class->number] Office Hours Change";
+		$message = "
+		Greetings!<br>
+		$teaches->level $user->first_name $user->last_name has $mod office hour(s).<br>
+		Office hours $mod: Every $this->day_of_week from $this->start_date to $this->end_date at
+		$this->start_time - $this->end_time in $this->location.
+		<br>
+		<br>
+		<br>
+		Want to unsubscribe? <a href = http://info230.cs.cornell.edu/groups/Team_15/www/unsubscribe.php?uid=$user->email&cid=$class->cid>Click here</a>
+		<br>
+		<a href = http://info230.cs.cornell.edu/groups/Team_15/www/index.php>CUOnTime</a>
+		";
+
+		while ($row = $result->fetch_assoc())
+		{
+			mail($row['email'], $subject, $message, $headers);
+		}
+	}
+
+	function email_update($db, $old)
+	{
+		$query = "
+		SELECT email
+		FROM Emails
+		WHERE cid = \"$this->cid\"";
+
+		$result = $db->query($query);
+
+		$class = new course($this->cid);
+		$class->lookup_data($db);
+
+		$user = new user($this->uid);
+		$user->lookup_data($db);
+
+		$teaches = new teaches($this->uid, $this->cid);
+		$teaches->lookup_data($db);
+
+		$headers = "From: CUOnTime _do not reply_\n";
+		$headers .= "MIME-Version: 1.0\n";
+		$headers .= "Content-Type: text/html; charset=ISO-8859-1 \n";
+
+		$subject = "[$class->department $class->number] Office Hours Change";
+		$message = "
+		<html><body>
+		Greetings!<br>
+		$teaches->level $user->first_name $user->last_name has updated their office hour(s).<br>
+		Old office hours: Every $old->day_of_week from $old->start_date to $old->end_date at
+		$old->start_time - $old->end_time in $old->location.<br>
+		New office hours: Every $this->day_of_week from $this->start_date to $this->end_date at
+		$this->start_time - $this->end_time in $this->location.<br>
+		<br>
+		<br>
+		<br>
+		Want to unsubscribe? <a href = http://info230.cs.cornell.edu/groups/Team_15/www/unsubscribe.php?uid=$user->email&cid=$class->cid>Click here</a>
+		<br>
+		<a href = http://info230.cs.cornell.edu/groups/Team_15/www/index.php>CUOnTime</a>
+		</body></html>
+		";
+
+		while ($row = $result->fetch_assoc())
+		{
+			mail($row['email'], $subject, $message, $headers);
+		}
+	}
 
 
 	static function find_repeating_hours($db, $uid, $cid)

@@ -50,6 +50,7 @@ if (isset($_POST['start_date'])
         }
         if ($del)
         {
+            $roh->set_data($sd, $ed, $st, $et, $day, $loc, $uid, $cid);
             $roh->delete($db);
         }
         elseif ($day != '' && $sd != '' && $ed != '' && $st != '' && $et != '' && $loc != '') // make sure all set
@@ -72,8 +73,11 @@ if (isset($_POST['start_date'])
                     || $et != $roh->end_time
                     || $loc != $roh->location)
                 {
+                    $old = new repeating_office_hours($rt);
+                    $old->lookup_data($db);
+
                     $roh->set_data($sd, $ed, $st, $et, $day, $loc, $uid, $cid);
-                    $roh->update($db);
+                    $roh->update($db, $old);
                     office_hours::delete_repeating($db, $rt);
                     office_hours::add_repeating($db, $roh);
                 }
@@ -89,7 +93,7 @@ if (isset($_POST['start_date'])
 <head>
 	<link rel="stylesheet" type="text/css" href="styles/styles.css">
     <!-- style sheets will change depending on the month -->
-	<link rel="stylesheet" type="text/css" href="styles/<?php echo strtolower(date('F'))?>.css">
+    <link rel="stylesheet" type="text/css" href="styles/<?php echo strtolower(date('F'))?>.css">
     <link href='http://fonts.googleapis.com/css?family=Acme' rel='stylesheet' type='text/css' />
     <link href='http://fonts.googleapis.com/css?family=Gudea' rel='stylesheet' type='text/css' />
 </head>
@@ -106,7 +110,7 @@ if (isset($_POST['start_date'])
     <div class="content">
         <h2><? print $course->department_number(); ?> | Edit Office Hours</h2>
         <div class="center">
-           <form method="post" action="edit_repeating_hours.php?cid=<?print $cid?>">
+         <form method="post" action="edit_repeating_hours.php?cid=<?print $cid?>">
             <?
             if (count($hours) > 0)
             {
