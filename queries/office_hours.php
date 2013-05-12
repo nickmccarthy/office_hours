@@ -286,6 +286,7 @@ class repeating_office_hours
 
 		$subject = "[$class->department $class->number] Office Hours Change";
 		$message = "
+		<html><body>
 		Greetings!<br>
 		$teaches->level $user->first_name $user->last_name has $mod office hour(s).<br>
 		Office hours $mod: Every $this->day_of_week from $this->start_date to $this->end_date at
@@ -293,9 +294,15 @@ class repeating_office_hours
 		<br>
 		<br>
 		<br>
-		Want to unsubscribe? <a href = http://info230.cs.cornell.edu/groups/Team_15/www/unsubscribe.php?uid=$user->email&cid=$class->cid>Click here</a>
+		Want to unsubscribe?
+		<form method=\"post\" action=\"http://info230.cs.cornell.edu/groups/Team_15/www/unsubscribe.php\">
+		<input type=\"hidden\" name=\"email\" value=\"$user->email\">
+		<input type=\"hidden\" name=\"cid\" value=\"$class->cid\">
+		<button type=\"submit\">Click here</button>
+		</form>
 		<br>
 		<a href = http://info230.cs.cornell.edu/groups/Team_15/www/index.php>CUOnTime</a>
+		</body></html>
 		";
 
 		while ($row = $result->fetch_assoc())
@@ -336,9 +343,12 @@ class repeating_office_hours
 		New office hours: Every $this->day_of_week from $this->start_date to $this->end_date at
 		$this->start_time - $this->end_time in $this->location.<br>
 		<br>
-		<br>
-		<br>
-		Want to unsubscribe? <a href = http://info230.cs.cornell.edu/groups/Team_15/www/unsubscribe.php?uid=$user->email&cid=$class->cid>Click here</a>
+		Want to unsubscribe?
+		<form method=\"post\" action=\"http://info230.cs.cornell.edu/groups/Team_15/www/unsubscribe.php\">
+		<input type=\"hidden\" name=\"email\" value=\"$user->email\">
+		<input type=\"hidden\" name=\"cid\" value=\"$class->cid\">
+		<button type=\"submit\">Click here</button>
+		</form>
 		<br>
 		<a href = http://info230.cs.cornell.edu/groups/Team_15/www/index.php>CUOnTime</a>
 		</body></html>
