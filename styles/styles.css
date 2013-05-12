@@ -337,6 +337,24 @@ background-color: #eee;
     text-align: center;
 }
 
+.left {
+    overflow: auto;
+    width: auto;
+    margin: 15px auto;
+    text-align: left;
+    height: auto;
+    padding: 5px;
+}
+
+.right {
+    overflow: auto;
+    width: auto;
+    height: auto;
+    margin:  auto;
+    padding: 0;
+    float: right;
+}
+
 .date_btn {
     width: 60px !important;
     margin: 0 !important;
