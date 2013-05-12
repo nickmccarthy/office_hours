@@ -41,16 +41,21 @@ class office_hours
 		}
 	}
 
-	function add($db)
+	function add($db, $is_multiple)
 	{
 		$query = "
 		INSERT INTO OfficeHours (cid, uid, date, location, start_time, end_time, repeat_tag)
 		VALUES (\"$this->cid\",\"$this->uid\",\"$this->date\",\"$this->location\",\"$this->start_time\",\"$this->end_time\",\"$this->repeat_tag\")";
 		
 		$db->query($query);
+
+		if (!$is_multiple)
+		{
+			$this->email($db, "ADD");
+		}
 	}
 
-	function update($db, $new_start_time)
+	function update($db, $new_start_time, $old)
 	{
 		$query = "
 		UPDATE OfficeHours
@@ -65,6 +70,8 @@ class office_hours
 
 		$db->query($query);
 		$this->start_time = $new_start_time;
+
+		$this->email_update($db, $old);
 	}
 
 	function delete($db)
@@ -77,7 +84,110 @@ class office_hours
 		AND start_time = \"$this->start_time\"";
 
 		$db->query($query);
+
+		$this->email($db, "DELETE");
 	}
+
+	function email($db, $update_type)
+	{
+		$query = "
+		SELECT email
+		FROM Emails
+		WHERE cid = \"$this->cid\"";
+
+		$result = $db->query($query);
+
+		$class = new course($this->cid);
+		$class->lookup_data($db);
+
+		$user = new user($this->uid);
+		$user->lookup_data($db);
+
+		$teaches = new teaches($this->uid, $this->cid);
+		$teaches->lookup_data($db);
+
+		$mod = "canceled";
+		if ($update_type == "ADD")
+			$mod = "added";
+
+		$headers = "From: CUOnTime _do not reply_\n";
+		$headers .= "MIME-Version: 1.0\n";
+		$headers .= "Content-Type: text/html; charset=ISO-8859-1 \n";
+
+		$subject = "[$class->department $class->number] Office Hour Change";
+		$message = "
+		<html><body>
+		Greetings!<br>
+		$teaches->level $user->first_name $user->last_name has $mod an office hour.<br>
+		Office hour $mod: $this->date at $this->start_time - $this->end_time in $this->location.
+		<br>
+		<br>
+		<br>
+		Want to unsubscribe?
+		<form method=\"post\" action=\"http://info230.cs.cornell.edu/groups/Team_15/www/unsubscribe.php\">
+		<input type=\"hidden\" name=\"email\" value=\"$user->email\">
+		<input type=\"hidden\" name=\"cid\" value=\"$class->cid\">
+		<button type=\"submit\">Click here</button>
+		</form>
+		<br>
+		<a href = http://info230.cs.cornell.edu/groups/Team_15/www/index.php>CUOnTime</a>
+		</body></html>
+		";
+
+		while ($row = $result->fetch_assoc())
+		{
+			mail($row['email'], $subject, $message, $headers);
+		}
+
+	}
+
+	function email_update($db, $old)
+	{
+		$query = "
+		SELECT email
+		FROM Emails
+		WHERE cid = \"$this->cid\"";
+
+		$result = $db->query($query);
+
+		$class = new course($this->cid);
+		$class->lookup_data($db);
+
+		$user = new user($this->uid);
+		$user->lookup_data($db);
+
+		$teaches = new teaches($this->uid, $this->cid);
+		$teaches->lookup_data($db);
+
+		$headers = "From: CUOnTime _do not reply_\n";
+		$headers .= "MIME-Version: 1.0\n";
+		$headers .= "Content-Type: text/html; charset=ISO-8859-1 \n";
+
+		$subject = "[$class->department $class->number] Office Hour Change";
+		$message = "
+		<html><body>
+		Greetings!<br>
+		$teaches->level $user->first_name $user->last_name has updated an office hour.<br>
+		Old office hour: $old->date at $old->start_time - $old->end_time in $old->location.<br>
+		New office hour: $this->date at $this->start_time - $this->end_time in $this->location.<br>
+		<br>
+		Want to unsubscribe?
+		<form method=\"post\" action=\"http://info230.cs.cornell.edu/groups/Team_15/www/unsubscribe.php\">
+		<input type=\"hidden\" name=\"email\" value=\"$user->email\">
+		<input type=\"hidden\" name=\"cid\" value=\"$class->cid\">
+		<button type=\"submit\">Click here</button>
+		</form>
+		<br>
+		<a href = http://info230.cs.cornell.edu/groups/Team_15/www/index.php>CUOnTime</a>
+		</body></html>
+		";
+
+		while ($row = $result->fetch_assoc())
+		{
+			mail($row['email'], $subject, $message, $headers);
+		}
+	}
+
 
 
 	static function find_hours_on_date($db, $uid, $cid, $date)
@@ -164,7 +274,7 @@ class office_hours
 		{			
 			$oh = new office_hours($roh->cid, $roh->uid, $date, $roh->start_time);
 			$oh->set_data($roh->location, $roh->end_time, $roh->repeat_tag);
-			$oh->add($db);
+			$oh->add($db, true);
 
 			$date = date('Y-m-d', strtotime("next $roh->day_of_week", strtotime($date)));
 
@@ -276,7 +386,7 @@ class repeating_office_hours
 		$teaches = new teaches($this->uid, $this->cid);
 		$teaches->lookup_data($db);
 
-		$mod = "cancelled";
+		$mod = "canceled";
 		if ($update_type == "ADD")
 			$mod = "added";
 
