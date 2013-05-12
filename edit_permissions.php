@@ -11,7 +11,7 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="styles/styles.css">
     <!-- style sheets will change depending on the month -->
-	<!--<link rel="stylesheet" type="text/css" href="styles/april1.css">-->
+	<link rel="stylesheet" type="text/css" href="styles/<?php echo strtolower(date('F'))?>.css">
 	<link href='http://fonts.googleapis.com/css?family=Acme' rel='stylesheet' type='text/css' />
 	<link href='http://fonts.googleapis.com/css?family=Gudea' rel='stylesheet' type='text/css' />
 </head>
@@ -25,8 +25,7 @@
     }
 ?>
 <div class="content">
-    <h2>Course ID | Settings</h2>
-    <p><a href="dashboard.php">Back to Dashboard</a></p>
+    <h2>Course ID | Course Permissions</h2>
 </div>
 
 </body>

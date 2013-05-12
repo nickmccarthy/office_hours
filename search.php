@@ -94,7 +94,7 @@ function display_search_results($terms){
 
 				//print instructors
 				print('<div class="courses">');
-				print('<span class="edit"><a href="instructor_info.php?uid=' . $array["uid"] . '" alt="' . $array["first_name"] . ' ' . $array["last_name"] . '">' . $array["first_name"] . ' ' . $array["last_name"] . '</a></span>');
+				print('<span class="id"><a href="instructor_info.php?uid=' . $array["uid"] . '" alt="' . $array["first_name"] . ' ' . $array["last_name"] . '">' . $array["first_name"] . ' ' . $array["last_name"] . '</a></span>');
 				print('</div>');
 			}
 		}

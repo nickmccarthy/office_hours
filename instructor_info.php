@@ -11,7 +11,7 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="styles/styles.css">
     <!-- style sheets will change depending on the month -->
-	<!--<link rel="stylesheet" type="text/css" href="styles/april1.css">-->
+	<link rel="stylesheet" type="text/css" href="styles/<?php echo strtolower(date('F'))?>.css">
 	<link href='http://fonts.googleapis.com/css?family=Acme' rel='stylesheet' type='text/css' />
 	<link href='http://fonts.googleapis.com/css?family=Gudea' rel='stylesheet' type='text/css' />
 </head>
@@ -38,7 +38,8 @@ if(isset($_GET['uid'])){
 	$first_row = $result->fetch_assoc();
 	if(isset($first_row)){
 		print("<h2>" . $first_row['first_name'] . " " . $first_row['last_name'] . "</h2>");
-		print("<div><a href='course_info.php?cid=" . $first_row['cid'] . "' alt = '" . $first_row['name'] . "'>" . $first_row['department'] . " " . $first_row['number'] . ": " . $first_row['name'] . "</a>");
+		print("<div class=\"classlist\">
+			  <div class=\"title\"><h3><a href='course_info.php?cid=" . $first_row['cid'] . "' alt = '" . $first_row['name'] . "'>" . $first_row['department'] . " " . $first_row['number'] . ": " . $first_row['name'] . "</a></h3></div>");
 		$teachesquery = "SELECT * FROM Teaches WHERE cid=" . $first_row['cid'] . " AND uid=" . $_GET['uid'];
 		$teaches = $mydb->query($teachesquery);
 		if($teaches->num_rows > 0){
@@ -46,7 +47,8 @@ if(isset($_GET['uid'])){
 		}
 		print("</div>");
 		while($next_row = $result->fetch_assoc()){
-			print("<div><a href='course_info.php?cid=" . $next_row['cid'] . "' alt = '" . $next_row['name'] . "'>" . $next_row['department'] . " " . $next_row['number'] . ": " . $next_row['name'] . "</a>");
+			print("<div class=\"classlist\">
+				  <div class=\"title\"><h3><a href='course_info.php?cid=" . $next_row['cid'] . "' alt = '" . $next_row['name'] . "'>" . $next_row['department'] . " " . $next_row['number'] . ": " . $next_row['name'] . "</a></h3></div>");
 			$teachesquery = "SELECT * FROM Teaches WHERE cid=" . $first_row['cid'] . " AND uid=" . $_GET['uid'];
 			$teaches = $mydb->query($teachesquery);
 			if($teaches->num_rows > 0){
@@ -81,7 +83,10 @@ function printOfficeHours($mydb, $row, $uid){
 				$myDateTime = DateTime::createFromFormat('Y-m-d', $array['date']);
 				$day = $myDateTime->format('F jS');
 			}
-		print("<div> Day: " . $day . " Time:" . $array['start_time'] . " Location:" . $array['location'] . "</div>");
+		print("<div class=\"officehours\">
+			  <span class=\"ohlist\">Day: " . $day . "</span>
+			  <span class=\"ohlist\">Start Time: " . $array['start_time'] . "</span>
+			  <span class=\"ohlist\">Location: " . $array['location'] . "</span></div>");
 	}
 }
 ?>

@@ -53,7 +53,7 @@ if(isset($_GET['cid'])){
 	$firstDayOfWeek = date("Y-m-d");
 	$firstDayOfNextWeek = date("Y-m-d", strtotime("+1 week"));
 	$firstForDisplay = date("F jS");
-	print("<div><h3>Office Hours Week following " . $firstForDisplay . "</h3></div>");
+	print("<div><h3>Office Hours for the week following " . $firstForDisplay . "</h3></div>");
 
 	$query = "SELECT * FROM (OfficeHours LEFT JOIN Repeating ON OfficeHours.repeat_tag=Repeating.repeat_tag) NATURAL JOIN Users WHERE cid=" . $_GET['cid'] . " AND((date <='" . $firstDayOfNextWeek . "' AND date >='" . $firstDayOfWeek . "') OR (Repeating.repeat_tag IS NOT NULL AND start_date <= '" . $firstDayOfWeek . "' AND end_date >= '" . $firstDayOfWeek . "'))";
 	$ohResult = $mydb->query($query);
@@ -70,7 +70,12 @@ if(isset($_GET['cid'])){
 				$myDateTime = DateTime::createFromFormat('Y-m-d', $array['date']);
 				$day = $myDateTime->format('F jS');
 			}
-			print("<span><a href='instructor_info.php?uid=" . $array['uid'] . "''>" . $array['first_name'] . " " . $array['last_name'] . " " . $day ." starts:" . $array['start_time'] . " ends:" . $array['end_time'] . " location:" . $array['location'] . " </a></span>");
+			print("<div class=\"courses\">
+				  <span class=\"id\">Instructor: <a href='instructor_info.php?uid=" . $array['uid'] . "''>" . $array['first_name'] . " " . $array['last_name'] . "</a></span>
+				  <span class=\"edit\">Day: " . $day ."</span>
+				  <span class=\"id\">Starts: " . $array['start_time'] . " Ends: " . $array['end_time'] . "</span>
+				  <span class=\"edit\">Location: " . $array['location'] . "</span>
+				  </div>");
 		}
 	}
 }else{

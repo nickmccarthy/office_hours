@@ -85,7 +85,7 @@ if (isset($_POST['start_time'])
 <head>
 	<link rel="stylesheet" type="text/css" href="styles/styles.css">
     <!-- style sheets will change depending on the month -->
-    <!--<link rel="stylesheet" type="text/css" href="styles/april1.css">-->
+	<link rel="stylesheet" type="text/css" href="styles/<?php echo strtolower(date('F'))?>.css" />
     <link href='http://fonts.googleapis.com/css?family=Acme' rel='stylesheet' type='text/css' />
     <link href='http://fonts.googleapis.com/css?family=Gudea' rel='stylesheet' type='text/css' />
 </head>
@@ -101,14 +101,19 @@ if (isset($_POST['start_time'])
 
 
     <div class="content">
-        <h2><?php print $course->department_number(); ?> | Edit Office Hours</h2>
+        <h2>
+            <span class="header1"><?php print $course->department_number(); ?> | Edit Office Hours: Single Edit</span>
+            <span class="header2"><a href="edit_repeating_hours.php?cid=<?php print "$cid";?>">Edit Repeat Office Hours</a></span>
+        </h2>
         <div class="center">
-            <form method="get" action="edit_single_hours.php">
+            <form method="get" action="edit_single_hours.php" required>
                 <input type="hidden" name="cid" value="<?print $cid?>">
-                Choose Date: <input type="date" name="date" value="<?print $date?>">
-                <input type="submit">
+                <span class="edit_form">Choose Date: </span><input type="date" name="date" value="<?print $date?>">
+                <button type="submit" class="date_btn">Go!</button>
             </form>
-            <form method="post" action="edit_single_hours.php?<?print "cid=$cid&date=$date"; ?>">
+        </div>
+        <div class="centeroh">
+            <form method="post" action="edit_single_hours.php?<?php print "cid=$cid&date=$date"; ?>" required>
                 <?
                 if (count($hours) > 0)
                 {
@@ -118,7 +123,7 @@ if (isset($_POST['start_time'])
                     }
                 }
                 format_oh(false);
-                print '<input type="submit">';
+                print '<div class="lineoh"><button type="submit" class="oh_btn">Submit</button></div>';
                 ?>
             </form>
         </div>
@@ -139,15 +144,13 @@ function format_oh($oh)
         $loc = $oh->location;
         $del = "";
     }
-    print "<input type=\"time\" name=\"start_time[]\" value=\"$st\">";
-    print " to ";
-    print "<input type=\"time\" name=\"end_time[]\" value=\"$et\">";
-    print " in ";
-    // temporarily a textarea to not have text styling
-    print "<input type=\"textarea\" rows=\"1\" cols=\"30\" name=\"location[]\" value=\"$loc\">";
-    print " Del: <input type=\"checkbox\" name=\"delete[]\" $del value=\"$st\">";
-    print '<br>'; // remove when formatting exists
-    print "<input type=\"hidden\" name=\"orig_start_time[]\" value=\"$st\">"; // keep track or original to change
+    print "<div class=\"lineoh\"><input type=\"time\" name=\"start_time[]\" value=\"$st\">";
+    print "<span class=\"edit_form\"> to </span>";
+    print " <input type=\"time\" name=\"end_time[]\" value=\"$et\">";
+    print "<span class=\"edit_form\"> in </span><input type=\"textarea\" placeholder=\"Location\" rows=\"1\" cols=\"30\" name=\"location[]\" value=\"$loc\">";
+    print "<span class=\"edit_form\"> Delete? </span><input type=\"checkbox\" name=\"delete[]\" $del value=\"$st\">";
+    print '</div>'; // remove when formatting exists
+    print "<input type=\"hidden\" name=\"orig_start_time[]\" value=\"$st\"></span>"; // keep track or original to change
 }
 
 // TODO:
