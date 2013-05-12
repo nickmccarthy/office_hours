@@ -1,7 +1,7 @@
 /* MONTH OF DECEMBER COLORS*/
 
 /* general css*/
-h1, h2 {
+h1, h2, h3, p, span {
     color: #705347;
 }
 
@@ -94,15 +94,18 @@ input:focus {
 /* dashboard page */
 .courses:nth-child(2n+1) {
     background-color: #fff;
-    border-color: #705347;
-}
-
-.courses:first-child,
-.courses:last-child {
-    border-color: #705347;
-
 }
 
 .courses:hover {
     background-color: #d5e8d3;
+}
+
+input[type="date"],
+input[type="time"],
+input[type="textarea"] {
+    border-color: #705347;
+}
+
+select {
+    border-color: #705347;
 }

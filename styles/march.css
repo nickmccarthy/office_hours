@@ -1,7 +1,7 @@
 /* MONTH OF MARCH COLORS*/
 
 /* general css*/
-h1, h2 {
+h1, h2, h3, span, p {
     color: #6a4a39;
 }
 
@@ -94,15 +94,18 @@ input:focus {
 /* dashboard page */
 .courses:nth-child(2n+1) {
     background-color: #fff;
-    border-color: #6a4a39;
-}
-
-.courses:first-child,
-.courses:last-child {
-    border-color: #6a4a39;
-
 }
 
 .courses:hover {
     background-color: #e3f0de;
+}
+
+input[type="date"],
+input[type="time"],
+input[type="textarea"] {
+    border-color: #6a4a39;
+}
+
+select {
+    border-color: #6a4a39;
 }

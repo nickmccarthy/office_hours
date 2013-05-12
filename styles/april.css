@@ -1,7 +1,7 @@
 /* MONTH OF APRIL COLORS*/
 
 /* general css*/
-h1, h2 {
+h1, h2, h3, p, span {
     color: #705c52;
 }
 
@@ -95,14 +95,18 @@ input:focus {
 /* dashboard page */
 .courses:nth-child(2n+1) {
     background-color: #f2eae3;
-    border-color: #705c52;
-}
-
-.courses:first-child,
-.courses:last-child {
-    border-color: #705c52;
 }
 
 .courses:hover {
     background-color: #f5efef;
+}
+
+input[type="date"],
+input[type="time"],
+input[type="textarea"] {
+    border-color: #705c52;
+}
+
+select {
+    border-color: #705c52;
 }

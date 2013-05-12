@@ -1,7 +1,7 @@
 /* MONTH OF OCTOBER COLORS*/
 
 /* general css*/
-h1, h2 {
+h1, h2, h3, span, p {
     color: #7b4524;
 }
 
@@ -94,15 +94,18 @@ input:focus {
 /* dashboard page */
 .courses:nth-child(2n+1) {
     background-color: #fff;
-    border-color: #7b4524;
-}
-
-.courses:first-child,
-.courses:last-child {
-    border-color: #7b4524;
-
 }
 
 .courses:hover {
     background-color: #D6EDcE;
+}
+
+input[type="date"],
+input[type="time"],
+input[type="textarea"] {
+    border-color: #7b4524;
+}
+
+select {
+    border-color: #7b4524;
 }

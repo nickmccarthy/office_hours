@@ -1,7 +1,7 @@
 /* MONTH OF JUNE COLORS*/
 
 /* general css*/
-h1, h2 {
+h1, h2, h3, span, p {
     color: #A76C45;
 }
 
@@ -95,14 +95,18 @@ input:focus {
 /* dashboard page */
 .courses:nth-child(2n+1) {
     background-color: #f2eae3;
-    border-color: #A76C45;
-}
-
-.courses:first-child,
-.courses:last-child {
-    border-color: #A76C45;
 }
 
 .courses:hover {
     background-color: #fff4e2;
+}
+
+input[type="date"],
+input[type="time"],
+input[type="textarea"] {
+    border-color: #A76C45;
+}
+
+select {
+    border-color: #A76C45;
 }
