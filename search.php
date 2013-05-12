@@ -53,28 +53,26 @@ function display_search_results($terms){
 				//print the courses
 				print("<div class='courses'> \n");
 				print('<span class="id"><a href="course_info.php?cid=' . $array["cid"] . '" alt = "' . $array["name"] . '">' . $array["name"] . '</a></span>');
+				print('<span class="id">' . $I1name . ' ' . $I2name . '</span>');
+				print ("<div class='sub_courses'>");
 				if(isset($_SESSION['user'])){
-					print('<span class="edit"><a alt="Join" class="join_btn" id ="' . $array["cid"] . '">Join Class</a></span>');
-					print('<div class="cid" style="visibility: hidden">' . $array['cid'] . '</div>');
-					print($I1name . ' ' . $I2name);
-					print("</div> \n");
+					print('<span class="join_btn"><button alt="Join" id ="' . $array["cid"] . '">Join Class</button></span>');
+					print('<span class="cid">' . $array['cid'] . '</span>');
 					print("<div class='join_class' id='" . $array['cid'] ."'>
-						<div class='courses'>
-						<input type='text' name='position' id='position' placeholder='your position'>
-						<button type='submit' class='join_submit'>Join</button>
-						</div>
+						<button type='submit' class='join_submit'>Go!</button>
+						<input type='text' name='position' id='position' placeholder='Your Position (TA, Grader, Professor)'>
 						</div>");
 				}
-				print('<span class="edit"><a class="sub_btn" id="' . $array["cid"] .'">Subscribe</a></span>');
-				print('<div class="cid" style="visibility: hidden">' . $array['cid'] . '</div>');
-				print($I1name . ' ' . $I2name);
-				print("</div> \n");
+					print('<span class="sub_btn"><button alt="Subscribe" id="' . $array["cid"] .'">Subscribe</button></span>');
+				print('<span class="cid">' . $array['cid'] . '</span>');
 				print("<div class='subscribe' id='" . $array['cid'] ."'>
-					<div class='courses'>
+						<button type='submit' class='sub_submit'>Go!</button>
 						<input type='text' name='email' id='email' placeholder='netID@cornell.edu'>
-						<button type='submit' class='sub_submit'>Subscribe</button>
-					</div>
-				</div>");
+					</div>");
+				
+				print('</div>
+					  </div>');
+				
 			}
 		}
 		if(isset($result_instructors)){
