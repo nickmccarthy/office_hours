@@ -27,6 +27,26 @@
 <div class="content">
     <h2>Course ID | Settings</h2>
     <p><a href="dashboard.php">Back to Dashboard</a></p>
+    <form action="edit_permissions.php?cid=<?php print($_GET['cid']); ?>" method="post">
+        Make Inactive: <input type="checkbox" name="inactive" value="1"><br />
+        Change Course Name: <input type="text" name="coursename"><br />
+        Drop any of the following from being an instructor:<br />
+<?php
+    require 'config/mysql.config.php';
+    require 'config/pageinfo.config.php';
+    $mydb = new mysqli($dbserver, $dbusername, $dbpassword, $dbname);
+    if (mysqli_connect_errno()) {
+        printf("Connect failed: %s\n", mysqli_connect_error());
+        exit();
+    }
+    $query = "SELECT first_name, last_name, uid FROM Teaches NATURAL JOIN Users WHERE cid=" . $_GET['cid'];
+    $teachers = $mydb->query($query);
+    while($row = $teachers->fetch_assoc()){
+        print("<label for " . $row['uid'] . "><input type='checkbox' name='teachers[]' value='" . $row['uid'] . "'>" . $row['first_name'] . " " . $row['last_name'] . "<br />");
+    }
+?> 
+        <input type="submit" value="Submit">
+    </form>
 </div>
 
 </body>
@@ -34,6 +54,35 @@
 
 
 <?php
+    require 'config/mysql.config.php';
+    require 'config/pageinfo.config.php';
+    $mydb = new mysqli($dbserver, $dbusername, $dbpassword, $dbname);
+    if (mysqli_connect_errno()) {
+        printf("Connect failed: %s\n", mysqli_connect_error());
+        exit();
+    }
+    $re = false;
+if(isset($_POST['inactive'])){
+    $query = "UPDATE Class SET inactive = 1 WHERE cid=" . $_GET['cid'];
+    $mydb->query($query);
+    $re=true;
+}
+if(isset($_POST['coursename'])){
+    $query = "UPDATE Class SET name ='" . $_POST['coursename'] . "' WHERE cid=" . $_GET['cid'];
+    $mydb->query($query);
+    $re=true;
+}
+if(isset($_POST['teachers'])){
+    foreach($_POST['teachers'] as $t){
+        $query = "DELETE FROM Teaches WHERE uid=" . $t . " AND cid=" . $_GET['cid'];
+        $mydb->query($query);
+        $re=true;
+    }
+}
+
+if($re){
+    header("Location: $dashboard");
+}
 
 // TODO:
 

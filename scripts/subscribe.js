@@ -8,8 +8,8 @@ $(document).ready(function(){
 		var id = event.target.id;
 		var lookup = '#' + id + '.subscribe';
 		if($(lookup).is(':hidden')){
-			$('.subscribe').hide();
-			$('.join_class').hide();
+			$('.subscribe').hide("slow");
+			$('.join_class').hide("slow");
 		}
 		$(lookup).toggle("slow");
 	})
@@ -18,8 +18,8 @@ $(document).ready(function(){
 		var id = event.target.id;
 		var lookup = '#' + id + '.join_class';
 		if($(lookup).is(':hidden')){
-			$('.join_class').hide();
-			$('.subscribe').hide();
+			$('.join_class').hide("slow");
+			$('.subscribe').hide("slow");
 		}
 		$(lookup).toggle("slow");
 	})
