@@ -108,7 +108,10 @@ if (isset($_POST['start_date'])
 
     ?>
     <div class="content">
-        <h2><? print $course->department_number(); ?> | Edit Office Hours</h2>
+        <h2>
+            <span class="header1"><?php print $course->department_number(); ?> | Edit Office Hours: Repeat Edit</span>
+            <span class="header2"><a href="edit_single_hours.php?cid=<?php print "$cid";?>">Edit Single Office Hours</a></span>
+        </h2>
         <div class="centeroh">
          <form method="post" action="edit_repeating_hours.php?cid=<?print $cid?>">
             <?
