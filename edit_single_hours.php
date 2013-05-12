@@ -62,15 +62,18 @@ if (isset($_POST['start_time'])
             {
                 $oh = new office_hours($cid, $uid, $date, $st);
                 $oh->set_data($loc, $et);
-                $oh->add($db);
+                $oh->add($db, false);
             } else {
                 $oh = new office_hours($cid, $uid, $date, $ost);
                 $oh->lookup_data($db);
 
                 if ($st != $ost || $et != $oh->end_time || $loc != $oh->location)
                 {
+                    $oldoh = new office_hours($cid, $uid, $date, $ost);
+                    $oldoh->lookup_data($db);
+
                     $oh->set_data($loc, $et);
-                    $oh->update($db, $st);
+                    $oh->update($db, $st, $oldoh);
                 }
 
             }
