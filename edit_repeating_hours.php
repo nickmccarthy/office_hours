@@ -109,7 +109,7 @@ if (isset($_POST['start_date'])
     ?>
     <div class="content">
         <h2><? print $course->department_number(); ?> | Edit Office Hours</h2>
-        <div class="center">
+        <div class="centeroh">
          <form method="post" action="edit_repeating_hours.php?cid=<?print $cid?>">
             <?
             if (count($hours) > 0)
@@ -119,7 +119,7 @@ if (isset($_POST['start_date'])
                 }
             }
             format_oh(false);
-            print '<input type="submit">';
+                print '<div class="lineoh"><button type="submit" class="oh_btn">Submit</button></div>';
             ?>
         </form>
     </div>
@@ -157,7 +157,7 @@ function format_oh($oh)
         $del = "";
     }
 
-    print "Every ";
+print "<div class=\"lineoh\"><span class=\"edit_form\">Every </span>";
 
     print '<select name="day[]">';
     foreach ($days as $day) {
@@ -166,20 +166,19 @@ function format_oh($oh)
     }
     print '</select>';
 
-    print " from ";
+    print "<span class=\"edit_form\"> from </span>";
     print "<input type=\"date\" name=\"start_date[]\" value=\"$sd\">";
-    print " to ";
+    print "<span class=\"edit_form\"> to </span>";
     print "<input type=\"date\" name=\"end_date[]\" value=\"$ed\">";
-    print " - ";
+    print "<span class=\"edit_form\"> - </span>";
     print "<input type=\"time\" name=\"start_time[]\" value=\"$st\">";
-    print " to ";
+    print "<span class=\"edit_form\"> to </span>";
     print "<input type=\"time\" name=\"end_time[]\" value=\"$et\">";
-    print " in ";
+    print "<span class=\"edit_form\"> in </span>";
     // temporarily a textarea to not have text styling
-    print "<input type=\"textarea\" rows=\"1\" cols=\"30\" name=\"location[]\" value=\"$loc\">";
-    print " Del: <input type=\"checkbox\" name=\"delete[]\" $del value=\"$rt\">";
-    print '<br>'; // remove when formatting exists
-
+    print "<input type=\"textarea\" rows=\"1\" cols=\"30\" placeholder=\"Location\" name=\"location[]\" value=\"$loc\">";
+    print "<span class=\"edit_form\"> Delete: </span><input type=\"checkbox\" name=\"delete[]\" $del value=\"$rt\">";
+    print '</div>';
     print "<input type=\"hidden\" name=\"repeat_tag[]\" value=\"$rt\">"; // keep track or original to change
 }
 
