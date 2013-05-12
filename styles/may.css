@@ -1,7 +1,7 @@
 /* MONTH OF MAY COLORS*/
 
 /* general css*/
-h1, h2, p {
+h1, h2, h3, p, span {
     color: #9c7f54;
 }
 
@@ -93,17 +93,22 @@ input:focus {
 }
 
 /* dashboard page */
-.courses:nth-child(2n+1) {
+.courses:nth-child(2n+1),
+.officehours:nth-child(2n+1) {
     background-color: #fff;
-    border-color: #9c7f54;
 }
 
-.courses:first-child,
-.courses:last-child {
-    border-color: #9c7f54;
-
-}
-
-.courses:hover {
+.courses:hover,
+.officehours:hover {
     background-color: #FFeeDf;
+}
+
+input[type="date"],
+input[type="time"],
+input[type="textarea"] {
+    border-color: #9c7f54;
+}
+
+select {
+    border-color: #9c7f54;
 }

@@ -6,8 +6,15 @@ body {
     color: #bbb;
 }
 
-h1, h2, h3, p {
+h1, h2, h3, p, span {
     color: #8CBBE5;
+}
+
+span.header1 {
+    float: left;
+}
+span.header2 {
+    float: right;
 }
 
 a {
@@ -105,7 +112,7 @@ div.center {
     /*border: 1px solid #bbb;*/
     width: 500px;
     padding: 10px;
-    margin: 50px auto;
+    margin: 100px auto;
     overflow: auto;
     text-align: center;
 }
@@ -188,19 +195,15 @@ div.content {
 }
 
 body#search_in .content:after { /* search_in content arrow */
-    right: 330px;
+    right: 270px;
 }
 
 body#dash .content:after { /* dashboard content arrow */
-    right: 246px;
+    right: 188px;
 }
 
 body#settings .content:after { /* settings content arrow */
-    right: 158px;
-}
-
-body#help .content:after { /* help content arrow */
-    right: 86px;
+    right: 98px;
 }
 
 body#search_out .content:after { /* search_out content arrow */
@@ -237,11 +240,19 @@ background-color: #eee;
     padding: 10px;
 }
 
-.courses:nth-child(2n+1) {
+.officehours {
+    width: auto;
+    height: 20px;
+    padding: 10px;
+}
+
+.courses:nth-child(2n+1),
+.officehours:nth-child(2n+1) {
     background-color: #fff;
 }
 
-.courses:hover {
+.courses:hover,
+.classlist:hover {
     background-color: #EEF3F7;
 }
 
@@ -260,6 +271,25 @@ background-color: #eee;
     height: auto;
 }
 
+.ohlist {
+    padding: 5px 10px;
+    display: inline;
+    text-align: center;
+    height: auto;
+}
+
+.classlist {
+    width: auto;
+    height: auto;
+    padding: 0;
+}
+
+.title {
+    padding: 0px !important;
+    height: auto;
+    overflow: auto;
+}
+
 /* Subscribe */
 .sub_courses {
     background: none;
@@ -272,6 +302,7 @@ background-color: #eee;
 .sub_btn, .join_btn {
     float: right;
     width: auto;
+    font-size: 100% !important;
 }
 
 .cid {
@@ -287,4 +318,91 @@ background-color: #eee;
 .sub_submit, .join_submit {
     width: 60px !important;
     margin-left: 10px !important;
+}
+
+/* edit office hours */
+.edit_form {
+    font-size: 120%;
+}
+
+.centeroh {
+    width: 100%;
+    margin: 100px auto;
+}
+
+.lineoh {
+    overflow: auto;
+    width: auto;
+    margin: 15px auto;
+    text-align: center;
+}
+
+.left {
+    overflow: auto;
+    width: auto;
+    margin: 15px auto;
+    text-align: left;
+    height: auto;
+    padding: 5px;
+}
+
+.right {
+    overflow: auto;
+    width: auto;
+    height: auto;
+    margin:  auto;
+    padding: 0;
+    float: right;
+}
+
+.date_btn {
+    width: 60px !important;
+    margin: 0 !important;
+    float: inherit !important;
+}
+
+.oh_btn {
+    float: none !important;
+    width: 100px !important;
+    margin: 0 auto;
+}
+
+input[type="date"],
+input[type="time"],
+input[type="textarea"] {
+    width: 130px;
+    font-size: 90%;
+    text-align: center;
+    border-radius: 5px;
+    height: 20px;
+    border: 2px solid #bbb;
+    padding: 3px 5px;
+    font-family: Gudea, Helvetica, Arial;
+}
+
+select {
+    width: 130px;
+    font-size: 100%;
+    text-align: center;
+    border-radius: 15px !important;
+    height: 30px;
+    border: 2px solid #bbb;
+    padding: 5px;
+    font-family: Gudea, Helvetica, Arial;
+}
+
+input[type="textarea"]::-webkit-input-placeholder { /* ebKit browsers */
+    font-size: 100%;
+}
+
+:-moz-placeholder { /* Firefox 4 to 18 */
+    font-size: 100%;
+}
+
+::-moz-placeholder { /* Firefox 19+ */
+    font-size: 100%;
+}
+
+:-ms-input-placeholder { /* IE 10+ */
+    font-size: 100%;
 }

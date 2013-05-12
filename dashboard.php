@@ -23,9 +23,9 @@ function format_course($teaches)
 
 
     print '<span class="edit">';
-    print "<a href=\"edit_single_hours.php?cid=$class->cid\">Single Edit</a>";
+    print "Edit Office Hours: <a href=\"edit_single_hours.php?cid=$class->cid\">Single Edit</a>";
     print ' | ';
-    print "<a href=\"edit_repeating_hours.php?cid=$class->cid\">Repeating Edit</a>";
+    print "<a href=\"edit_repeating_hours.php?cid=$class->cid\">Repeat Edit</a>";
     print '</span>';
 
     if (strtoupper($teaches->level) == 'PROFESSOR' || strtoupper($teaches->level) == 'INSTRUCTOR')
