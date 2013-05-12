@@ -28,7 +28,7 @@
     <h2>Course ID | Settings</h2>
     <p><a href="dashboard.php">Back to Dashboard</a></p>
     <form action="edit_permissions.php?cid=<?php print($_GET['cid']); ?>" method="post">
-        Make Inactive: <input type="checkbox" name="inactive" value="1"><br />
+        Toggle Inactive: <input type="checkbox" name="inactive" value="1"><br />
         Change Course Name: <input type="text" name="coursename"><br />
         Drop any of the following from being an instructor:<br />
 <?php
@@ -63,7 +63,15 @@
     }
     $re = false;
 if(isset($_POST['inactive'])){
-    $query = "UPDATE Class SET inactive = 1 WHERE cid=" . $_GET['cid'];
+    $checkquery = "SELECT inactive FROM Class WHERE cid=" . $_GET['cid'];
+    $check = $mydb->query($checkquery);
+    $result_row = $check->fetch_assoc();
+    if($result_row['inactive'] == 0){
+        $change=1;
+    }else{
+        $change=0;
+    }
+    $query = "UPDATE Class SET inactive = " . $change . " WHERE cid=" . $_GET['cid'];
     $mydb->query($query);
     $re=true;
 }
